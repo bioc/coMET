@@ -1,0 +1,41 @@
+COMET 0.99.6 - 2014-11-25
+-----------------------------
+- add in "import IRanges and S4Vectors" in NAMESPACE
+- Fix mistakes in the vignette
+
+
+COMET 0.99.5 - 2014-11-06
+-----------------------------
+- Update the annotation tracks using Gviz because of the update of Gviz (version 1.11.2)
+
+COMET 0.99.4 - 2014-11-05
+-----------------------------
+- Update the manual and the vignette
+- Fix little bugs
+- Update the annotation tracks using BiomartGeneRegionTrack of Gviz
+
+
+COMET 0.99.3 - 2014-10-25
+-----------------------------
+- Update the manuel and the vignette
+- Update the function to create annotation tracks connecting to ENSEMBL mart (change of schema)
+- Fix little bug
+- Add the function to define the reference genome (cf the change of schema of ENSEMBL mart)
+
+
+COMET 0.99.2 - 2014-10-16
+-----------------------------
+
+- Update the manual comet.web file
+
+COMET 0.99.1 - 2014-10-16
+-----------------------------
+
+- Add the package "BiocStyle" in Suggests of DESCRIPTION file
+- Change the absolute path to relative path of files (info file, expression file, and correlation file) in vignette and manual
+
+
+COMET 0.99.0 - 2014-09-24
+-----------------------------
+
+- Version draft of this script

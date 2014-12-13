@@ -1,0 +1,80 @@
+## ============================================================
+## Import
+## ============================================================
+
+# Import all packages listed as Imports or Depends
+### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+### base packages
+###
+import(grid)
+import(grDevices)
+
+### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+### Non-bioconductor packages
+###
+importFrom("colortools",complementary, opposite)
+importFrom("gridExtra",arrangeGrob, grid.arrange)
+importClassesFrom("hash",hash)
+#importMethodsFrom("hash",keys)
+importFrom("hash",hash)
+importFrom("hash",has.key)
+
+
+
+### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+### Bioconductor packages
+###
+import(IRanges)
+import(S4Vectors)
+import(GenomicRanges)
+import(biomaRt)
+import(Gviz)
+import(rtracklayer)
+
+importFrom("trackViewer",viewTracks)
+importClassesFrom("trackViewer",track, trackList)
+importFrom("trackViewer", trackList)
+
+importFrom("ggplot2",ggplotGrob)
+importFrom("ggbio",tracks)
+
+
+## ============================================================
+## Export
+## ============================================================
+
+# Export all names
+#exportPattern("^[[:alpha:]]+")
+#exportPattern("^[^\\.]") 
+
+### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+### Primary functions
+###
+export(comet,comet.web)
+
+
+### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+### pre-formatted tracks
+###
+export(chromatinHMMAll, chromatinHMMOne,
+       chrUCSC2ENSEMBL,
+       ClinVarCnvTrack, ClinVarMainTrack,
+       CoreillCNVTrack,
+       COSMICTrack,
+       cpgIslandsUCSC,
+       DNAseUCSC,
+       GADTrack,
+       gcContent,
+       GeneReviewsTrack,
+       genesENSEMBL,
+       genesNameENSEMBL,
+       GWASTrack,
+       HistoneAll, HistoneOne,
+       ISCATrack,
+       knownGenesUCSC,
+       regulationBiomart,
+       snpBiomart,
+       snpLocationsUCSC,
+       structureBiomart,
+       transcriptENSEMBL,
+       xenorefGenesUCSC)
