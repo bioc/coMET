@@ -24,8 +24,6 @@ importFrom("hash",has.key)
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ### Bioconductor packages
 ###
-import(IRanges)
-import(S4Vectors)
 import(GenomicRanges)
 import(biomaRt)
 import(Gviz)
