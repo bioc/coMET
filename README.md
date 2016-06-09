@@ -2,7 +2,7 @@ coMET
 =====
 
 ##Overview
-The coMET package is a web-based plotting tool and R-based package to visualize different genome-wide association scans such as EWAS (epigenome-wide association scan) results in a genomic region of interest. coMET provides a plot of the EWAS association signal and visualisation of the methylation correlation between CpG sites (co-methylation). The coMET package also provides the option to annotate the region using functional genomic information, including both user-defined features and pre-selected features based on the Encode project. The plot can be customized with different parameters, such as plot labels, colours, symbols, heatmap colour scheme, significance thresholds, and including reference CpG sites. Finally, the tool can also be applied to display the correlation patterns of other genomic data and any species, e.g. gene expression array data. 
+The coMET package is a web-based plotting tool and R-based package to visualize different genome-wide association scans such as EWAS (epigenome-wide association scan) results in a genomic region of interest. coMET provides a plot of the EWAS association signal and visualisation of the methylation correlation between CpG sites (co-methylation). The coMET package also provides the option to annotate the region using functional genomic information, including both user-defined features and pre-selected features based on such as ENSEMBL (http://www.ensembl.org/index.html) , the Encode project, ROADMAP epigenomics projects http://www.roadmapepigenomics.org/ , The Genotype-Tissue Expression (GTEx) project http://www.gtexportal.org/ and FANTOM5 project https://genome.ucsc.edu/ and annotation tracks from UCSC Genome Browser website. The plot can be customized with different parameters, such as plot labels, colours, symbols, heatmap colour scheme, significance thresholds, and including reference CpG sites. Finally, the tool can also be applied to display the correlation patterns of other genomic data and any species, e.g. gene expression array data. 
 
 
 ##coMET webservice
@@ -19,6 +19,8 @@ coMET is developed by Tiphaine C. Martin in collaboration with Idil Erte, Pei-Ch
 
 ##Cite
 
+Martin, T.C., Erte, I., Tsai, P-C., Bell and J.T. (2015). coMET: visualisation of regional epigenome-wide association scan results and DNA co-methylation patterns. BMC Bioinformatics. 
+
 Martin, T.C, Erte, I, Tsai, P-C, Bell, J.T.,coMET: an R plotting package to visualize regional plots of epigenome-wide association scan results, QC14, 2014.
 
 
@@ -29,6 +31,6 @@ For any question, you can send an email to Tiphaine Martin (tiphaine.martin at k
 
 ##More information
 
-Go to the website Department of Twin Research :http://epigen.kcl.ac.uk/comet
+Go to the website of Epigenetic group of Department of Twin Research :http://epigen.kcl.ac.uk/comet
 
 Go to the help of coMET webservice : http://comet.epigen.kcl.ac.uk:3838/coMET/

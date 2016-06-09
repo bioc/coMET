@@ -1,3 +1,32 @@
+COMET 1.5.3 - 2016-06-8
+-------------------------
+-Change the name of functions:
+  xenorefGenesUCSC into xenorefGenes_UCSC
+  transcriptENSEMBL into transcript_ENSEMBL
+  structureBiomart into structureBiomart_ENSEMBL
+  snpLocationsUCSC into snpLocations_UCSC
+  snpBiomart into snpBiomart_ENSEMBL
+  RepeatMaskerTrack into repeatMasker_UCSC
+  regulationBiomart into regulationBiomart_ENSEMBL
+  knownGenesUCSC into knownGenes_UCSC
+  ISCATrack into ISCA_UCSC
+  HistoneOne into HistoneOne_UCSC
+  HistoneAll to HistoneAll_UCSC
+  GWASTrack to GWAScatalog_UCSC
+  genesNameENSEMBL to genesName_ENSEMBL
+  genesENSEMBL to genes_ENSEMBL
+  GeneReviewsTrack to GeneReviews_UCSC
+  gcContent to gcContent_UCSC
+  GADTrack to GAD_UCSC
+  DNAseUCSC to DNAse_UCSC
+  COSMICTrack to COSMIC_UCSC
+  cpgIslandsUCSC to cpgIslands_UCSC
+  CoreillCNVTrack to CoreillCNV_UCSC
+  chromatinHMMAll to chromatinHMMAll_UCSC
+  chromatinHMMOne to chromatinHMMOne_UCSC
+  ClinVarCnvTrack to ClinVarCnv_UCSC 
+  ClinVarMainTrack to ClinVarMain_UCSC
+  
 COMET 1.4.3 - 2016-04-29
 -------------------------
 - Update the management of multiple secondary info data
