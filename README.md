@@ -31,6 +31,8 @@ For any question, you can send an email to Tiphaine Martin (tiphaine.martin at k
 
 ##More information
 
-Go to the website of Epigenetic group of Department of Twin Research :http://epigen.kcl.ac.uk/comet
+Go to the website of Epigenetic group of Department of Twin Research : http://epigen.kcl.ac.uk/comet
 
 Go to the help of coMET webservice : http://comet.epigen.kcl.ac.uk:3838/coMET/
+
+Go to the webiste of Department of Twin Research : http://www.twinsuk.ac.uk/
