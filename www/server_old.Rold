@@ -14,11 +14,12 @@ library("psych")
 
 #Normally Need to load coMET package not like that !!!!
 ## Need to wait that it accept in Bioconductor
-source("/home/osboxes/Documents/coMET/reference/coMET_website/coMET_website_ip-10-242-3-91/R/cometWeb.R")
-source("/home/osboxes/Documents/coMET/reference/coMET_website/coMET_website_ip-10-242-3-91/R/AnalyseFile.R")
-source("/home/osboxes/Documents/coMET/reference/coMET_website/coMET_website_ip-10-242-3-91/R/BiofeatureGraphics.R")
-source("/home/osboxes/Documents/coMET/reference/coMET_website/coMET_website_ip-10-242-3-91/R/DrawPlot.R")
-source("/home/osboxes/Documents/coMET/reference/coMET_website/coMET_website_ip-10-242-3-91/R/GeneralMethodComet.R")
+source("/home/ubuntu/gitHub/coMET/R/cometWeb.R")
+source("/home/ubuntu/gitHub/coMET/R/AnalyseFile.R")
+source("/home/ubuntu/gitHub/coMET/R/BiofeatureGraphics.R")
+source("/home/ubuntu/gitHub/coMET/R/DrawPlot.R")
+source("/home/ubuntu/gitHub/coMET/R/GeneralMethodComet.R")
+
 
 # By default, the file size limit is 5MB. It can be changed by
 # setting this option. Here we'll raise limit to 9MB.
@@ -110,7 +111,7 @@ shinyServer(function(input, output,session) {
   
   ## INFO DATA for help
   output$infoHelp <- renderTable({
-    infohelp <- "/var/shiny-server/www/cyp1b1_infofile_Grch38.txt" 
+    infohelp <- "/var/shiny-server/www/coMET/cyp1b1info.txt" 
     
     if (is.null(infohelp))
       return(NULL)
@@ -122,7 +123,7 @@ shinyServer(function(input, output,session) {
   
   ## INFO DATA for help,region format
   output$inforegionHelp <- renderTable({
-    infohelp <- "/var/shiny-server/www/cyp1b1_infofile_exprGene_region_Grch38.txt" 
+    infohelp <- "/var/shiny-server/www/coMET/cyp1b1info_expr_reduce_region.txt" 
     
     if (is.null(infohelp))
       return(NULL)
@@ -134,7 +135,7 @@ shinyServer(function(input, output,session) {
   
   ## CONFING FILE for help,region format
   output$configFileHelp <- renderTable({
-    infohelp <- "/var/shiny-server/www/config_cyp1b1_zoom_4webserver_Grch38.txt" 
+    infohelp <- "/var/shiny-server/www/coMET/config_cyp1b1_zoom.txt" 
     
     if (is.null(infohelp))
       return(NULL)
@@ -149,7 +150,7 @@ shinyServer(function(input, output,session) {
 #	filename =  "cyp1b1_infofile.txt",
 
  #  content = function(file){
-#	dataINFO = "/var/shiny-server/www/cyp1b1_infofile.txt",
+#	dataINFO = "/var/shiny-server/www/coMET/cyp1b1_infofile.txt",
 #	write.csv(dataINFO, file)
 #	}
 # )
@@ -169,7 +170,7 @@ shinyServer(function(input, output,session) {
   
   ## CORRELATION MATRIX for help
   output$corHelp <- renderTable({
-    corhelp <- "/var/shiny-server/www/cyp1b1_res37_rawMatrix.txt" 
+    corhelp <- "/var/shiny-server/www/coMET/cyp1b1res_37.txt" 
     
     if (is.null(corhelp))
       return(NULL)
@@ -217,17 +218,22 @@ shinyServer(function(input, output,session) {
   
   
   ##### DRAW THE PLOT
-  #Define the name of file
+#  output$cometplot <- renderPlot(function() {
+#    plotPrintInput()
+#  })
+
+  
   filenameplot <- function() {
       filename = paste(input$plotfilename, "png", sep='.')
       filenameImagetmp <- tempfile(fileext=filename)
       filenameImagetmp
   }
 
-  #Create the png
+
   output$cometplotImage <- renderImage({
-    isize <- as.numeric(input$imagesize) * 100
+    
     filenameImage <- filenameplot()
+        isize <- as.numeric(input$imagesize)*100
         png(file = filenameImage,
                   width=isize,
                   height=isize,
@@ -246,8 +252,9 @@ shinyServer(function(input, output,session) {
   
   cometplotPrint <- renderPrint({ plotPrintInput() })
   
-  plotPrintInput <- function() {
-    
+
+
+  plotPrintInput <- function() {    
     datainFile <- input$datafile
     if (is.null(datainFile))
       return(NULL)
@@ -283,10 +290,6 @@ shinyServer(function(input, output,session) {
     if(!is.null(input$dispAsso) & (input$defineParm) & input$dispAsso)
       dispAsso <- "TRUE"
     
-    dispbetaAsso <- "FALSE"
-    if(!is.null(input$dispbetaAsso) & (input$defineParm) & input$dispbetaAsso)
-      dispbetaAsso <- "TRUE"
-    
     dispReg <- "FALSE"
     if( !is.null(input$dispReg) & (input$defineParm) & input$dispReg)
       dispReg <- "TRUE"
@@ -311,10 +314,6 @@ shinyServer(function(input, output,session) {
     displargeAsso <- "FALSE"
     if(!is.null(input$dispAssolarge) & (input$defineextraParm) & input$dispAssolarge)
       displargeAsso <- "TRUE"
-    
-    dispbetaAssolarge <- "FALSE"
-    if(!is.null(input$dispbetaAssolarge) & (input$defineParm) & input$dispbetaAssolarge)
-      dispbetaAssolarge <- "TRUE"
     
     dispReglarge <- "FALSE"
     if( !is.null(input$dispReglarge) & (input$defineextraParm) & input$dispReglarge)
@@ -345,9 +344,9 @@ shinyServer(function(input, output,session) {
     if(!is.null(input$coralphaCI) & (input$definecorParm))
       coralphaCI <- input$coralphaCI
     
-    copvalThres <- 0.05
+    copvalThres <- 0
     if(!is.null(input$corpvalThres) & (input$definecorParm))
-      corpvalThres <- input$corpvalThres
+       corpvalThres <- input$corpvalThres
     
     coradjmethod <- "none"
     if(!is.null(input$coradjmethod) & (input$definecorParm))
@@ -380,17 +379,6 @@ shinyServer(function(input, output,session) {
     if(!is.null(input$refCpGcolor) & (!input$defineplotParm)) 
       dispCpG <- "TRUE"
     
-    pvalThres <- 0.0000001
-    if(!is.null(input$pvalThres) & (input$defineParm))
-      pvalThres <- input$pvalThres
-    
-    pvalThres2 <- 0.00001
-    if(!is.null(input$pvalThres2) & (input$defineParm))
-      pvalThres2 <- input$pvalThres2
-    
-    fontfactorGviz <- 5
-    if(!is.null(input$fontfactorGviz) & (input$defineParm))
-      fontfactorGviz <- input$fontfactorGviz
     
     annotformat <- NULL
     if(!is.null(input$annotformat) & input$annotformat != "NULL"
@@ -410,19 +398,15 @@ shinyServer(function(input, output,session) {
       #plot(1,2)
       #comet.web(mydata.file=datainFile$datapath,mydata.format=as.character(input$dataformat))
       comet.web(mydata.file=datainFile$datapath,mydata.format=dataformat,disp.association=dispAsso,
-                disp.beta.association=dispbetaAsso,
                 disp.region=dispReg, sample.labels=datalab, symbols=datasymb, color.list=datacolor,
                 cormatrix.file=cordatainFile$datapath,cormatrix.method=cormethod, 
                 cormatrix.format=corformat, cormatrix.adjust=coradjmethod,
                 cormatrix.conf.level=coralphaCI, cormatrix.sig.level=corpvalThres,
                 cormatrix.color.scheme=corcolor,mydata.large.file=largedatainFilepath,
                 mydata.large.format=datalargeformat,disp.association.large=displargeAsso,
-                disp.beta.association.large=dispbetaAssolarge,
                 disp.region.large=dispReglarge, sample.labels.large=datalablarge, 
                 symbols.large=datalargesymb, color.list.large=datalargecolor,genome=genomeCpG,
                 start=startCpG,end=stopCpG,mydata.ref=myrefCpG,disp.color.ref=dispCpG,
-                pval.threshold=pvalThres, pval.threshold.2=pvalThres2, factor.beta=factorbeta,
-                font.factor=fontfactorGviz,
                 list.tracks=listTrack, biofeat.user.file=annotdatainFilepath, 
                 biofeat.user.type=annotformat, biofeat.user.type.plot=annotplot, image.title=imagetitle, 
                 print.image=FALSE, verbose=TRUE)
@@ -441,10 +425,10 @@ shinyServer(function(input, output,session) {
   
   output$downloadPlot <- downloadHandler(
     filename = function() { paste(input$plotfilename, input$imageformat, sep='.') },
-    content = function(file) {
+    content = function(filename) {
       if(input$imageformat == "pdf"){
         pdf(encoding = "ISOLatin1.enc",
-            file = file,
+            file = filenameImage,
             onefile=FALSE,
             width=as.numeric(input$imagesize),
             height=as.numeric(input$imagesize),
@@ -452,7 +436,7 @@ shinyServer(function(input, output,session) {
       } 
       if(input$imageformat == "eps"){
         postscript(encoding = "ISOLatin1.enc",
-                   file = file,
+                   file = filenameImage,
                    horizontal=FALSE,
                    onefile=FALSE,
                    width=as.numeric(input$imagesize),
@@ -462,7 +446,7 @@ shinyServer(function(input, output,session) {
                    fonts=c("sans"))
       }
       if(input$imageformat == "png"){
-        png(file = file,
+        png(file = filenameImage,
             width=as.numeric(input$imagesize),
             height=as.numeric(input$imagesize),
             fonts=c("sans"))
@@ -494,7 +478,6 @@ shinyServer(function(input, output,session) {
           
           tagList(
             p('your plot is running, please wait....'),
-            p('Connexion to UCSC and Ensembl'),
             hr(),    
             imageOutput("cometplotImage"),
             hr(),    
@@ -502,18 +485,7 @@ shinyServer(function(input, output,session) {
             hr(),  
             hr(),  
             hr(),  
-            hr(),
-            hr(),
-            hr(),    
-            hr(),  
-            hr(),  
-            hr(),  
-            hr(),  
-            hr(),
-            hr(),
             h5("Download your image",style = "color:red"),
-            p('Click on the image and save the image in png or redo in pdf or eps'),
-            p('It is going to take time because it need to rerun coMET and need to connect to UCSC and ENSEMBL'),
             selectInput("imageformat", "Define the format of plot:" , 
                         choices = c("pdf","eps","png")),
             downloadButton('downloadPlot', 'Download')
@@ -540,20 +512,11 @@ shinyServer(function(input, output,session) {
       if(!is.null(input$dataformat) & (input$defineParm))
         p('Format of info file:',input$dataformat),
       
-      if(!is.null(input$dispbetaAsso) & (input$defineParm) & input$dispbetaAsso)
-        p('Show association of info file:',input$dispbetaAsso),
-      
       if(!is.null(input$dispAsso) & (input$defineParm) & input$dispAsso)
         p('Show association of info file:',input$dispAsso),
       
       if(!is.null(input$dispAsso) & (input$defineParm) &  !input$dispAsso)
         p('Show association of info file: FALSE'),
-      
-      if(!is.null(input$dispbetaAsso) & (input$defineParm) & input$dispbetaAsso)
-        p('Show association of info file:',input$dispbetaAsso),
-      
-      if(!is.null(input$dispbetaAsso) & (input$defineParm) &  !input$dispbetaAsso)
-        p('Show beta of association of info file: FALSE'),
       
       if( !is.null(input$dispReg) & (input$defineParm) & input$dispReg)
         p('Show region of info file:',TRUE),
@@ -593,12 +556,6 @@ shinyServer(function(input, output,session) {
       
       if(!is.null(input$dispAssolarge) & (input$defineextraParm) & input$dispAssolarge)
         p('Show association of supplementary file:',input$dispAssolarge),
-      
-      if(!is.null(input$dispbetaAssolarge) & (input$defineParm) & input$dispbetaAssolarge)
-        p('Show association of supplementary file:',input$dispbetaAssolarge),
-      
-      if(!is.null(input$dispbetaAssolarge) & (input$defineParm) &  !input$dispbetaAssolarge)
-        p('Show beta of association of supplementary file: FALSE'),
       
       if( !is.null(input$dispReglarge) & (input$defineextraParm) & input$dispReglarge)
         p('Show region of supplementary file:',input$dispReglarge),
@@ -661,10 +618,8 @@ shinyServer(function(input, output,session) {
     tagList(
       h1('Welcome to coMET'),
       h3('Overview'),
-      p('The coMET package is a web-based plotting tool and R-based package to visualize different genome-wide association scans such as EWAS (epigenome-wide association scan) results in a genomic region of interest.',
-        'coMET provides a plot of the EWAS association signal and visualisation of the methylation correlation between CpG sites (co-methylation).',
-          'The coMET package also provides the option to annotate the region using functional genomic information, including both user-defined features and pre-selected features based on such as  the ',
-        a(href = 'http://genome.ucsc.edu/ENCODE/', 'Encode'),' and  annotation tracks from', a(href = 'https://genome.ucsc.edu/', 'UCSC Genome Browser website'),  
+      p('The coMET package is a web-based plotting tool and R-based package to visualize different genome-wide association scans such as EWAS (epigenome-wide association scan) results in a genomic region of interest. coMET provides a plot of the EWAS association signal and visualisation of the methylation correlation between CpG sites (co-methylation). The coMET package also provides the option to annotate the region using functional genomic information, including both user-defined features and pre-selected features based on the ',
+        a(href = 'http://genome.ucsc.edu/ENCODE/', 'Encode'),  
         'project. The plot can be customized with different parameters, such as plot labels, colours, symbols, heatmap colour scheme, significance thresholds, and including reference CpG sites. Finally, the tool can also be applied to display the correlation patterns of other genomic data, e.g. gene expression array data.'
       ),
       h3('coMET webservice'),
@@ -672,11 +627,8 @@ shinyServer(function(input, output,session) {
       p('Only 100 omic features can be visualised in the correlation matrix.'),
       p('If the region is large or ENSEMBL and UCSC is busy, the creation of plot can take time.'),
       h3('Developpers'),
-      p('coMET is developed by Tiphaine C. Martin in collaboration with Tom Hardiman, Idil Yet, Pei-Chien Tsai, Jordana T.Bell, Department of Twin Research, Kings College London.'),
+      p('coMET is developed by Tiphaine C. Martin in collaboration with Idil Yet, Pei-Chien Tsai, Jordana T.Bell, Department of Twin Research, Kings College London.'),
       h3('Cite'),
-      p('Martin, T.C., Yet, I., Tsai, P-C., Bell and J.T. (2015).',	
-        a(href='http://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-015-0568-2','“coMET: visualisation of regional epigenome-wide association scan results and DNA co-methylation patterns.”'),
-        ' BMC Bioinformatics.'),
       p('Martin, T.C, Erte, I, Tsai, P-C, Bell, J.T.,coMET: an R plotting package to visualize regional plots of epigenome-wide association scan results,',
 	a(href='http://quantgen.soc.srcf.net/qg14/', 'QG14'),
 	', 2014.'),

@@ -1,5 +1,5 @@
 library(shiny)
-library(coMET)
+#library(coMET)
 
 shinyUI(fluidPage(
   
@@ -9,7 +9,7 @@ shinyUI(fluidPage(
     sidebarPanel(
       h5("Info file",style = "color:red"),
       p(span("You need to load a file", style = "color:red")),
-      p("Example file:",a(href="http://comet.epigen.kcl.ac.uk:3838/cyp1b1_infofile.txt", "cyp1b1_infofile.txt", target="_blank")),
+      p("Example file:",a(href="http://comet.epigen.kcl.ac.uk:3838/cyp1b1_infofile_Grch38.txt", "cyp1b1_infofile.txt", target="_blank")),
    
       fileInput('datafile', 'Choose info file to upload (mandatory, max 100 omic features) :',
                 accept=c('text/csv', 
@@ -29,10 +29,11 @@ shinyUI(fluidPage(
                                      "Region with directions values" = "region_asso")),
                        
                        conditionalPanel(condition = "input.dataformat == 'site_asso' | input.dataformat == 'region_asso' ",
-                                        checkboxInput(inputId="dispAsso",label="Display the direction of association", TRUE),
+                                        checkboxInput(inputId="dispAsso",label="Display the direction of association (positive/negative)", TRUE),
                                         conditionalPanel(condition = "input.dispAsso",
                                                          textInput("datacolor", "Give a color:", "red")
-                                        )
+                                        ),
+                                        checkboxInput(inputId="dispbetaAsso",label="Display the beta of association (value)", TRUE)
                        ),
                        conditionalPanel(condition = "input.dataformat == 'region' | input.dataformat == 'region_asso' ",
                                         checkboxInput(inputId="dispReg",label="Display the region ", TRUE)
@@ -98,7 +99,7 @@ shinyUI(fluidPage(
       hr(),
       h5("Configuration file"),
       p('If you do not want to define the parameters of coMET via the interface, you can download the example configuration file and modify according to your data. But you have to modify at least 3 parameters (', span("mydata.format (format of info file), CORMATRIX.FORMAT ( format of raw or correlation matrice), cormatrix.method (method to analyse the raw data if it is raw format)", style = "color:red"),')'),
-      p("Example file:",a(href="http://comet.epigen.kcl.ac.uk:3838/config_cyp1b1_zoom_4webserver.txt", target="_blank", 
+      p("Example file:",a(href="http://comet.epigen.kcl.ac.uk:3838/config_cyp1b1_zoom_4webserver_Grch38.txt", target="_blank", 
                           "config_cyp1b1_zoom_4webserver.txt")),
       fileInput('configfile', 'Choose configuration file to upload:',
                 accept=c('text/plain', '.txt')
@@ -116,7 +117,10 @@ shinyUI(fluidPage(
                        uiOutput("startCpG"),
                        uiOutput("stopCpG"),
                        numericInput("pvalThres", "Significant P-value threshold (for example 1e-8):",0.0000001),
+                       numericInput("pvalThres2", " Second significant P-value threshold (for example 1e-5):",0.00001),
                        numericInput("disppvalThres", " higher P-value threshold displayed (for example 0):", 0),
+                       numericInput("factorbeta", "Factor to visualise the size of beta (for example 0.3):",0.3),
+                       numericInput("fontfactorGviz", "Font size of the sample labels (for example 5):",5),
                        selectInput("scale", "Select your scale of y-values" , 
                                    choices = c("log10","ln")),
                        checkboxInput(inputId="refCpG",label="Select a CpG reference", FALSE),
@@ -136,7 +140,7 @@ shinyUI(fluidPage(
       
       hr(),
       h5("Info file for the second set of data (e.g.= gene expression, validation data) (optional, no limitation)"),
-      p("Example file:",a(href="http://comet.epigen.kcl.ac.uk:3838/cyp1b1_infofile_exprGene_region.txt", target="_blank", 
+      p("Example file:",a(href="http://comet.epigen.kcl.ac.uk:3838/cyp1b1_infofile_exprGene_region_Grch38.txt", target="_blank", 
                           "cyp1b1_infofile_exprGene_region.txt")),
       fileInput('datalargefile', 'Choose other data file to upload',
                 accept=c('text/csv', 
@@ -158,7 +162,9 @@ shinyUI(fluidPage(
                                         checkboxInput(inputId="dispAssolarge",label="Display the direction of association", TRUE),
                                         conditionalPanel(condition = "input.dispAssolarge",
                                                          textInput("datalargecolor", "Give a color:", "green")
-                                        )
+                                        ),
+                                        checkboxInput(inputId="dispbetaAssolarge",label="Display the beta of association (value) for association", TRUE)
+                                        
                        ),
                        conditionalPanel(condition = "input.datalargeformat == 'region' | input.datalargeformat == 'region_asso' ",
                                         checkboxInput(inputId="dispReglarge",label="Display the region ", TRUE)
@@ -178,24 +184,34 @@ shinyUI(fluidPage(
                                    c("Genes (ENSEMBL)" = "geneENSEMBL",
                                      "Transcript (ENSEMBL)" = "transcriptENSEMBL",
                                      "Genes (UCSC)" = "genesUCSC",
+                                     "Ref Genes (UCSC)" = "refgenesUCSC",
                                      "CpG Island (UCSC)" = "CGI",
                                      "ChromHMM Broad (UCSC)" = "ChromHMM",
+                                     "Blood Histone (Broad)" ="BroadHistone",
                                      "DNAse (UCSC)" = "DNAse",
                                      "Regulation (ENSEMBL)" = "RegENSEMBL",
+                                     "Binding motif (ENSEMBL)" = "BindingMotifENSEMBL",
+                                     "Other regulatories (ENSEMBL)" = "otherRegulatoryENSEMBL",
+                                     "Regulatory evidence (ENSEMBL)" = "regulatoryEvidenceENSEMBL",
+                                     "Regulatory features (ENSEMBL)" = "regulatoryFeaturesENSEMBL",
+                                     "Regulatory segments (ENSEMBL)" = "regulatorySegmeENSEMBL",
+                                     "miRNA target regions (ENSEMBL)" = "miRNAENSEMBL",
                                      "SNP (version dbSNP 142)" = "SNP",
-                                     "ISCA" = "ISCA",
                                      "ClinVar Main" = "ClinVar",
                                      "ClinVar CNV" = "ClinVarCNV",
                                      "GWAS catalog" = "GWAS",
                                      "GAD variants" = "GAD",
                                      "GeneReviews" = "GeneReviews",
                                      "Genome axis" = "genomeAxis",
-                                     "structural SNP" = "SNPstru",
-                                     "stomatic SNP " = "SNPstoma",
+                                     "structural SNP (ENSEMBL)" = "SNPstru",
+                                     "stomatic SNP (ENSEMBL)" = "SNPstoma",
                                      "stomatic structural SNP" = "SNPstrustoma",
                                      "xeno genes (UCSC)" = "xenogenesUCSC",
+                                     "Repeat Elements (UCSC)" = "RepeatElt",
+                                     "Segmental duplication (UCSC)" = "SegDuplication",
                                      "GC content" = "GCcontent",
-                                     "COSMIC" = "COSMIC"),
+                                     "COSMIC" = "COSMIC",
+                                     "Imprinted genes (GTEx)" = "ImprintedtissuesGenes"),
                                    multiple=TRUE),
                        checkboxInput(inputId="addTrack",label="Add user-customised annotation track", FALSE),
                        conditionalPanel(condition = "input.addTrack",
@@ -242,10 +258,14 @@ shinyUI(fluidPage(
 			textInput('plotfilename', "Filename of your plot","coMET"),
 			selectInput("imagesize", "Define the size of plot:" , 
 			            choices = c("7","3.5")),
+			selectInput("imageformat", "Define the format of plot:" ,
+                                    choices = c("pdf","eps","png")),
       hr(),
       h5("Submit the data:",style = "color:red"),
-      p('You need to click on the plot button and go the coMET plot tab.'),
+      p('You need to click on the "plot" button and go the coMET plot tab.'),
+			p('If you want to create the plot directly in a file, you need to click on the "download" button.'),
       p('The creation of plot takes time relative to the time to connect UCSC and ENSEMBL'),
+      downloadButton('downloadPlot', 'Download'),
       actionButton("goPlot", "Plot")
     ),
     
