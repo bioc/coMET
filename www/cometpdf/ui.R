@@ -1,5 +1,4 @@
 library(shiny)
-#library(coMET)
 
 shinyUI(fluidPage(
   
@@ -259,20 +258,29 @@ shinyUI(fluidPage(
 			selectInput("imagesize", "Define the size of plot:" , 
 			            choices = c("7","3.5")),
 			selectInput("imageformat", "Define the format of plot:" ,
-                                    choices = c("pdf","eps","png")),
+                                    choices = c("pdf","eps")),
       hr(),
       h5("Submit the data:",style = "color:red"),
-      p('You need to click on the "plot" button and go the coMET plot tab.'),
-			p('If you want to create the plot directly in a file, you need to click on the "download" button.'),
-      p('The creation of plot takes time relative to the time to connect UCSC and ENSEMBL'),
-      downloadButton('downloadPlot', 'Download'),
-      actionButton("goPlot", "Plot")
+#      p('You need to click on the "plot" button and go the coMET plot tab.'),
+
+#p('If you want to create the plot directly in a file, you need to click on the "download" button.'),	
+#       checkboxInput(inputId="RunDownload",label="Plot directly in a file", FALSE),
+#                conditionalPanel(condition = "input.RunDownload",
+        	downloadButton('downloadPlot', 'Download')
+#       ),
+#	 p('The creation of plot takes time relative to the time to connect UCSC and ENSEMBL'),
+#      checkboxInput(inputId="RunPlot",label="Plot directly in the webpage, don't forget to go to the coMET plot tab ", FALSE),
+ #               conditionalPanel(condition = "input.RunPlot",
+#                         actionButton("goPlot", "Plot")
+  #    )
+
+
     ),
     
     mainPanel(
       tabsetPanel(type = "tabs", 
                   tabPanel("coMET Home ", htmlOutput("home")),
-                  tabPanel("coMET Plot", htmlOutput("cometplotUI")),
+                  #tabPanel("coMET Plot", htmlOutput("cometplotUI")),
                   tabPanel("Info data", tableOutput("table")),
                   tabPanel("Correlation Matrix", tableOutput("cortable")),
                   tabPanel("Second info data", tableOutput("odatatable")),
@@ -284,4 +292,5 @@ shinyUI(fluidPage(
     
   )
   
+
 ))

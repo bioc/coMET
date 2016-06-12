@@ -8,17 +8,9 @@ library("Gviz")
 library("ggbio")
 library("colortools")
 library("hash")
-#library("EBImage")
 library("psych")
-#library("coMET")
+library("coMET")
 
-#Normally Need to load coMET package not like that !!!!
-## Need to wait that it accept in Bioconductor
-source("/home/osboxes/Documents/coMET/reference/coMET_website/coMET_website_ip-10-242-3-91/R/cometWeb.R")
-source("/home/osboxes/Documents/coMET/reference/coMET_website/coMET_website_ip-10-242-3-91/R/AnalyseFile.R")
-source("/home/osboxes/Documents/coMET/reference/coMET_website/coMET_website_ip-10-242-3-91/R/BiofeatureGraphics.R")
-source("/home/osboxes/Documents/coMET/reference/coMET_website/coMET_website_ip-10-242-3-91/R/DrawPlot.R")
-source("/home/osboxes/Documents/coMET/reference/coMET_website/coMET_website_ip-10-242-3-91/R/GeneralMethodComet.R")
 
 # By default, the file size limit is 5MB. It can be changed by
 # setting this option. Here we'll raise limit to 9MB.
@@ -30,6 +22,7 @@ shinyServer(function(input, output,session) {
   
   #### CREATE LIST OF ELEMENTS
   output$listCpG <- renderUI ({
+    cat(file=stderr(), "Create the lsit of CpG sites \n")
     inFile1 <- input$datafile
     listCpG <- c("")
     if (is.null(inFile1)) {
@@ -46,6 +39,7 @@ shinyServer(function(input, output,session) {
       #print(sizeListCpG,digit=10);
       
     }
+    cat(file=stderr(), "Number of CpG sites", sizeListCpG, "CpG sites\n")
     selectInput("reflistCpG", paste ("among",sizeListCpG) , 
                 choices = listCpG,selected = NULL,
                 multiple = FALSE)
@@ -54,6 +48,7 @@ shinyServer(function(input, output,session) {
   
   ## Start position
   output$startCpG <- renderUI ({
+     cat(file=stderr(), "Define start position \n")
     inFile1 <- input$datafile
     startCpG <- 1
     if (is.null(inFile1)) {
@@ -73,6 +68,7 @@ shinyServer(function(input, output,session) {
   
   ## Stop position
   output$stopCpG <- renderUI ({
+	cat(file=stderr(), "Define stop position \n")
     inFile1 <- input$datafile
     stopCpG <- 1
     if (is.null(inFile1)) {
@@ -93,6 +89,7 @@ shinyServer(function(input, output,session) {
   #### READ DIFFERENT FILES 
   ## DATASET
   output$table <- renderTable({
+	cat(file=stderr(), "Visualise info data \n")
     # input$file1 will be NULL initially. After the user selects
     # and uploads a file, it will be a data frame with 'name',
     # 'size', 'type', and 'datapath' columns. The 'datapath'
@@ -110,6 +107,7 @@ shinyServer(function(input, output,session) {
   
   ## INFO DATA for help
   output$infoHelp <- renderTable({
+	cat(file=stderr(), "Visualise info data in the help tab \n")
     infohelp <- "/var/shiny-server/www/cyp1b1_infofile_Grch38.txt" 
     
     if (is.null(infohelp))
@@ -122,6 +120,7 @@ shinyServer(function(input, output,session) {
   
   ## INFO DATA for help,region format
   output$inforegionHelp <- renderTable({
+	cat(file=stderr(), "Visualise region example file in the help tab\n")
     infohelp <- "/var/shiny-server/www/cyp1b1_infofile_exprGene_region_Grch38.txt" 
     
     if (is.null(infohelp))
@@ -134,6 +133,7 @@ shinyServer(function(input, output,session) {
   
   ## CONFING FILE for help,region format
   output$configFileHelp <- renderTable({
+	cat(file=stderr(), "Visualise the configuration file in the help tab \n")
     infohelp <- "/var/shiny-server/www/config_cyp1b1_zoom_4webserver_Grch38.txt" 
     
     if (is.null(infohelp))
@@ -158,6 +158,7 @@ shinyServer(function(input, output,session) {
   
   ## CORRELATION MATRIX
   output$cortable <- renderTable({
+cat(file=stderr(), "Visualise the correlation file downloaded \n")
     corinFile <- input$corfile
     
     if (is.null(corinFile))
@@ -169,6 +170,7 @@ shinyServer(function(input, output,session) {
   
   ## CORRELATION MATRIX for help
   output$corHelp <- renderTable({
+	cat(file=stderr(), "Visualiase the correlation file in the help tab \n")
     corhelp <- "/var/shiny-server/www/cyp1b1_res37_rawMatrix.txt" 
     
     if (is.null(corhelp))
@@ -182,6 +184,7 @@ shinyServer(function(input, output,session) {
   
   ## EXTRA DATASET
   output$odatatable <- renderTable({
+    cat(file=stderr(), "Visualisation extra data\n")
     oinFile <- input$datalargefile
     
     if (is.null(oinFile))
@@ -193,6 +196,7 @@ shinyServer(function(input, output,session) {
   
   ## ANNOTATION DATA
   output$annottable <- renderTable({
+	cat(file=stderr(), "Visualisation annotation data\n")
     annotinFile <- input$annotfile
     
     if (is.null(annotinFile))
@@ -204,6 +208,7 @@ shinyServer(function(input, output,session) {
   
   ## CONFIGURATION DATA
   output$configtable <- renderTable({
+	cat(file=stderr(), "Visualise the configuration file downloaded \n")
     configdatainFile <- input$configfile
     
     if (is.null(configdatainFile))
@@ -219,6 +224,7 @@ shinyServer(function(input, output,session) {
   ##### DRAW THE PLOT
   #Define the name of file
   filenameplot <- function() {
+	cat(file=stderr(), "Define the name of file \n")
       filename = paste(input$plotfilename, "png", sep='.')
       filenameImagetmp <- tempfile(fileext=filename)
       filenameImagetmp
@@ -246,8 +252,12 @@ shinyServer(function(input, output,session) {
   
   cometplotPrint <- renderPrint({ plotPrintInput() })
   
+#cometplotPrint <- renderPrint({ 
+#	cat(file=stderr(), "Start to read the value\n") 
+#	plot(1,2) })
+  
   plotPrintInput <- function() {
-    
+  cat(file=stderr(), "Start to read the value\n")  
     datainFile <- input$datafile
     if (is.null(datainFile))
       return(NULL)
@@ -407,9 +417,64 @@ shinyServer(function(input, output,session) {
       imagetitle <- as.character(input$imagetitle)
     
     if (is.null(configdatainFile)) {
-      #plot(1,2)
+	cat(file=stderr(), "Run coMET.web from values added by hand \n")
+        cat(file=stderr(), " config ",configdatainFile$datapath,"\n")
+        cat(file=stderr(), " data ",datainFile$datapath,"\n")
+        cat(file=stderr(), " cormatrix ",cordatainFile$datapath,"\n")      
+#plot(1,2)
       #comet.web(mydata.file=datainFile$datapath,mydata.format=as.character(input$dataformat))
-      comet.web(mydata.file=datainFile$datapath,mydata.format=dataformat,disp.association=dispAsso,
+      if(is.null(annotdatainFilepath)){
+        if(is.null(largedatainFilepath)){
+	comet.web(mydata.file=datainFile$datapath,mydata.format=dataformat,disp.association=dispAsso,
+                disp.beta.association=dispbetaAsso,
+                disp.region=dispReg, sample.labels=datalab, symbols=datasymb, color.list=datacolor,
+                cormatrix.file=cordatainFile$datapath,cormatrix.method=cormethod, 
+                cormatrix.format=corformat, cormatrix.adjust=coradjmethod,
+                cormatrix.conf.level=coralphaCI, cormatrix.sig.level=corpvalThres,
+                cormatrix.color.scheme=corcolor,genome=genomeCpG,
+                start=startCpG,end=stopCpG,mydata.ref=myrefCpG,disp.color.ref=dispCpG,
+                pval.threshold=pvalThres, pval.threshold.2=pvalThres2, factor.beta=factorbeta,
+                font.factor=fontfactorGviz,list.tracks=listTrack, image.title=imagetitle, 
+                print.image=FALSE, verbose=TRUE)
+	}else{
+        cat(file=stderr(), " large data ",largedatainFilepath,"\n")
+	comet.web(mydata.file=datainFile$datapath,mydata.format=dataformat,disp.association=dispAsso,
+                disp.beta.association=dispbetaAsso,
+                disp.region=dispReg, sample.labels=datalab, symbols=datasymb, color.list=datacolor,
+                cormatrix.file=cordatainFile$datapath,cormatrix.method=cormethod, 
+                cormatrix.format=corformat, cormatrix.adjust=coradjmethod,
+                cormatrix.conf.level=coralphaCI, cormatrix.sig.level=corpvalThres,
+                cormatrix.color.scheme=corcolor,mydata.large.file=largedatainFilepath,
+                mydata.large.format=datalargeformat,disp.association.large=displargeAsso,
+                disp.beta.association.large=dispbetaAssolarge,
+                disp.region.large=dispReglarge, sample.labels.large=datalablarge, 
+                symbols.large=datalargesymb, color.list.large=datalargecolor,genome=genomeCpG,
+                start=startCpG,end=stopCpG,mydata.ref=myrefCpG,disp.color.ref=dispCpG,
+                pval.threshold=pvalThres, pval.threshold.2=pvalThres2, factor.beta=factorbeta,
+                font.factor=fontfactorGviz,list.tracks=listTrack, image.title=imagetitle, 
+                print.image=FALSE, verbose=TRUE)
+       }
+      }else{
+        cat(file=stderr(), " Annotation data ",annotdatainFilepath,"\n")
+        if(is.null(largedatainFilepath)){
+		comet.web(mydata.file=datainFile$datapath,mydata.format=dataformat,disp.association=dispAsso,
+                disp.beta.association=dispbetaAsso,
+                disp.region=dispReg, sample.labels=datalab, symbols=datasymb, color.list=datacolor,
+                cormatrix.file=cordatainFile$datapath,cormatrix.method=cormethod, 
+                cormatrix.format=corformat, cormatrix.adjust=coradjmethod,
+                cormatrix.conf.level=coralphaCI, cormatrix.sig.level=corpvalThres,
+                cormatrix.color.scheme=corcolor,mydata.large.file=largedatainFilepath,
+                mydata.large.format=datalargeformat,disp.association.large=displargeAsso,
+                disp.beta.association.large=dispbetaAssolarge,
+                disp.region.large=dispReglarge, sample.labels.large=datalablarge, 
+                symbols.large=datalargesymb, color.list.large=datalargecolor,genome=genomeCpG,
+                start=startCpG,end=stopCpG,mydata.ref=myrefCpG,disp.color.ref=dispCpG,
+                pval.threshold=pvalThres, pval.threshold.2=pvalThres2, factor.beta=factorbeta,
+                font.factor=fontfactorGviz, list.tracks=listTrack, image.title=imagetitle,
+                print.image=FALSE, verbose=TRUE)
+	}else{
+        	cat(file=stderr(), " large data ",largedatainFilepath,"\n")
+	comet.web(mydata.file=datainFile$datapath,mydata.format=dataformat,disp.association=dispAsso,
                 disp.beta.association=dispbetaAsso,
                 disp.region=dispReg, sample.labels=datalab, symbols=datasymb, color.list=datacolor,
                 cormatrix.file=cordatainFile$datapath,cormatrix.method=cormethod, 
@@ -426,16 +491,43 @@ shinyServer(function(input, output,session) {
                 list.tracks=listTrack, biofeat.user.file=annotdatainFilepath, 
                 biofeat.user.type=annotformat, biofeat.user.type.plot=annotplot, image.title=imagetitle, 
                 print.image=FALSE, verbose=TRUE)
+	}
+     }
+
     } else {
+        cat(file=stderr(), "Run plotprintInput with configuration files\n")
+        cat(file=stderr(), " config ",configdatainFile$datapath,"\n")
+        cat(file=stderr(), " data ",datainFile$datapath,"\n")
+        cat(file=stderr(), " cormatrix ",cordatainFile$datapath,"\n")
       #plot(1,2)
       #mydata.large.file=largedatainFilepath,
       #configFile="/home/tmartin/git_iop/comet/Rpackage/comet/data/smoking/config_cyp1b1_zoom_local.txt"
       #comet.web(config.file=configFile,mydata.file=datainFile$datapath,cormatrix.file=cordatainFile$datapath, print.image=FALSE)
-      
-      comet.web(config.file=configdatainFile$datapath, mydata.file=datainFile$datapath,
-                cormatrix.file=cordatainFile$datapath, mydata.large.file=largedatainFilepath, 
-                biofeat.user.file=annotdatainFilepath, print.image=FALSE, verbose=TRUE)
-    }
+     if(is.null(annotdatainFilepath)){
+        if(is.null(largedatainFilepath)){
+        comet.web(config.file=configdatainFile$datapath, mydata.file=datainFile$datapath,
+                cormatrix.file=cordatainFile$datapath, print.image=FALSE, verbose=TRUE)
+        }else{
+        cat(file=stderr(), " large data ",largedatainFilepath,"\n")
+        comet.web(config.file=configdatainFile$datapath, mydata.file=datainFile$datapath,
+                cormatrix.file=cordatainFile$datapath, mydata.large.file=largedatainFilepath,
+                print.image=FALSE, verbose=TRUE)
+        }
+     }else{
+        cat(file=stderr(), " Annotation data ",annotdatainFilepath,"\n")
+        if(is.null(largedatainFilepath)){
+        comet.web(config.file=configdatainFile$datapath, mydata.file=datainFile$datapath,
+                cormatrix.file=cordatainFile$datapath, biofeat.user.file=annotdatainFilepath,
+                print.image=FALSE, verbose=TRUE)
+        }else{
+        cat(file=stderr(), " large data ",largedatainFilepath,"\n")
+        comet.web(config.file=configdatainFile$datapath, mydata.file=datainFile$datapath,
+                cormatrix.file=cordatainFile$datapath, mydata.large.file=largedatainFilepath,
+                biofeat.user.file=annotdatainFilepath,print.image=FALSE, verbose=TRUE)
+        }
+     }
+   }
+#	cat(file=stderr(), "comet.web has finished !\n")
     
   }
   
@@ -443,6 +535,7 @@ shinyServer(function(input, output,session) {
     filename = function() { paste(input$plotfilename, input$imageformat, sep='.') },
     content = function(file) {
       if(input$imageformat == "pdf"){
+cat(file=stderr(), "in pdf \n")
         pdf(encoding = "ISOLatin1.enc",
             file = file,
             onefile=FALSE,
@@ -451,6 +544,7 @@ shinyServer(function(input, output,session) {
             paper="special")
       } 
       if(input$imageformat == "eps"){
+	cat(file=stderr(), "in eps \n")
         postscript(encoding = "ISOLatin1.enc",
                    file = file,
                    horizontal=FALSE,
@@ -462,21 +556,27 @@ shinyServer(function(input, output,session) {
                    fonts=c("sans"))
       }
       if(input$imageformat == "png"){
+	cat(file=stderr(), "png \n")
+	pngsize <- as.numeric(input$imagesize) * 1000 
         png(file = file,
-            width=as.numeric(input$imagesize),
-            height=as.numeric(input$imagesize),
+            width=pngsize,
+            height=pngsize,
             fonts=c("sans"))
+	par(mar=c(1,1,1,1))
       }
       #lena = readImage(filenameImage)
       #display(lena)
       cometplotPrint()
+#	cat(file=stderr(), "finished to do the plot\n")
       dev.off()
+	cat(file=stderr(), "finished to create files \n")
     }
   )
   
   
   observe({
     if(input$goPlot) {
+#	cat(file=stderr(), "Ask to run plot in the page \n")
       if(is.null(input$datafile)){
         output$cometplotUI <- renderUI({
           h5("Need to upload data file",style = "color:red")
@@ -490,6 +590,7 @@ shinyServer(function(input, output,session) {
           h5("Need to upload configuration file to define parameters of data file, of correlation file and of plot or define from the website",style = "color:red")
         })
       } else {
+	cat(file=stderr(), "Run the creation plot \n")
         output$cometplotUI <- renderUI({
           
           tagList(
@@ -514,8 +615,6 @@ shinyServer(function(input, output,session) {
             h5("Download your image",style = "color:red"),
             p('Click on the image and save the image in png or redo in pdf or eps'),
             p('It is going to take time because it need to rerun coMET and need to connect to UCSC and ENSEMBL'),
-            selectInput("imageformat", "Define the format of plot:" , 
-                        choices = c("pdf","eps","png")),
             downloadButton('downloadPlot', 'Download')
           )
         })
@@ -731,7 +830,7 @@ shinyServer(function(input, output,session) {
       
       hr(),
       h3('Option of comet.web'),
-      ?comet.web
+      p('Info: ', ?comet.web)
     )
   })
   
