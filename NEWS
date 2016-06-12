@@ -1,3 +1,7 @@
+COMET 1.4.4 - 2016-06-12
+------------------------
+- Remove the big files (bigger 1Mo not need to keep for examples and vignette)
+
 COMET 1.4.3 - 2016-04-29
 -------------------------
 - Update the management of multiple secondary info data
