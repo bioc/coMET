@@ -1,3 +1,9 @@
+COMET 1.11.1 - 2007-07-27 
+-------------------------
+- Update vignette because of the update of BiocStyle
+- Add examples data that was not uploaded correctly the first time
+
+
 COMET 1.5.5 - 2016-06-12
 -------------------------
 - Update the script for coMET website
