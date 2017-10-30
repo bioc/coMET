@@ -7,9 +7,9 @@
 \documentclass[11pt]{article}
 
 % A bunch of styles and package requirements for the Bioconductor vignette branding
-<<style, eval=TRUE, echo=FALSE,results="asis">>=
+<<style, eval=TRUE, echo=FALSE,results="asis",warning=FALSE>>=
 #library("BiocStyle")
-BiocStyle::latex()
+BiocStyle::latex_old()
 @
 
 <<setup, include=FALSE, cache=FALSE, echo=F>>=
@@ -793,13 +793,13 @@ This function is now obselet in coMET as Ensembl have restructured their databas
 The colors were :
 \\
 \\
-\centerline{\includegraphics[scale=.19]{../inst/extdata/JpegTables/RegulatoryElementsENSEMBL}}
+\centerline{\includegraphics[scale=.75]{../inst/extdata/JpegTables/RegulatoryElementsENSEMBL}}
 
 \subsubsection{structureBiomart from Ensembl}
 Listed below are the colours for somatic structural variation and structural variation.
 \\
 \\
-\centerline{\includegraphics[scale=.13]{../inst/extdata/JpegTables/structureBiomart}}
+\centerline{\includegraphics[scale=.75]{../inst/extdata/JpegTables/structureBiomart}}
 
 \subsubsection{miRNA Target Regions from Ensembl}
 The colour of the miRNA target regions is set to Plum4 (hex code: \#8B668B)
@@ -809,37 +809,37 @@ The colour of the miRNA target regions is set to Plum4 (hex code: \#8B668B)
 Listed on the next page are the colours used for the different types of binding motifs. The frequency shown is that found in GRCh38 (hg38). Motifs with red text are found only in GRCh37 (hg19), motifs with blue text are found only in GRCh38 (hg38)
 \\
 \\
-\centerline{\includegraphics[scale=0.13]{../inst/extdata/JpegTables/BindingMotifsBiomart}}
+\centerline{\includegraphics[scale=0.70]{../inst/extdata/JpegTables/BindingMotifsBiomart}}
 
 \subsubsection{Other Regulatory Regions Biomart from Ensembl}
 
 Listed below are the colours used for the different types of regulatory regions. The frequency shown is that found in GRCh38 (hg38).
 \\
 \\
-\centerline{\includegraphics[scale=0.13]{../inst/extdata/JpegTables/OtherRegulatoryRegions}}
+\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/OtherRegulatoryRegions}}
 
 \subsubsection{Regulatory Features Biomart from Ensembl}
 
 Listed below are the colours used for the different types of regulatory features The frequency shown is that found in GRCh38 (hg38).
 \\
 \\
-\centerline{\includegraphics[scale=0.13]{../inst/extdata/JpegTables/RegulatoryFeaturesBiomart}}
+\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/RegulatoryFeaturesBiomart}}
 
 \subsubsection{Other Regulatory Segments Biomart from Ensembl}
 
 Listed below are the colours used for the different types of regulatory segments. The frequency shown is that found in GRCh38 (hg38). Segments with red text are found only in GRCh37 (hg19)
 \\
 \\
-\centerline{\includegraphics[scale=0.13]{../inst/extdata/JpegTables/RegulatorySegmentsBiomart}}
+\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/RegulatorySegmentsBiomart}}
 
 \subsubsection{Binding Motif Biomart from Ensembl}
 
 Listed on the next 3 pages are the colours used for the different types of regulatory evidence elements. The frequency shown is that found in GRCh37 (hg19). At the current time this track has not been optimised for GRCh38 (hg38) meaning any elements found exclusively in GRCh38 do not have an assigned colour and will be displayed in the default track colour of Gviz.
 \\
 \\
-\centerline{\includegraphics[scale=0.14]{../inst/extdata/JpegTables/RegulatoryEvidence_1}}
-\centerline{\includegraphics[scale=0.14]{../inst/extdata/JpegTables/RegulatoryEvidence_2}}
-\centerline{\includegraphics[scale=0.14]{../inst/extdata/JpegTables/RegulatoryEvidence_3}}
+\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/RegulatoryEvidence_1}}
+\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/RegulatoryEvidence_2}}
+\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/RegulatoryEvidence_3}}
 
 \clearpage
 \subsection{UCSC}
@@ -876,10 +876,10 @@ For this function there are two possible colour schemes to choose from. The sele
 the colours used in both schemes are listed below:
 \\
 \\
-\centerline{\includegraphics[scale=.13]{../inst/extdata/JpegTables/ChromHMM_coMET}}
+\centerline{\includegraphics[scale=.75]{../inst/extdata/JpegTables/ChromHMM_coMET}}
 \\
 \\
-\centerline{\includegraphics[scale=.13]{../inst/extdata/JpegTables/ChromHMM_UCSC}}
+\centerline{\includegraphics[scale=.75]{../inst/extdata/JpegTables/ChromHMM_UCSC}}
 %
 % \begin{longtable}{|c|c|}
 % \hline \multicolumn{1}{|c|}{Omic feature} & \multicolumn{1}{c|}{Color} \\ \hline
@@ -918,7 +918,7 @@ International Standards of Cytogenomic Arrays Consortium defined a set of phenot
 This database is not more accessible from UCSC.
 \\
 \\
-\centerline{\includegraphics[scale=.13]{../inst/extdata/JpegTables/ISCATrack}}
+\centerline{\includegraphics[scale=.75]{../inst/extdata/JpegTables/ISCATrack}}
 
 \subsubsection{Other potential data from UCSC}
 You can access to other data via UCSC track hub \citep{UCSC2013} :
@@ -964,27 +964,27 @@ Below you can find the color code for each state depending if 15-,18- or 25-stat
 Listed below are the colours used for the different elements contained in ROADmap data with 15 states.
 \\
 \\
-\centerline{\includegraphics[scale=0.13]{../inst/extdata/JpegTables/RoadMap15_RoadMap}}
+\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/RoadMap15_RoadMap}}
 
 Listed below are the colours used for the different elements contained in ROADmap data with 18 states with RoadMap colors.
 \\
 \\
-\centerline{\includegraphics[scale=0.13]{../inst/extdata/JpegTables/RoadMap18_RoadMap}}
+\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/RoadMap18_RoadMap}}
 
 Listed below are the colours used for the different elements contained in ROADmap data with 18 states with coMET colors.
 \\
 \\
-\centerline{\includegraphics[scale=0.13]{../inst/extdata/JpegTables/RoadMap18_coMET}}
+\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/RoadMap18_coMET}}
 
 Listed below are the colours used for the different elements contained in ROADmap data with 25 states with RoadMap colors.
 \\
 \\
-\centerline{\includegraphics[scale=0.13]{../inst/extdata/JpegTables/RoadMap25_RoadMap}}
+\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/RoadMap25_RoadMap}}
 
 Listed below are the colours used for the different elements contained in ROADmap data with 25 states with coMET colors.
 \\
 \\
-\centerline{\includegraphics[scale=0.13]{../inst/extdata/JpegTables/RoadMap25_coMET}}
+\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/RoadMap25_coMET}}
 
 \subsubsection{DNA Motif Positional Bias in Digital Genomic Footprinting Sites}
 The Digital Genomic Footprinting (DGF) sites in each cell type can be visualised using the function \emph{dgfootprints\_RoadMap} using the file of DNase/DGF Footprint calls \url{http://egg2.wustl.edu/roadmap/data/byDataType/dgfootprints/}
@@ -1455,7 +1455,7 @@ You can visualise our eQTL using \textbf{\emph{eQTL}} function.
 Listed below are the colours used for the different elements contained in eQTL data.
 \\
 \\
-\centerline{\includegraphics[scale=0.13]{../inst/extdata/JpegTables/eQTL}}
+\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/eQTL}}
 
 \subsubsection{metQTL data}
 You can visualise our eQTL using \textbf{\emph{metQTL}} function.
@@ -1463,7 +1463,7 @@ You can visualise our eQTL using \textbf{\emph{metQTL}} function.
 Listed below are the colours used for the different elements contained in metQTL data.
 \\
 \\
-\centerline{\includegraphics[scale=0.13]{../inst/extdata/JpegTables/metQTL}}
+\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/metQTL}}
 
 \clearpage
 \section{coMET: Shiny web-service}
@@ -1628,8 +1628,32 @@ Use option \emph{VERBOSE=TRUE} in the function coMET or coMET.web
 \leavevmode
 \\
 If this does not help resolve the issue, please to send your command line with \emph{VERBOSE=TRUE} and its error message to tiphaine.martin@kcl.ac.uk. Do not forget to give alsoinformation about the session by using sessionInfo().
+\\
+\item\textbf{How do you visualise coMET plots working within a R Markdown framework}?
+\leavevmode
+\\
+When coMET writes to a PDF, it is writing out to a 7X7 square area. So, it turns out that one can 'force; the R Markdown block to also write to a 7 x 7 square PDF, as follows:
+
+<<faq4,eval=FALSE>>=
+'''{r plot_ex1,fig.keep='last', fig.height=7,fig.width=7,dev='pdf'}
+comet(config.gile=configfile,
+mydata.file=myinfofile, mydata_type="file",
+cormatrix.file-mycorrelation, cormatrix.type="listfile", 
+mydata.large.file=myexpressfile, mydata.large.type="listfile",
+tracks.gviz=listgviz,
+verbose=FALSE, print.image=FALSE, disp.pvalueplot=FALSE)
+'''
+@
+\leavevmode
+\\
 \end{itemize}
 
+\clearpage
+\section{Acknowledgement}
+T.C.M would like to thank Bioconductor team for their help and advice in the development of a R Bioconductor package. Moreover, T.C.M would like to thank different users for their feedback that help to improve this present R package.
+\begin{itemize}
+  \item Prof Daniel Weeks and Dr Annie Infancia Arockiaraj to share with us how to visualise correctly coMET plot in R Markdown code.
+\end{itemize}
 
 
 \clearpage
