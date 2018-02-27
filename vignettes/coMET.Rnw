@@ -7,9 +7,10 @@
 \documentclass[11pt]{article}
 
 % A bunch of styles and package requirements for the Bioconductor vignette branding
-<<style, eval=TRUE, echo=FALSE,results="asis",warning=FALSE>>=
+%<<style, eval=TRUE, echo=FALSE,results="asis",warning=FALSE>>=
+<<style-knitr, eval=TRUE, echo=FALSE,warning=FALSE, results="asis">>=
 #library("BiocStyle")
-BiocStyle::latex_old()
+BiocStyle::latex()
 @
 
 <<setup, include=FALSE, cache=FALSE, echo=F>>=
@@ -18,10 +19,10 @@ opts_chunk$set(fig.path='figure/minimal-', fig.align='center', fig.show='hold')
 options(replace.assign=TRUE,width=90)
 @
 
-\RequirePackage[utf8]{inputenc} 
+\RequirePackage[utf8]{inputenc}
 \RequirePackage{hyperref}
 \RequirePackage{url}
-\RequirePackage[numbers]{natbib}
+%\RequirePackage[numbers]{natbib}
 %\bibliographystyle{plainnat}
 %\bibpunct{(}{)}{;}{a}{,}{,}
 % \RequirePackage[text={7.2in,9in},centering]{geometry}
@@ -38,12 +39,16 @@ options(replace.assign=TRUE,width=90)
 \newcommand{\Reference}[1]{{\texttt{#1}}}
 \newcommand{\link}[1]{{#1}}
 \newcommand{\RR}[0]{{\texttt{R}}}
+\newcommand\BiocStyle{\Rpackage{BiocStyle}}
+\newcommand\knitr{\Rpackage{knitr}}
 
-\title{The coMET User Guide}
-\author{Tiphaine C. Martin \footnote{tiphaine.martin@kcl.ac.uk}, Tom Hardiman \footnote{thomas.hardiman@kcl.ac.uk}, Idil Yet \footnote{idil.yet@kcl.ac.uk}, Pei-Chien Tsai \footnote{peichien.tsai@kcl.ac.uk}, Jordana T. Bell \footnote{jordana.bell@kcl.ac.uk}}
+%\footnote{thomas.hardiman@kcl.ac.uk}, \footnote{idil.yet@kcl.ac.uk}, \footnote{peichien.tsai@kcl.ac.uk}, \footnote{jordana.bell@kcl.ac.uk}
+\bioctitle[The coMET User Guide]{The coMET User Guide}
+\author{Tiphaine C. Martin \footnote{\email{tiphaine.martin@mssm.edu}}, Tom Hardiman, Idil Yet, Pei-Chien Tsai, Jordana T. Bell}
 \date{Edited: July 2015; Compiled: \today}
 
 \begin{document}
+
 
 \maketitle
 
@@ -58,33 +63,34 @@ citation(package='coMET')
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction}
-The CoMET package is a web-based plotting tool and R-based package to visualize omic-WAS results in a genomic region of interest, such as EWAS (epigenome-wide association scan). CoMET provides a plot of the EWAS association signal and visualisation of the methylation correlation between CpG sites (co-methylation). The CoMET package also provides the option to annotate the region using functional genomic information, including both user-defined features and pre-selected features based on the Encode project. The plot can be customized with different parameters, such as plot labels, colours, symbols, heatmap colour scheme, significance thresholds, and including reference CpG sites. Finally, the tool can also be applied to display the correlation patterns of other genomic data in any species, e.g. gene expression array data.
+\begin{abstract}
+The \Biocpkg{coMET} package is a web-based plotting tool and R-based package to visualize omic-WAS results in a genomic region of interest, such as EWAS (epigenome-wide association scan). \Biocpkg{coMET} provides a plot of the EWAS association signal and visualisation of the methylation correlation between CpG sites (co-methylation). The \Biocpkg{coMET} package also provides the option to annotate the region using functional genomic information, including both user-defined features and pre-selected features based on the Encode project. The plot can be customized with different parameters, such as plot labels, colours, symbols, heatmap colour scheme, significance thresholds, and including reference CpG sites. Finally, the tool can also be applied to display the correlation patterns of other genomic data in any species, e.g. gene expression array data.
 
-coMET generates a multi-panel plot to visualize EWAS results, co-methylation patterns, and annotation tracks in a genomic region of interest. A coMET figure (cf. Fig. 1) includes three components: 
+\Biocpkg{coMET} generates a multi-panel plot to visualize EWAS results, co-methylation patterns, and annotation tracks in a genomic region of interest. A \Biocpkg{coMET} figure (cf. Fig. 1) includes three components:
 \begin{enumerate}
 \item the upper plot shows the strength and extent of EWAS association signal;
 \item the middle panel provides customized annotation tracks;
 \item the lower panel shows the correlation between selected CpG sites in the genomic region.
 \end{enumerate}
-The structure of the plots builds on snp.plotter (Luna et al., 2007) \citep{Luna2007}, with extensions to incorporate genomic annotation tracks and customized functions. coMET produces plots in PDF and Encapsulated Postscript (EPS) format.
+The structure of the plots builds on \CRANpkg{snp.plotter}\cite{Luna2007}, with extensions to incorporate genomic annotation tracks and customized functions. \Biocpkg{coMET} produces plots in PDF and Encapsulated Postscript (EPS) format.
 
-The current version of coMET can visualise EWAS results and annotations from a genomic region up to an entire chromosome in the upper and middle panels of the coMET plot. However, the lower panel (co-methylation) is restricted to visualising a maximum of 120 single-CpG or region-based datapoints. This limitation is due to limitations in the size of a standard A4 plot, and may be updated in the near future. However, the user can use the function comet.list to extracts all significant correlations beyond a given threshold in the dataset from either a genomic region or from an entire chromosome if required.
+The current version of \Biocpkg{coMET} can visualise EWAS results and annotations from a genomic region up to an entire chromosome in the upper and middle panels of the coMET plot. However, the lower panel (co-methylation) is restricted to visualising a maximum of 120 single-CpG or region-based datapoints. This limitation is due to limitations in the size of a standard A4 plot, and may be updated in the near future. However, the user can use the function \Rfunction{comet.list} to extracts all significant correlations beyond a given threshold in the dataset from either a genomic region or from an entire chromosome if required.
+\end{abstract}
 
 \clearpage
 \section{Usage}
-CoMET requires the installation of R, the statistical computing software, freely available for Linux, Windows, or MacOS. CoMET can be downloaded from bioconductor. Packages can be installed using the install.packages command in R. The coMET R package includes two major functions \textbf{\emph{comet.web}} and \textbf{\emph{comet}} to visualise omci-WAS results. 
+\Biocpkg{coMET} requires the installation of R, the statistical computing software, freely available for Linux, Windows, or MacOS. \Biocpkg{coMET} can be downloaded from bioconductor. Packages can be installed using the install.packages command in R. The \Biocpkg{coMET} R package includes two major functions \Rfunction{comet.web} and \Rfunction{comet} to visualise omci-WAS results.
 \begin{itemize}
-\item The function \textbf{\emph{comet.web}} generates output plot with the same settings of genomic annotation tracks as that of the webservice (\url{http://epigen.kcl.ac.uk/comet} or direcly \url{http://comet.epigen.kcl.ac.uk:3838/coMET/}).
-\item The function \textbf{\emph{comet}} generates output plots with the customized annotation tracks defined by user.
-\end{itemize} 
+\item The function \Rfunction{comet.web} generates output plot with the same settings of genomic annotation tracks as that of the webservice (\url{http://epigen.kcl.ac.uk/comet} or direcly \url{http://comet.epigen.kcl.ac.uk:3838/coMET/}).
+\item The function \Rfunction{comet} generates output plots with the customized annotation tracks defined by user.
+\end{itemize}
 
 <<installPackages,eval=FALSE>>=
 source("http://bioconductor.org/biocLite.R")
 biocLite("coMET")
 @
 
-CoMET uses the packages called "psych", "corrplot" and "colortools", which are not available from bioconductor. This must be installed before the installation of coMET.
+\Biocpkg{coMET} uses the packages called \CRANpkg{psych}, \CRANpkg{corrplot} and \CRANpkg{colortools}, which are not available from bioconductor. This must be installed before the installation of \Biocpkg{coMET}
 
 <<installPackagesdepend,eval=FALSE>>=
 install.packages("psych")
@@ -92,11 +98,11 @@ install.packages("corrplot")
 install.packages("colortools")
 @
 
-coMET has a development version on gitHub, go to the section "Install the development version of coMET from Bioconductor". 
+\Biocpkg{coMET} has a development version on gitHub, go to the section "Install the development version of \Biocpkg{coMET} from \Bioconductor{}".
 
-You can install also on the version R 3.2.2 via the master version of package on gitHub. The same steps must be followed as described in the section "Install the development version of coMET from Bioconductor".
+You can install also on the version R 3.2.2 via the master version of package on gitHub. The same steps must be followed as described in the section "Install the development version of \Biocpkg{coMET} from \Bioconductor{}".
 
-After downloading from Bioconductor or gitHUB, and installing on your computer, CoMET can be loaded into a R session using this command:
+After downloading from \Bioconductor{} or gitHUB, and installing on your computer, \Biocpkg{coMET} can be loaded into a R session using this command:
 <<dd,echo=FALSE,eval=FALSE>>=
 require("hash")
 require("grid")
@@ -134,14 +140,14 @@ The configuration file specifies the options for the coMET plot. Example configu
 @
 
 \subsection{Install the development version of coMET from Bioconductor}
-To install coMET from the development version of Bioconductor, the user must install R-devel from \url{http://www.bioconductor.org/developers/how-to/useDevel/}. Following this installation, use standard Bioconductor command line, e.g.
+To install \Biocpkg{coMET} from the development version of Bioconductor, the user must install R-devel from \url{http://www.bioconductor.org/developers/how-to/useDevel/}. Following this installation, use standard Bioconductor command line, e.g.
 
 <<installPackages_develbioc,eval=FALSE>>=
 source("http://bioconductor.org/biocLite.R")
 biocLite("coMET")
 @
 \subsection{Install the version of coMET from gitHub}
-Another way to install coMET is to download the master package from gitHUB \url{https://github.com/TiphaineCMartin/coMET} or the devel package \url{https://github.com/TiphaineCMartin/coMet/tree/devel}. Once downloaded use command line:
+Another way to install \Biocpkg{coMET} is to download the master package from gitHUB \url{https://github.com/TiphaineCMartin/coMET} or the devel package \url{https://github.com/TiphaineCMartin/coMET/tree/devel}. Once downloaded use command line:
 
 <<installPackages_develversion,eval=FALSE>>=
 install.packages("YourPath/coMET_YourVersion.tar.gz",repos=NULL,type="source")
@@ -153,27 +159,27 @@ install.packages("YourPath/coMET_0.99.9.tar.gz",repos=NULL,type="source")
 \section{Functions in coMET}
 Currently, there are 3 main functions:
 \begin{enumerate}
-\item \textbf{\emph{comet.web}} is the pre-customized function that allows us to visualise quickly EWAS (or other omic-WAS) results, annotation tracks, and correlations between features. This version is installed in the Shiny web-service. Currently, it is formated only to visualise human data.
-\item \textbf{\emph{comet}} is the generic function that allows us to visualise quickly EWAS results, annotation tracks, and correlations between features. Users can visualise more personalised annotation tracks and give multiple extra EWAS/omic-WAS results to plot.
-\item \textbf{\emph{comet.list}} is an additional function that allows us to extract the values of correlations, the pvalues, and estimates and confidence intervals for all datapoints that surpass a particular threshold.
+\item \Rfunction{comet.web} is the pre-customized function that allows us to visualise quickly EWAS (or other omic-WAS) results, annotation tracks, and correlations between features. This version is installed in the Shiny web-service. Currently, it is formated only to visualise human data.
+\item \Rfunction{comet} is the generic function that allows us to visualise quickly EWAS results, annotation tracks, and correlations between features. Users can visualise more personalised annotation tracks and give multiple extra EWAS/omic-WAS results to plot.
+\item \Rfunction{comet.list} is an additional function that allows us to extract the values of correlations, the pvalues, and estimates and confidence intervals for all datapoints that surpass a particular threshold.
 \end{enumerate}
 
-The functions can read the data input files, but it is also possible to use data frames within R for all data input except for the configuration file. The latter can be achieved with the two functions \textbf{\emph{comet}} and \textbf{\emph{comet.list}}. The structure of the data frames (number of columns, type, format) follows the same rules as for the data input files (cf. section "File formats").
+The functions can read the data input files, but it is also possible to use data frames within R for all data input except for the configuration file. The latter can be achieved with the two functions \Rfunction{comet} and \Rfunction{comet.list}. The structure of the data frames (number of columns, type, format) follows the same rules as for the data input files (cf. section "File formats").
 
 \clearpage
 \section{File formats}
 There are five types of files that can be given by the user to produce the plot:
 \begin{enumerate}
-\item Info file is defined in the option \textbf{\emph{mydata.file}}. \textcolor{red}{This is mandatory and has to be in tabular format with a header}.
-\item Correlation file is defined in the option \textbf{\emph{cormatrix.file}}. \textcolor{red}{This is mandatory and has to be in tabular format with a header}.
-\item Extra info files are defined in the option \textbf{\emph{mydata.file.large}}. \textcolor{red}{This is optional, and if provided has to be in tabular format with a header}.
-\item Annotation info file is defined in the option \textbf{\emph{biofeat.user.file}}. This option exists only in the function \textbf{\emph{comet.web}} and the user should inform also the format to visualise this data with the options \textbf{\emph{biofeat.user.type}} and \textbf{\emph{biofeat.user.type.plot}}.
-\item Configuration file contains the values of these options instead of defining these by command line. \textcolor{red}{Each line in the file is one option. The name of the option is in capital letters and is separated by its value by "="}. If there are multiple values such as for the option \textbf{\emph{list.tracks}} or the options for additional data, you need to separated them by a "comma".
+\item Info file is defined in the option \Robject{mydata.file}. \warning{This is mandatory and has to be in tabular format with a header}.
+\item Correlation file is defined in the option \Robject{cormatrix.file}. \warning{This is mandatory and has to be in tabular format with a header}.
+\item Extra info files are defined in the option \Robject{mydata.file.large}. \warning{This is optional, and if provided has to be in tabular format with a header}.
+\item Annotation info file is defined in the option \Robject{biofeat.user.file}. This option exists only in the function \Rfunction{comet.web} and the user should inform also the format to visualise this data with the options \Robject{biofeat.user.type} and \Robject{biofeat.user.type.plot}.
+\item Configuration file contains the values of these options instead of defining these by command line. \warning{Each line in the file is one option. The name of the option is in capital letters and is separated by its value by "="}. If there are multiple values such as for the option \Robject{list.tracks} or the options for additional data, you need to separated them by a "comma".
 \end{enumerate}
 
 
-\subsection{Format of the info file (for option: \textbf{\emph{mydata.file}}, mandatory)}
-\textcolor{red}{This file is mandatory and has to be in tabular format with a header. The name of features has to start by a letter}. Info files can be a list of CpG sites with/without Beta value (for example DNA methylation level) or direction sign. If it is a site file then it is mandatory to have the 4 columns as shown below with headers in the same order. Beta can be the 5th column(optional) and  can be either a numeric value (positive or negative values) or only direction sign ("+", "-"). The number of columns and their types are defined by the option \textbf{\emph{mydata.format}}.
+\subsection{Format of the info file (for option: \Robject{mydata.file}, mandatory)}
+\warning{This file is mandatory and has to be in tabular format with a header. The name of features has to start by a letter}. Info files can be a list of CpG sites with/without Beta value (for example DNA methylation level) or direction sign. If it is a site file then it is mandatory to have the 4 columns as shown below with headers in the same order. Beta can be the 5th column(optional) and  can be either a numeric value (positive or negative values) or only direction sign ("+", "-"). The number of columns and their types are defined by the option \Robject{mydata.format}.
 
 <<Filedata>>=
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
@@ -233,12 +239,12 @@ In summary, there are 4 possible formats for the info file:
 \end{enumerate}
 
 
-\subsection{Format of correlation matrix (for option: \textbf{\emph{cormatrix.file}}, mandatory)}
-\textcolor{red}{This file is mandatory and has to be in tabular format with an header}. The data file used for the correlation matrix is described in the option \textbf{\emph{cormatrix.file}}. This tab-delimited file can take 3 formats described in the option \textbf{\emph{cormatrix.format}}:
+\subsection{Format of correlation matrix (for option: \Robject{cormatrix.file}, mandatory)}
+\warning{This file is mandatory and has to be in tabular format with an header}. The data file used for the correlation matrix is described in the option \Robject{cormatrix.file}. This tab-delimited file can take 3 formats described in the option \Robject{cormatrix.format}:
 \begin{enumerate}
 \item \textbf{\emph{cormatrix}}: pre-computed correlation matrix provided by the user; Dimension of matrix : CpG\_number X CpG\_number. Need to put the CpG sites/regions in the ascending order of positions and to have a header with the name of CpG sites/regions;
-\item \textbf{\emph{raw}}: Raw data format. Correlations of these can be computed by one of 3 methods Spearman, Pearson, Kendall (option \textbf{\emph{cormatrix.method}}). Dimension of matrix :  sample\_size X CpG\_number. Need to have a header with the name of CpG sites/regions ;
-\item \textbf{\emph{raw\_rev}}: Raw data format. Correlations of these can be computed by one of 3 methods Spearman, Pearson, Kendall (option \textbf{\emph{cormatrix.method}}). Dimension of matrix :  CpG\_number X sample\_size. Need to have the row names of CpG sites/regions and a header with the name of samples ;
+\item \textbf{\emph{raw}}: Raw data format. Correlations of these can be computed by one of 3 methods Spearman, Pearson, Kendall (option \Robject{cormatrix.method}). Dimension of matrix :  sample\_size X CpG\_number. Need to have a header with the name of CpG sites/regions ;
+\item \textbf{\emph{raw\_rev}}: Raw data format. Correlations of these can be computed by one of 3 methods Spearman, Pearson, Kendall (option \Robject{cormatrix.method}). Dimension of matrix :  CpG\_number X sample\_size. Need to have the row names of CpG sites/regions and a header with the name of samples ;
 \end{enumerate}
 
 <<corrMatrix>>=
@@ -251,46 +257,46 @@ data_cor[1:6,1:6]
 @
 
 
-\subsection{Format of extra info file (for option: \textbf{\emph{mydata.large.file}})}
-\textcolor{red}{This file is optional file and if provided has to be in tabular format with an header. The name of features has to start by a letter}.
-The extra info files can be described in the option \textbf{\emph{mydata.large.file}} and their format in \textbf{\emph{mydata.large.format}}. More than one extra info file can be used, each should be separated by a comma.
+\subsection{Format of extra info file (for option: \Robject{mydata.large.file})}
+\warning{This file is optional file and if provided has to be in tabular format with an header. The name of features has to start by a letter}.
+The extra info files can be described in the option \Robject{mydata.large.file} and their format in \Robject{mydata.large.format}. More than one extra info file can be used, each should be separated by a comma.
 
 This can be another type of info file (e.g expression or replication data) and should follow the same rules as the standard info file.
 
-\subsection{Format of annotation file (for option \textbf{\emph{biofeat.user.file}})}
-The file is defined in the option \textbf{\emph{biofeat.user.file}} and the format of file is the format accepted by GViz (BED, GTF, and GFF3).
+\subsection{Format of annotation file (for option \Robject{biofeat.user.file})}
+The file is defined in the option \Robject{biofeat.user.file} and the format of file is the format accepted by \Biocpkg{Gviz} (BED, GTF, and GFF3).
 
 \subsection{Option of config.file}
-\textcolor{red}{Each line in the file is one option. The name of the option is in lowercase letters and is separated by its value by "=" without space. If there are multiple values such as for the option \textbf{\emph{list.tracks}} or options for additional data, these need to be separated them by a "comma" withou space}.
+\warning{Each line in the file is one option. The name of the option is in lowercase letters and is separated by its value by "=" without space. If there are multiple values such as for the option \Robject{list.tracks} or options for additional data, these need to be separated them by a "comma" withou space}.
 If you would like to make your own changes to the plot you can download the configuration file, make changes to it, and upload it into R as shown in the example below.
 
-The important options of a coMET figure include three components:
+The important options of a \Biocpkg{coMET} figure include three components:
 \begin{enumerate}
-\item The \textbf{\emph{upper plot}} shows the strength and extent of EWAS association signal on a regional Manhattan plot.
+\item The \Robject{upper plot} shows the strength and extent of EWAS association signal on a regional Manhattan plot.
 \begin{itemize}
-\item \textbf{\emph{pval.threshold}}: Significance threshold to be displayed as a red dashed line
-\item \textbf{\emph{pval.threshold2}}: Another Significance threshold (optional)
-\item \textbf{\emph{disp.pvalueplot}}: Value can be TRUE or FALSE. Used to either display or hide Manhattan plot.
-\item \textbf{\emph{disp.beta.association}}: Value can be TRUE or FALSE. Used to show the effect size.
-\item \textbf{\emph{disp.association}}: This logical option works only if \textbf{\emph{mydata.file}} contains the effect direction (\textbf{\emph{mydata.format}}=\textbf{\emph{site\_asso}} or \textbf{\emph{region\_asso}}). The value can be TRUE or FALSE: if FALSE (default), for each point of data in the p-value plot, the colour of symbol is the colour of co-methylation pattern between the point and the reference site; if TRUE, the effect direction is shown. If the association is positive, the colour is the one defined with the option \textbf{\emph{color.list}}. On the other hand, if the association is negative, the colour is the inverse to that selected.
-\item \textbf{\emph{disp.region}} : This logical option works only if \textbf{\emph{mydata.file}} contains regions (\textbf{\emph{mydata.format}}=\textbf{\emph{region}} or \textbf{\emph{region\_asso}}). The value can be TRUE or FALSE (default). If TRUE, the genomic element will be shown as a continuous line with the colour of the element, in addition to the symbol at the center of the region. If FALSE, only the symbol is shown.
+\item \Robject{pval.threshold}: Significance threshold to be displayed as a red dashed line
+\item \Robject{pval.threshold2}: Another Significance threshold (optional)
+\item \Robject{disp.pvalueplot}: Value can be TRUE or FALSE. Used to either display or hide Manhattan plot.
+\item \Robject{disp.beta.association}: Value can be TRUE or FALSE. Used to show the effect size.
+\item \Robject{disp.association}: This logical option works only if \Robject{mydata.file} contains the effect direction (\Robject{mydata.format}=\textbf{\emph{site\_asso}} or \textbf{\emph{region\_asso}}). The value can be TRUE or FALSE: if FALSE (default), for each point of data in the p-value plot, the colour of symbol is the colour of co-methylation pattern between the point and the reference site; if TRUE, the effect direction is shown. If the association is positive, the colour is the one defined with the option \Rfunction{color.list}. On the other hand, if the association is negative, the colour is the inverse to that selected.
+\item \Rfunction{disp.region} : This logical option works only if the option \Rfunction{mydata.file} contains regions (\Rfunction{mydata.format}=\textbf{\emph{region}} or \textbf{\emph{region\_asso}}). The value can be TRUE or FALSE (default). If TRUE, the genomic element will be shown as a continuous line with the colour of the element, in addition to the symbol at the center of the region. If FALSE, only the symbol is shown.
 \end{itemize}
 
 \item The \textbf{\emph{middle panel}} provides customized annotation tracks;
 \begin{itemize}
-\item \textbf{\emph{list.tracks}} (for \emph{comet.web} function): List of annotation tracks to be visualised. Tracks currently available: geneENSEMBL, CGI, ChromHMM, DNAse, RegENSEMBL, SNP, transcriptENSEMBL, SNPstoma, SNPstru, SNPstrustoma, ISCA, COSMIC, GAD, ClinVar, GeneReviews, GWAS, ClinVarCNV, GCcontent, genesUCSC, xenogenesUCSC, metQTL, eQTL, BindingMotifsBiomart, chromHMM\_RoadMap, miRNATargetRegionsBiomart, OtherRegulatoryRegionsBiomart, RegulatoryEvidenceBiomart, RegulatorySegmentsBiomart and segmentalDupsUCSC. The elements are separated by a comma.
-\item \textbf{\emph{tracks.gviz, tracks.ggbio, tracks.trackviewer}} (for \emph{comet} function): For each option, it is possible to give a list of annotation tracks that is created by the Gviz, GGBio, and TrackViewer bioconductor packages. The integration of plots from ggbio and trackviewer can be sometimes not really perfect. It is better to create plots from Gviz and use tracks.gviz
+\item \Robject{list.tracks} (for \Rfunction{comet.web} function): List of annotation tracks to be visualised. Tracks currently available: geneENSEMBL, CGI, ChromHMM, DNAse, RegENSEMBL, SNP, transcriptENSEMBL, SNPstoma, SNPstru, SNPstrustoma, ISCA, COSMIC, GAD, ClinVar, GeneReviews, GWAS, ClinVarCNV, GCcontent, genesUCSC, xenogenesUCSC, metQTL, eQTL, BindingMotifsBiomart, chromHMM\_RoadMap, miRNATargetRegionsBiomart, OtherRegulatoryRegionsBiomart, RegulatoryEvidenceBiomart, RegulatorySegmentsBiomart and segmentalDupsUCSC. The elements are separated by a comma.
+\item \Robject{tracks.gviz}, \Robject{tracks.ggbio}, \Robject{tracks.trackviewer} (for \Rfunction{comet} function): For each option, it is possible to give a list of annotation tracks that is created by the \Biocpkg{Gviz}, \Biocpkg{GGBio}, and \Biocpkg{TrackViewer} bioconductor packages. The integration of plots from ggbio and trackviewer can be sometimes not really perfect. It is better to create plots from \Biocpkg{Gviz} and use \Robject{tracks.gviz}
 \end{itemize}
 
 \item The \textbf{\emph{lower panel}} shows the correlation between selected CpG sites in the genomic region (heatmap).
 \begin{itemize}
-\item \textbf{\emph{cormatrix.format}} : Format of the input fie \textbf{\emph{cormatrix.file}}: either raw data (option RAW if CpG sites are by column and samples by row or option RAW\_REV if CpG site are by row and samples by column) or correlation matrix (option CORMATRIX)
-\item \textbf{\emph{cormatrix.method}} : If raw data are provided it will be necessary to produce the correlation matrix using one of 3 methods (spearman, pearson and kendall).
-\item \textbf{\emph{cormatrix.color.scheme}} : There are 5 colour schemes (heat, bluewhitered, cm, topo, gray, bluetored)
-\item \textbf{\emph{disp.cormatrixmap}} : logical option TRUE or FALSE. TRUE (default), if FALSE correlation matrix is not shown )
-\item \textbf{\emph{cormatrix.conf.level}} : Alpha level for the confidence interval. Default value= 0.05. CI will be the alpha/2 lower and upper values. )
-\item \textbf{\emph{cormatrix.sig.level}} : Significant level to visualise the correlation. If the correlation has a pvalue under the significant level, the correlation will be colored in "goshwhite", else the color is related to the correlation level and the color scheme choosen.Default value =1.)
-\item \textbf{\emph{cormatrix.adjust}} : Indicates which adjustment for multiple tests should be used. "holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr", "none".Default value="none".)
+\item \Robject{cormatrix.format} : Format of the input file \textbf{\emph{cormatrix.file}}: either raw data (option RAW if CpG sites are by column and samples by row or option RAW\_REV if CpG site are by row and samples by column) or correlation matrix (option CORMATRIX)
+\item \Robject{cormatrix.method} : If raw data are provided it will be necessary to produce the correlation matrix using one of 3 methods (spearman, pearson and kendall).
+\item \Robject{cormatrix.color.scheme} : There are 5 colour schemes (heat, bluewhitered, cm, topo, gray, bluetored)
+\item \Robject{disp.cormatrixmap} : logical option TRUE or FALSE. TRUE (default), if FALSE correlation matrix is not shown
+\item \Robject{cormatrix.conf.level} : Alpha level for the confidence interval. Default value= 0.05. CI will be the alpha/2 lower and upper values.
+\item \Robject{cormatrix.sig.level} : Significant level to visualise the correlation. If the correlation has a pvalue under the significant level, the correlation will be colored in "goshwhite", else the color is related to the correlation level and the color scheme choosen.Default value =1.
+\item \Robject{cormatrix.adjust} : Indicates which adjustment for multiple tests should be used. "holm", "hochberg", "hommel", "bonferroni", "BH", "BY", "fdr", "none".Default value="none".
 \end{itemize}
 \end{enumerate}
 
@@ -305,9 +311,9 @@ data_config
 
 \clearpage
 \section{Creating a plot like the webservice: comet.web}
-\subsection{coMET plot: usage and plot like in the webservice}
-The user can create a coMET plot via the coMET website (\url{http://epigen.kcl.ac.uk/comet}).
-It is possible to reproduce the web service plotting defaults by using the function comet.web, for example see Figure \ref{fig:cometweb_simple}.
+\subsection{\Biocpkg{coMET} plot: usage and plot like in the webservice}
+The user can create a \Biocpkg{coMET} plot via the \Biocpkg{coMET} website (\url{http://epigen.kcl.ac.uk/comet}).
+It is possible to reproduce the web service plotting defaults by using the function \Rfunction{comet.web}, for example see Figure \ref{fig:cometweb_simple}.
 
 <<cometwebPlotText, eval=FALSE, fig.keep='last' >>=
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
@@ -321,7 +327,7 @@ comet.web(config.file=configfile, mydata.file=myinfofile,
 @
 
 \begin{figure}
-<<cometwebPlot, echo=FALSE, fig.keep='last' >>=
+<<cometwebPlot, echo=FALSE, fig.keep='last',fig.width=7, fig.height=7 >>=
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 myinfofile <- file.path(extdata, "cyp1b1_infofile_Grch38.txt")
 myexpressfile <- file.path(extdata, "cyp1b1_infofile_exprGene_region_Grch38.txt")
@@ -331,11 +337,12 @@ comet.web(config.file=configfile, mydata.file=myinfofile,
           cormatrix.file=mycorrelation ,mydata.large.file=myexpressfile,
           print.image=FALSE,verbose=FALSE)
 @
-\caption{Plot with comet.web function.\label{fig:cometweb_simple}}
+%\incfig{fig:cometweb_simple}{\textwidth}{Plot with comet.web function.}
+\caption{Plot with \Rfunction{comet.web} function.\label{fig:cometweb_simple}}
 \end{figure}
 
-\subsection{Hidden values of comet.web function}
-Hidden values of \textbf{\emph{comet.web}} function are shown in the section. If these values do not correspond to what you want to visualise, you need to use the function \textbf{\emph{comet}}, as a more generic option.
+\subsection{Hidden values of \Rfunction{comet.web} function}
+Hidden values of \Rfunction{comet.web} function are shown in the section. If these values do not correspond to what you want to visualise, you need to use the function \Rfunction{comet}, as a more generic option.
 
 
 \begin{longtable}{|c|c|}
@@ -390,13 +397,13 @@ BROWSER.SESSION & UCSC\\
 \end{longtable}
 
 \clearpage
-\section{Creating a plot with the generic function: comet}
-It is possible to create the annotation tracks by Gviz, trackviewer or ggbio, for example see Figure \ref{fig:cometPlotfile}.
-Currently, the Gviz option for annotation tracks, in combination with the heatmap of correlation values between genomic elements, provides the most informative and easy approach to visualize graphics.
+\section{Creating a plot with the generic function: \Rfunction{comet}}
+It is possible to create the annotation tracks by \Biocpkg{Gviz}, \Biocpkg{trackviewer} or \Biocpkg{ggbio}, for example see Figure \ref{fig:cometPlotfile}.
+Currently, the \Biocpkg{Gviz} option for annotation tracks, in combination with the heatmap of correlation values between genomic elements, provides the most informative and easy approach to visualize graphics.
 
-\subsection{coMET plot: pvalue plot, annotation tracks, and correlation matrix}
+\subsection{\Biocpkg{coMET} plot: pvalue plot, annotation tracks, and correlation matrix}
 \subsubsection{Input from data files}
-In this figure \ref{fig:cometPlotfile}, we create different tracks outside to coMET with Gviz. The list of annotation tracks and different files are given to the function coMET.
+In this figure \ref{fig:cometPlotfile}, we create different tracks outside to \Biocpkg{coMET} with \Biocpkg{Gviz}. The list of annotation tracks and different files are given to the function \Rfunction{coMET}.
 
 <<cometPlotText, eval=FALSE, fig.keep='last' >>=
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
@@ -416,26 +423,29 @@ mySession <- browserSession(BROWSER.SESSION)
 genome(mySession) <- gen
 
 genetrack <-genes_ENSEMBL(gen,chrom,start,end,showId=TRUE)
-snptrack <- snpBiomart_ENSEMBL(gen,chrom, start, end, dataset="hsapiens_snp_som",showId=FALSE)
+snptrack <- snpBiomart_ENSEMBL(gen,chrom, start, end,
+                               dataset="hsapiens_snp_som",showId=FALSE)
 cpgIstrack <- cpgIslands_UCSC(gen,chrom,start,end)
 
 prombedFilePath <- file.path(extdata, "/RoadMap/regions_prom_E063.bed")
-promRMtrackE063<- DNaseI_RoadMap(gen,chrom,start, end, prombedFilePath, 
-                             featureDisplay='promotor', stacking_type="squish")
+promRMtrackE063<- DNaseI_RoadMap(gen,chrom,start, end, prombedFilePath,
+                             featureDisplay='promotor', type_stacking="squish")
 
 bedFilePath <- file.path(extdata, "RoadMap/E063_15_coreMarks_mnemonics.bed")
-chromHMM_RoadMapAllE063 <- chromHMM_RoadMap(gen,chrom,start, end, bedFilePath, featureDisplay = "all", colorcase='roadmap15' )
+chromHMM_RoadMapAllE063 <- chromHMM_RoadMap(gen,chrom,start, end,
+                                            bedFilePath, featureDisplay = "all",
+                                            colorcase='roadmap15' )
 
 listgviz <- list(genetrack,snptrack,cpgIstrack,promRMtrackE063,chromHMM_RoadMapAllE063)
 
 comet(config.file=configfile, mydata.file=myinfofile, mydata.type="file",
       cormatrix.file=mycorrelation,  cormatrix.type="listfile",
-      mydata.large.file=myexpressfile, mydata.large.type="listfile", 
+      mydata.large.file=myexpressfile, mydata.large.type="listfile",
       tracks.gviz=listgviz, verbose=FALSE, print.image=FALSE)
 @
 
 \begin{figure}
-<<cometPlotfile, echo=FALSE, fig.keep='last' >>=
+<<cometPlotfile, echo=FALSE, fig.keep='last',fig.width=7, fig.height=7 >>=
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 configfile <- file.path(extdata, "config_cyp1b1_zoom_4comet.txt")
 myinfofile <- file.path(extdata, "cyp1b1_infofile.txt")
@@ -461,17 +471,16 @@ comet(config.file=configfile, mydata.file=myinfofile, mydata.type="file",
       mydata.large.file=myexpressfile, mydata.large.type="listfile",
       tracks.gviz=listgviz, verbose=FALSE, print.image=FALSE)
 @
-\caption{Plot with comet function from files.\label{fig:cometPlotfile}}
+\caption{Plot with \Rfunction{comet} function from files.\label{fig:cometPlotfile}}
 \end{figure}
 
 \clearpage
-\subsubsection{coMET plot using input from a data frame}
+\subsubsection{\Biocpkg{coMET} plot using input from a data frame}
 In this figure \ref{fig:cometPlotMatrix}, we visualize the same data as in figure \ref{fig:cometPlotfile}, but the data is in data frame format and not read in from an input file.
 
 In addition, if the user would like to visualise only the correlations between CpG sites with P-value less than or equal to 0.05 in the upper plot, this option can be included. The correlations with a P-value greater than 0.05 can have the colour "goshwhite" whereas the other correlations will be displayed using a colour related to the correlation level. Conversely, in the P-value plot (upper plot), the points of each omic feature have their colours related to their correlations with the reference omic feature without taking into account the P-value associated with the correlation matrix.
 
-Eventually, we increase the size of font using the option \textbf{fontsize.gviz}
-
+Eventually, we increase the size of font using the option \Robject{fontsize.gviz}
 
 <<cometPlotmatrix, eval=FALSE, fig.keep='last' >>=
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
@@ -491,21 +500,22 @@ mySession <- browserSession(BROWSER.SESSION)
 genome(mySession) <- gen
 
 genetrack <-genes_ENSEMBL(gen,chrom,start,end,showId=TRUE)
-snptrack <- snpBiomart_ENSEMBL(chrom, start, end, dataset="hsapiens_snp_som",showId=FALSE)
+snptrack <- snpBiomart_ENSEMBL(chrom, start, end,
+                               dataset="hsapiens_snp_som",showId=FALSE)
 iscatrack <-ISCA_UCSC(gen,chrom,start,end,mySession, table="iscaPathogenic")
 
 listgviz <- list(genetrack,snptrack,iscatrack)
 
-matrix.dnamethylation <- read.delim(myinfofile, header=TRUE, sep="\t", as.is=TRUE, 
+matrix.dnamethylation <- read.delim(myinfofile, header=TRUE, sep="\t", as.is=TRUE,
                                     blank.lines.skip = TRUE, fill=TRUE)
 matrix.expression <- read.delim(myexpressfile, header=TRUE, sep="\t", as.is=TRUE,
                                 blank.lines.skip = TRUE, fill=TRUE)
-cormatrix.data.raw <- read.delim(mycorrelation, sep="\t", header=TRUE, as.is=TRUE, 
+cormatrix.data.raw <- read.delim(mycorrelation, sep="\t", header=TRUE, as.is=TRUE,
                                  blank.lines.skip = TRUE, fill=TRUE)
 
 listmatrix.expression <- list(matrix.expression)
 listcormatrix.data.raw <- list(cormatrix.data.raw)
-comet(config.file=configfile, mydata.file=matrix.dnamethylation, 
+comet(config.file=configfile, mydata.file=matrix.dnamethylation,
       mydata.type="dataframe",cormatrix.file=listcormatrix.data.raw,
       cormatrix.type="listdataframe",cormatrix.sig.level=0.05,
       cormatrix.conf.level=0.05, cormatrix.adjust="BH",
@@ -515,14 +525,14 @@ comet(config.file=configfile, mydata.file=matrix.dnamethylation,
 @
 
 \begin{figure}
-<<cometPlotMatrix, echo=FALSE, fig.keep='last' >>=
+<<cometPlotMatrix, echo=FALSE, fig.keep='last',fig.width=7, fig.height=7 >>=
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 configfile <- file.path(extdata, "config_cyp1b1_zoom_4comet.txt")
 myinfofile <- file.path(extdata, "cyp1b1_infofile.txt")
 myexpressfile <- file.path(extdata, "cyp1b1_infofile_exprGene_region.txt")
 mycorrelation <- file.path(extdata, "cyp1b1_res37_rawMatrix.txt")
 
-#configfile <- "../inst/extdata/config_cyp1b1_zoom_4comet.txt" 
+#configfile <- "../inst/extdata/config_cyp1b1_zoom_4comet.txt"
 chrom <- "chr2"
 start <- 38290160
 end <- 38303219
@@ -535,13 +545,17 @@ data(ISCAtrack)
 
 listgviz <- list(genetrack,snptrack,iscatrack)
 
-matrix.dnamethylation <- read.delim(myinfofile, header=TRUE, sep="\t", as.is=TRUE, blank.lines.skip = TRUE, fill=TRUE)
-matrix.expression <- read.delim(myexpressfile, header=TRUE, sep="\t", as.is=TRUE, blank.lines.skip = TRUE, fill=TRUE)
-cormatrix.data.raw <- read.delim(mycorrelation, sep="\t", header=TRUE, as.is=TRUE, blank.lines.skip = TRUE, fill=TRUE)
+matrix.dnamethylation <- read.delim(myinfofile, header=TRUE, sep="\t",
+                                    as.is=TRUE, blank.lines.skip = TRUE,
+                                    fill=TRUE)
+matrix.expression <- read.delim(myexpressfile, header=TRUE, sep="\t",
+                                as.is=TRUE, blank.lines.skip = TRUE, fill=TRUE)
+cormatrix.data.raw <- read.delim(mycorrelation, sep="\t", header=TRUE,
+                                 as.is=TRUE, blank.lines.skip = TRUE, fill=TRUE)
 
 listmatrix.expression <- list(matrix.expression)
 listcormatrix.data.raw <- list(cormatrix.data.raw)
-comet(config.file=configfile, mydata.file=matrix.dnamethylation, 
+comet(config.file=configfile, mydata.file=matrix.dnamethylation,
       mydata.type="dataframe",cormatrix.file=listcormatrix.data.raw,
       cormatrix.type="listdataframe",cormatrix.sig.level=0.05,
       cormatrix.conf.level=0.05, cormatrix.adjust="BH",
@@ -549,13 +563,13 @@ comet(config.file=configfile, mydata.file=matrix.dnamethylation,
       fontsize.gviz =12,
       tracks.gviz=listgviz,verbose=FALSE, print.image=FALSE)
 @
-\caption{Plot with comet function from matrix data and with a pvalue threshold for the correlation between omics features (here CpG sites).\label{fig:cometPlotMatrix}}
+\caption{Plot with \Rfunction{comet} function from matrix data and with a pvalue threshold for the correlation between omics features (here CpG sites).\label{fig:cometPlotMatrix}}
 \end{figure}
 
 \clearpage
-\subsection{coMET plot: annotation tracks and correlation matrix}  
+\subsection{\Biocpkg{coMET} plot: annotation tracks and correlation matrix}
 It is possible to visualise only annotation tracks and the correlation between genetic elements.
-In this case, we need to use the option \texttt{disp.pvalueplot=FALSE}, for example see Figure \ref{fig:cometPlotNopval}.
+In this case, we need to use the option \Robject{disp.pvalueplot=FALSE}, for example see Figure \ref{fig:cometPlotNopval}.
 
 <<cometPlotNopvalText, eval=FALSE, fig.keep='last' >>=
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
@@ -570,9 +584,9 @@ gen <- "hg19"
 strand <- "*"
 
 genetrack <-genes_ENSEMBL(gen,chrom,start,end,showId=FALSE)
-snptrack <- snpBiomart_ENSEMBL(chrom, start, end, 
+snptrack <- snpBiomart_ENSEMBL(chrom, start, end,
                        dataset="hsapiens_snp_som",showId=FALSE)
-strutrack <- structureBiomart_ENSEMBL(chrom, start, end, 
+strutrack <- structureBiomart_ENSEMBL(chrom, start, end,
                               strand, dataset="hsapiens_structvar_som")
 clinVariant<-ClinVarMain_UCSC(gen,chrom,start,end)
 clinCNV<-ClinVarCnv_UCSC(gen,chrom,start,end)
@@ -584,14 +598,15 @@ listgviz <- list(genetrack,snptrack,strutrack,clinVariant,
 comet(config.file=configfile, mydata.file=myinfofile, mydata.type="file",
       cormatrix.file=mycorrelation, cormatrix.type="listfile",
       fontsize.gviz =12,
-      tracks.gviz=listgviz, verbose=FALSE, print.image=FALSE,disp.pvalueplot=FALSE)
+      tracks.gviz=listgviz, verbose=FALSE, print.image=FALSE,
+      disp.pvalueplot=FALSE)
 @
 
 \begin{figure}
-<<cometPlot_nopval, echo=FALSE, fig.keep='last' >>=
+<<cometPlot_nopval, echo=FALSE, fig.keep='last',fig.width=7, fig.height=7 >>=
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 configfile <- file.path(extdata, "config_cyp1b1_zoom_4cometnopval.txt")
-#configfile <- "../inst/extdata/config_cyp1b1_zoom_4comet.txt" 
+#configfile <- "../inst/extdata/config_cyp1b1_zoom_4comet.txt"
 myinfofile <- file.path(extdata, "cyp1b1_infofile.txt")
 mycorrelation <- file.path(extdata, "cyp1b1_res37_rawMatrix.txt")
 
@@ -614,15 +629,16 @@ listgviz <- list(genetrack,snptrack,strutrack,clinVariant,
 comet(config.file=configfile, mydata.file=myinfofile, mydata.type="file",
       cormatrix.file=mycorrelation, cormatrix.type="listfile",
       fontsize.gviz =12,
-      tracks.gviz=listgviz, verbose=FALSE, print.image=FALSE,disp.pvalueplot=FALSE)
+      tracks.gviz=listgviz, verbose=FALSE, print.image=FALSE,
+      disp.pvalueplot=FALSE)
 @
-\caption{Plot with comet function without pvalue plot.\label{fig:cometPlotNopval}}
+\caption{Plot with \Rfunction{comet} function without pvalue plot.\label{fig:cometPlotNopval}}
 \end{figure}
 
 \clearpage
-\subsection{coMET plot: Manhattan plot and anonation track}
+\subsection{\Biocpkg{coMET} plot: Manhattan plot and anonation track}
 It is possible to visualise only The Manhattan plot and the annotation tracks.
-In this case, we need to use the option \texttt{disp.cormatrixmap = FALSE}, for example see Figure \ref{fig:cometPlotNomatrix}.
+In this case, we need to use the option \Robject{disp.cormatrixmap = FALSE}, for example see Figure \ref{fig:cometPlotNomatrix}.
 
 <<cometPlotNomatrixtext, eval=FALSE, fig.keep='last' >>=
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
@@ -654,7 +670,7 @@ comet(config.file=configfile, mydata.file=myinfofile, mydata.type="file",
       tracks.gviz=listgviz, verbose=FALSE, print.image=FALSE)
 @
 
-\begin{figure}
+\begin{figure*}
 <<cometPlot_nomatrix, echo=FALSE, fig.keep='last' >>=
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 configfile <- file.path(extdata, "config_cyp1b1_zoom_4nomatrix.txt")
@@ -683,22 +699,22 @@ comet(config.file=configfile, mydata.file=myinfofile, mydata.type="file",
       fontsize.gviz =12, font.factor=3,
       tracks.gviz=listgviz, verbose=FALSE, print.image=FALSE)
 @
-\caption{Plot with comet function without the correlation matrix.\label{fig:cometPlotNomatrix}}
-\end{figure}
+\caption{Plot with \Rfunction{comet} function without the correlation matrix.\label{fig:cometPlotNomatrix}}
+\end{figure*}
 
 \clearpage
 \section{Extract the significant correlations between omic features}
-CoMET can help to visualise the correlations between omic features with EWAS results and other omic data. In addition, a function \textbf{\emph{comet.list}} can extract the significant correlations according the method (\textbf{\emph{cormatrix.method}}) and significance level (\textbf{\emph{cormatrix.sig.level}}).
+\Biocpkg{coMET} can help to visualise the correlations between omic features with EWAS results and other omic data. In addition, a function \Rfunction{comet.list} can extract the significant correlations according the method (options: \Robject{cormatrix.method}) and significance level (option: \Robject{cormatrix.sig.level}).
 
 The output file has 7 columns:
 \begin{enumerate}
 \item the name of the first omic feature
 \item the name of the second omic feature
 \item the correlation between the omic features
-\item the alpha/2 lower value (e.g. 0.05 (\textbf{\emph{cormatrix.conf.level}}))
-\item the alpha/2 upper value (e.g. 0.05 (\textbf{\emph{cormatrix.conf.level}}))
+\item the alpha/2 lower value (e.g. 0.05 (option \Robject{cormatrix.conf.level}))
+\item the alpha/2 upper value (e.g. 0.05 (option \Robject{cormatrix.conf.level}))
 \item the pvalue
-\item the pvalue adjusted with the method selected (e.g. Benjamin and Hochberg) (\textbf{\emph{cormatrix.adjust}})
+\item the pvalue adjusted with the method selected (e.g. Benjamin and Hochberg) (option \Robject{cormatrix.adjust})
 \end{enumerate}
 
 
@@ -711,7 +727,7 @@ myoutput <- file.path(extdata, "cyp1b1_res37_cormatrix_list_BH05.txt")
 comet.list(cormatrix.file=mycorrelation,cormatrix.method = "spearman",
            cormatrix.format= "raw", cormatrix.conf.level=0.05,
            cormatrix.sig.level= 0.05, cormatrix.adjust="BH",
-           cormatrix.type = "listfile", cormatrix.output=myoutput, 
+           cormatrix.type = "listfile", cormatrix.output=myoutput,
            verbose=FALSE)
 
 listcorr <- read.csv(myoutput, header = TRUE,
@@ -722,51 +738,52 @@ head(listcorr)
 
 \clearpage
 \section{Annotation tracks}
-Annotation tracks can be created with Gviz using four different functions:
+Annotation tracks can be created with \Biocpkg{Gviz} using four different functions:
 \begin{enumerate}
-\item \textbf{UcscTrack}. Different UCSC tracks can be selected for visualisation from the table Browser of UCSC \url{http://genome-euro.ucsc.edu/cgi-bin/hgTables?hgsid=202842745\_Dlvit14QO0G6ZPpLoEVABG8aqfrm&clade=mammal&org=Human&db=hg19&hgta_group=varRep&hgta_track=cpgIslandExt&hgta_table=0&hgta\_regionType=genome&position=chr6%3A32726553\-32727053&hgta\_outputType=primaryTable&hgta\_outFileName=}
-\item \textbf{BiomartGeneRegionTrack}. A connection should be established to the Biomart database to visualise the genetic elements.
-\item \textbf{DataTrack}. This allows the visualisation of numerical data.
-\item \textbf{AnnotationTrack}. This allows the visualisation of any annotation data.
+\item \Rfunction{UcscTrack}. Different UCSC tracks can be selected for visualisation from the table Browser of UCSC \url{http://genome-euro.ucsc.edu/cgi-bin/hgTables?hgsid=202842745\_Dlvit14QO0G6ZPpLoEVABG8aqfrm&clade=mammal&org=Human&db=hg19&hgta_group=varRep&hgta_track=cpgIslandExt&hgta_table=0&hgta\_regionType=genome&position=chr6%3A32726553\-32727053&hgta\_outputType=primaryTable&hgta\_outFileName=}
+\item \Rfunction{BiomartGeneRegionTrack}. A connection should be established to the Biomart database to visualise the genetic elements.
+\item \Rfunction{DataTrack}. This allows the visualisation of numerical data.
+\item \Rfunction{AnnotationTrack}. This allows the visualisation of any annotation data.
 \end{enumerate}
 
-For more information consult the user guide for Gviz.
+For more information consult the user guide for \Biocpkg{Gviz}.
 
 
 \subsection{Ensembl}
-The Ensembl project \citep{ENSEMBL2015} produces genome databases for vertebrates and other eukaryotic species, and makes this information freely available online \url{http://www.ensembl.org/index.html}. A set of wrap R functions were created to extract data from Ensembl BioMart for human genome using Ensembl REST \citep{ENSEMBL2014}, but they can be extended to other genomes. You can ask help to \emph{tiphaine.martin@kcl.ac.uk}.
+The Ensembl project \cite{ENSEMBL2015} produces genome databases for vertebrates and other eukaryotic species, and makes this information freely available online \url{http://www.ensembl.org/index.html}. A set of wrap R functions were created to extract data from Ensembl BioMart for human genome using Ensembl REST \cite{ENSEMBL2014}, but they can be extended to other genomes. You can ask help to \email{tiphaine.martin@mssm.edu}.
 
-This is the list of R functions created in coMET to visualise ENSEMBL data. Below described the colors of tracks and specific characteristics of some annotation tracks.
+This is the list of R functions created in \Biocpkg{coMET} to visualise ENSEMBL data. Below described the colors of tracks and specific characteristics of some annotation tracks.
 \begin{itemize}
-\item \textbf{\emph{bindingMotifsBiomart\_ENSEBML}} : Visualise the binding motifs in the genomic region of interest
-\item \textbf{genes\_ENSEBML} : Visualise the genes from ENCODE in the genomic region of interest
-\item \textbf{genesName\_ENSEBML} : Visualise the name of genes from ENCODE in the genomic region of interest
-\item \textbf{interestGenes\_ENSEBML} : Visualise the genes from ENCODE in the genomic region of interest with a specific color for genes of interest
-\item \textbf{interestTranscript\_ENSEBML} : Visualise the transcripts from ENCODE in the genomic region of interest with a specific color for exons of interest
-\item \textbf{miRNATargetRegionsBiomart\_ENSEBML} : Visualise the miRNA target regions in the genomic region of interest 
-\item \textbf{otherRegulatoryRegions\_ENSEBML} : Visualise the other regulatory regions in the genomic region of interest 
-\item \textbf{regulationBiomart\_ENSEBML} (obselet function): Visualise the other regulatory regions in the genomic region of interest 
-\item \textbf{regulatoryEvidenceBiomart\_ENSEBML} : Visualise the regulatory  evidence regions in the genomic region of interest 
-\item \textbf{regulatoryFeaturesBiomart\_ENSEBML} : Visualise the regulatory features regions in the genomic region of interest 
-\item \textbf{regulatorySegmentsBiomart\_ENSEBML} : Visualise the regulatory segment regions in the genomic region of interest 
-\item \textbf{snpBiomart\_ENSEBML} : Visualise the SNPs in the genomic region of interest 
-\item \textbf{structureBiomart\_ENSEBML} : Visualise the structural variations in the genomic region of interest 
-\item \textbf{transcript\_ENSEBML} : Visualise the transcripts in the genomic region of interest 
+\item \Rfunction{bindingMotifsBiomart\_ENSEBML} : Visualise the binding motifs in the genomic region of interest
+\item \Rfunction{genes\_ENSEBML} : Visualise the genes from ENCODE in the genomic region of interest
+\item \Rfunction{genesName\_ENSEBML} : Visualise the name of genes from ENCODE in the genomic region of interest
+\item \Rfunction{interestGenes\_ENSEBML} : Visualise the genes from ENCODE in the genomic region of interest with a specific color for genes of interest
+\item \Rfunction{interestTranscript\_ENSEBML} : Visualise the transcripts from ENCODE in the genomic region of interest with a specific color for exons of interest
+\item \Rfunction{miRNATargetRegionsBiomart\_ENSEBML} : Visualise the miRNA target regions in the genomic region of interest
+\item \Rfunction{otherRegulatoryRegions\_ENSEBML} : Visualise the other regulatory regions in the genomic region of interest
+\item \Rfunction{regulationBiomart\_ENSEBML} (obselet function): Visualise the other regulatory regions in the genomic region of interest
+\item \Rfunction{regulatoryEvidenceBiomart\_ENSEBML} : Visualise the regulatory  evidence regions in the genomic region of interest
+\item \Rfunction{regulatoryFeaturesBiomart\_ENSEBML} : Visualise the regulatory features regions in the genomic region of interest
+\item \Rfunction{regulatorySegmentsBiomart\_ENSEBML} : Visualise the regulatory segment regions in the genomic region of interest
+\item \Rfunction{snpBiomart\_ENSEBML} : Visualise the SNPs in the genomic region of interest
+\item \Rfunction{structureBiomart\_ENSEBML} : Visualise the structural variations in the genomic region of interest
+\item \Rfunction{transcript\_ENSEBML} : Visualise the transcripts in the genomic region of interest
 \end{itemize}
 
 Below described the colors of tracks and  specific characteristics of some annotation tracks.
 
 \subsubsection{Genes and transcripts from Ensembl}
-The color of the genetic elements is defined by the R package Gviz.
+The color of the genetic elements is defined by the R package \Biocpkg{Gviz}.
 
-It is possible to chagne the colour of some exsons by using the function \emph{interestGenesENSEMBL} or \emph{interestTranscriptENSEMBL}. The elements and the colours to be displayed must be given as list. An example is given below:
+It is possible to chagne the colour of some exsons by using the function \Rfunction{interestGenesENSEMBL} or \Rfunction{interestTranscriptENSEMBL}. The elements and the colours to be displayed must be given as list. An example is given below:
 
 <<GenesAndTranscript,eval=FALSE >>=
 gen <- "hg38"
 chr <- "chr15"
 start <- 75011669
 end <- 75019876
-interestfeatures <- rbind(c("75011883","75013394","bad"),c("75013932","75014410","good"))
+interestfeatures <- rbind(c("75011883","75013394","bad"),
+                          c("75013932","75014410","good"))
 interestcolor <- list("bad"="red", "good"="green")
 
 interestgenesENSMBLtrack<-interestGenes_ENSEMBL(gen,chr,start,end,interestfeatures,
@@ -774,7 +791,7 @@ interestgenesENSMBLtrack<-interestGenes_ENSEMBL(gen,chr,start,end,interestfeatur
 plotTracks(interestgenesENSMBLtrack, from=start, to=end)
 @
 
-\begin{figure}
+\begin{figure*}
 <<GenesAndTranscript2,echo=FALSE >>=
 gen <- "hg38"
 chr <- "chr15"
@@ -785,21 +802,21 @@ data(interestgenesENSMBLtrack)
 plotTracks(interestgenesENSMBLtrack, from=start, to=end)
 @
 \caption{Plot genes with different colors according user's choice.\label{fig:interestgenesENSEMBLtrack}}
-\end{figure}
+\end{figure*}
 
 \subsubsection{Regulatory elements from Ensembl}
-This function is now obselet in coMET as Ensembl have restructured their databases due to the new version of the genome GRCh38. The same data is now available by using the function 'RegulatoryFeaturesBiomart'. 
+This function is now obselet in \Biocpkg{coMET} as Ensembl have restructured their databases due to the new version of the genome GRCh38. The same data is now available by using the function \Rfunction{RegulatoryFeaturesBiomart}.
 
 The colors were :
 \\
 \\
-\centerline{\includegraphics[scale=.75]{../inst/extdata/JpegTables/RegulatoryElementsENSEMBL}}
+\centerline{\includegraphics{../inst/extdata/JpegTables/RegulatoryElementsENSEMBL}}
 
 \subsubsection{structureBiomart from Ensembl}
 Listed below are the colours for somatic structural variation and structural variation.
 \\
 \\
-\centerline{\includegraphics[scale=.75]{../inst/extdata/JpegTables/structureBiomart}}
+\centerline{\includegraphics{../inst/extdata/JpegTables/structureBiomart}}
 
 \subsubsection{miRNA Target Regions from Ensembl}
 The colour of the miRNA target regions is set to Plum4 (hex code: \#8B668B)
@@ -809,77 +826,81 @@ The colour of the miRNA target regions is set to Plum4 (hex code: \#8B668B)
 Listed on the next page are the colours used for the different types of binding motifs. The frequency shown is that found in GRCh38 (hg38). Motifs with red text are found only in GRCh37 (hg19), motifs with blue text are found only in GRCh38 (hg38)
 \\
 \\
-\centerline{\includegraphics[scale=0.70]{../inst/extdata/JpegTables/BindingMotifsBiomart}}
+\centerline{\includegraphics{../inst/extdata/JpegTables/BindingMotifsBiomart}}
 
 \subsubsection{Other Regulatory Regions Biomart from Ensembl}
 
 Listed below are the colours used for the different types of regulatory regions. The frequency shown is that found in GRCh38 (hg38).
 \\
 \\
-\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/OtherRegulatoryRegions}}
+\centerline{\includegraphics{../inst/extdata/JpegTables/OtherRegulatoryRegions}}
 
 \subsubsection{Regulatory Features Biomart from Ensembl}
 
 Listed below are the colours used for the different types of regulatory features The frequency shown is that found in GRCh38 (hg38).
 \\
 \\
-\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/RegulatoryFeaturesBiomart}}
+\centerline{\includegraphics{../inst/extdata/JpegTables/RegulatoryFeaturesBiomart}}
 
 \subsubsection{Other Regulatory Segments Biomart from Ensembl}
 
 Listed below are the colours used for the different types of regulatory segments. The frequency shown is that found in GRCh38 (hg38). Segments with red text are found only in GRCh37 (hg19)
 \\
 \\
-\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/RegulatorySegmentsBiomart}}
+\centerline{\includegraphics{../inst/extdata/JpegTables/RegulatorySegmentsBiomart}}
 
-\subsubsection{Binding Motif Biomart from Ensembl}
+\subsubsection{Regulatory Evidence Elements Biomart from Ensembl}
 
-Listed on the next 3 pages are the colours used for the different types of regulatory evidence elements. The frequency shown is that found in GRCh37 (hg19). At the current time this track has not been optimised for GRCh38 (hg38) meaning any elements found exclusively in GRCh38 do not have an assigned colour and will be displayed in the default track colour of Gviz.
-\\
-\\
-\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/RegulatoryEvidence_1}}
-\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/RegulatoryEvidence_2}}
-\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/RegulatoryEvidence_3}}
+Listed on the next 3 pages are the colours used for the different types of regulatory evidence elements. The frequency shown is that found in GRCh37 (hg19). At the current time this track has not been optimised for GRCh38 (hg38) meaning any elements found exclusively in GRCh38 do not have an assigned colour and will be displayed in the default track colour of \Biocpkg{Gviz}.
+
+\clearpage
+\centerline{\includegraphics{../inst/extdata/JpegTables/RegulatoryEvidence_1}}
+
+\clearpage
+\centerline{\includegraphics{../inst/extdata/JpegTables/RegulatoryEvidence_2}}
+
+\clearpage
+\centerline{\includegraphics{../inst/extdata/JpegTables/RegulatoryEvidence_3}}
 
 \clearpage
 \subsection{UCSC}
-the UCSC Genome Browser \citep{UCSC2002} website \url{http://genome-euro.ucsc.edu/} contains the reference sequence and working draft assemblies for a large collection of genomes.
+the UCSC Genome Browser \cite{UCSC2002} website \url{http://genome-euro.ucsc.edu/} contains the reference sequence and working draft assemblies for a large collection of genomes.
 
-This is the list of R wrapping functions of some tracks found in UCSC genome browser. Below described the colors of tracks and specific characteristics of some annotation tracks.
+This is the list of \R{} wrapping functions of some tracks found in UCSC genome browser. Below described the colors of tracks and specific characteristics of some annotation tracks.
 \begin{itemize}
-    \item \textbf{\emph{chromatinHMMAll\_UCSC}} : Visualise the chromHMM Broad found in UCSC genome browser of all tissues in the genomic region of interest.
-    \item \textbf{\emph{chromatinHMMOne\_UCSC}} : Visualise the chromHMM Broad found in UCSC genome browser of the tissue of interest in the genomic region of interest.
-    \item \textbf{\emph{ClinVarCnv\_UCSC}} : Visualise clinical CNVs found in ClinVar tracks of UCSC genome browser in the genomic region of interest.
-    \item \textbf{\emph{ClinVarMain\_UCSC}} : Visualise clinical SNPs found in ClinVar tracks of UCSC genome browser in the genomic region of interest.
-    \item \textbf{\emph{CoreillCNV\_UCSC}} : Visualise CNV found in Coreil tracks of UCSC genome browser in the genomic region of interest.
-    \item \textbf{\emph{COSMIC\_UCSC}} : Visualise SNPs found in COSMIIC tracks of UCSC genome browser in the genomic region of interest.
-    \item \textbf{\emph{cpgIslands\_UCSC}} : Visualise CpG Island found in CpGIsland tracks of UCSC genome browser in the genomic region of interest.
-    \item \textbf{\emph{DNAse\_UCSC}} : Visualise clinical CNV found in ClinVar tracks of UCSC genome browser in the genomic region of interest.
-    \item \textbf{\emph{GAD\_UCSC}} : Visualise genes found in GAD tracks of UCSC genome browser in the genomic region of interest.
-    \item \textbf{\emph{gcContent\_UCSC}} : Visualise GC content found in  UCSC genome browser in the genomic region of interest.
-    \item \textbf{\emph{GeneReviews\_UCSC}} : Visualise clinical genes found in GeneReviews tracks of UCSC genome browser in the genomic region of interest.
-    \item \textbf{\emph{GWAScatalog\_UCSC}} : Visualise SNPS found in GWAS catalog tracks of UCSC genome browser in the genomic region of interest.
-    \item \textbf{\emph{HistoneAll\_UCSC}} : Visualise histone patterns found in UCSC genome browser of all tissues in the genomic region of interest.
-    \item \textbf{\emph{HistoneOne\_UCSC}} : Visualise histone patterns found in UCSC genome browser of one tissue of interest in the genomic region of interest.
-    \item \textbf{\emph{ISCA\_UCSC}} (obselete) : Visualise clinical CNV found in UCSC genome browser in the genomic region of interest.
-    \item \textbf{\emph{knownGenes\_UCSC}} : Visualise known genes found in UCSC genome browser in the genomic region of interest.
-    \item \textbf{\emph{refGenes\_UCSC}} : Visualise reference genes found in UCSC genome browser in the genomic region of interest.
-    \item \textbf{\emph{repeatMasker\_UCSC}} : Visualise repeat elements found in UCSC genome browser in the genomic region of interest.
-    \item \textbf{\emph{segmentalDups\_UCSC}} : Visualise segmental duplcations found in UCSC genome browser in the genomic region of interest.
-    \item \textbf{\emph{snpLocations\_UCSC}} : Visualise SNPs found in UCSC genome browser in the genomic region of interest.
-    \item \textbf{\emph{xenorefGenes\_UCSC}} : Visualise xeno reference genes found in UCSC genome browser in the genomic region of interest.
+    \item \Rfunction{chromatinHMMAll\_UCSC} : Visualise the chromHMM Broad found in UCSC genome browser of all tissues in the genomic region of interest.
+    \item \Rfunction{chromatinHMMOne\_UCSC} : Visualise the chromHMM Broad found in UCSC genome browser of the tissue of interest in the genomic region of interest.
+    \item \Rfunction{ClinVarCnv\_UCSC} : Visualise clinical CNVs found in ClinVar tracks of UCSC genome browser in the genomic region of interest.
+    \item \Rfunction{ClinVarMain\_UCSC} : Visualise clinical SNPs found in ClinVar tracks of UCSC genome browser in the genomic region of interest.
+    \item \Rfunction{CoreillCNV\_UCSC} : Visualise CNV found in Coreil tracks of UCSC genome browser in the genomic region of interest.
+    \item \Rfunction{COSMIC\_UCSC} : Visualise SNPs found in COSMIIC tracks of UCSC genome browser in the genomic region of interest.
+    \item \Rfunction{cpgIslands\_UCSC} : Visualise CpG Island found in CpGIsland tracks of UCSC genome browser in the genomic region of interest.
+    \item \Rfunction{DNAse\_UCSC} : Visualise clinical CNV found in ClinVar tracks of UCSC genome browser in the genomic region of interest.
+    \item \Rfunction{GAD\_UCSC} : Visualise genes found in GAD tracks of UCSC genome browser in the genomic region of interest.
+    \item \Rfunction{gcContent\_UCSC} : Visualise GC content found in  UCSC genome browser in the genomic region of interest.
+    \item \Rfunction{GeneReviews\_UCSC} : Visualise clinical genes found in GeneReviews tracks of UCSC genome browser in the genomic region of interest.
+    \item \Rfunction{GWAScatalog\_UCSC} : Visualise SNPS found in GWAS catalog tracks of UCSC genome browser in the genomic region of interest.
+    \item \Rfunction{HistoneAll\_UCSC} : Visualise histone patterns found in UCSC genome browser of all tissues in the genomic region of interest.
+    \item \Rfunction{HistoneOne\_UCSC} : Visualise histone patterns found in UCSC genome browser of one tissue of interest in the genomic region of interest.
+    \item \Rfunction{ISCA\_UCSC} (obselete) : Visualise clinical CNV found in UCSC genome browser in the genomic region of interest.
+    \item \Rfunction{knownGenes\_UCSC} : Visualise known genes found in UCSC genome browser in the genomic region of interest.
+    \item \Rfunction{refGenes\_UCSC} : Visualise reference genes found in UCSC genome browser in the genomic region of interest.
+    \item \Rfunction{repeatMasker\_UCSC} : Visualise repeat elements found in UCSC genome browser in the genomic region of interest.
+    \item \Rfunction{segmentalDups\_UCSC} : Visualise segmental duplcations found in UCSC genome browser in the genomic region of interest.
+    \item \Rfunction{snpLocations\_UCSC} : Visualise SNPs found in UCSC genome browser in the genomic region of interest.
+    \item \Rfunction{xenorefGenes\_UCSC} : Visualise xeno reference genes found in UCSC genome browser in the genomic region of interest.
 \end{itemize}
 
 \subsubsection{ChromHMM from UCSC}
-For this function there are two possible colour schemes to choose from. The selection between schemes is made with the variable 'colour'. The default scheme is 'coMET', the colours chosen have been selected so that different elements can be easily distinguished. The second scheme is 'UCSC', these are the set colours used by UCSC, in certain plots it may be difficult to distinguish elements apart. These UCSC colours are correct at the time this document was writtern however if these change in the future and this is not reflected here please contact us.
+For this function there are two possible colour schemes to choose from. The selection between schemes is made with the variable \Robject{colour}. The default scheme is \Biocpkg{coMET}, the colours chosen have been selected so that different elements can be easily distinguished. The second scheme is \emph{UCSC}, these are the set colours used by UCSC, in certain plots it may be difficult to distinguish elements apart. These UCSC colours are correct at the time this document was writtern however if these change in the future and this is not reflected here please contact us.
 
 the colours used in both schemes are listed below:
 \\
 \\
-\centerline{\includegraphics[scale=.75]{../inst/extdata/JpegTables/ChromHMM_coMET}}
+\centerline{\includegraphics{../inst/extdata/JpegTables/ChromHMM_coMET}}
 \\
 \\
-\centerline{\includegraphics[scale=.75]{../inst/extdata/JpegTables/ChromHMM_UCSC}}
+\centerline{\includegraphics{../inst/extdata/JpegTables/ChromHMM_UCSC}}
 %
 % \begin{longtable}{|c|c|}
 % \hline \multicolumn{1}{|c|}{Omic feature} & \multicolumn{1}{c|}{Color} \\ \hline
@@ -918,79 +939,79 @@ International Standards of Cytogenomic Arrays Consortium defined a set of phenot
 This database is not more accessible from UCSC.
 \\
 \\
-\centerline{\includegraphics[scale=.75]{../inst/extdata/JpegTables/ISCATrack}}
+\centerline{\includegraphics{../inst/extdata/JpegTables/ISCATrack}}
 
 \subsubsection{Other potential data from UCSC}
-You can access to other data via UCSC track hub \citep{UCSC2013} :
+You can access to other data via UCSC track hub \cite{UCSC2013} :
 \begin{itemize}
 \item Other tracks and table accessible to UCSC genome browser \url{https://genome.ucsc.edu/cgi-bin/hgTables?hgsid=444062899_lxuSrw4J9exVt1OafMuY4LDbVs1F&clade=mammal&org=Human&db=hg19&hgta_group=allTracks&hgta_track=knownGene&hgta_table=0&hgta_regionType=genome&position=chr21%3A33031597-33041570&hgta_outputType=primaryTable&hgta_outFileName=}
 \item Track HUB of UCSC genome browser \url{https://genome-euro.ucsc.edu/cgi-bin/hgHubConnect?hubUrl=http%3A%2F%2Ffantom.gsc.riken.jp%2F5%2Fdatahub%2Fhub.txt&hgHubConnect.remakeTrackHub=on&redirect=manual&source=genome.ucsc.edu}
 \end{itemize}
 
-and use DataTrack or AnnotationTrack or UCSCTrack of Gviz to visuaslise them.
+and use \Rfunction{DataTrack} or \Rfunction{AnnotationTrack} or \Rfunction{UCSCTrack} of \Biocpkg{Gviz} to visuaslise them.
 
 \clearpage
-\subsection{ROADMAP epigenomics project}
-ROADMAP epigenomics projects \url{http://www.roadmapepigenomics.org/} \citep{ROADMAPConsortium2015} aims to produce a public resource of human epigenomic data to catalyze basic biology and disease-oriented research. The project has generated high-quality, genome-wide maps of several key histone modifications, chromatin accessibility, DNA methylation and mRNA expression across 100s of human cell types and tissues (111 consolidated epigenomes from the Roadmap Epigenomics Project and 16 epigenomes from The Encyclopedia of DNA Elements (ENCODE) project).
+\subsection{NIH Roadmap epigenomics project}
+NIH Roadmap epigenomics projects \url{http://www.roadmapepigenomics.org/} \cite{ROADMAPConsortium2015} aims to produce a public resource of human epigenomic data to catalyze basic biology and disease-oriented research. The project has generated high-quality, genome-wide maps of several key histone modifications, chromatin accessibility, DNA methylation and mRNA expression across 100s of human cell types and tissues (111 consolidated epigenomes from the NIH Roadmap Epigenomics Project and 16 epigenomes from The Encyclopedia of DNA Elements (ENCODE) project).
 
-Release 9 of the compendium contains uniformly pre-processed and mapped data from multiple profiling experiments (technical and biological replicates from multiple individuals and/or datasets from multiple centers) spanning 183 biological samples and 127 consolidated epigenomes. 
+Release 9 of the compendium contains uniformly pre-processed and mapped data from multiple profiling experiments (technical and biological replicates from multiple individuals and/or datasets from multiple centers) spanning 183 biological samples and 127 consolidated epigenomes.
 
-More information on each type data are on the site of ROADMAP  \url{http://egg2.wustl.edu/roadmap/web_portal/index.html} and the meta-data on different tissues (more for correspondance between Epigenome ID (EID) and the standartized epigenome name), you need to look at this spreadsheet \url{https://docs.google.com/spreadsheets/d/1yikGx4MsO9Ei36b64yOy9Vb6oPC5IBGlFbYEt-N6gOM/edit#gid=15}
+More information on each type data are on the site of NIH Roadmap Epigenomics Program \url{http://egg2.wustl.edu/roadmap/web_portal/index.html} and the meta-data on different tissues (more for correspondance between Epigenome ID (EID) and the standartized epigenome name), you need to look at this spreadsheet \url{https://docs.google.com/spreadsheets/d/1yikGx4MsO9Ei36b64yOy9Vb6oPC5IBGlFbYEt-N6gOM/edit#gid=15}
 
 The current data are done on Release 9. The data are mapped on the reference genome \textbf{hg19}. Below described the colors of tracks and specific characteristics of some annotation tracks.
 \begin{itemize}
-  \item \textbf{\emph{chromHMM\_RoadMap}} : Visualisation of chromatin states defined in RoadMap project
-  \item \textbf{\emph{dgfootprints\_RoadMap}}: Visualisation of DNA motif positional bias in digital genomic Footprinting Sites
-  \item \textbf{\emph{DNaseI\_RoadMap}} : Visualisation of promoter/enhancer regions 
+  \item \Rfunction{chromHMM\_RoadMap} : Visualisation of chromatin states defined in NIH Roadmap project
+  \item \Rfunction{dgfootprints\_RoadMap}: Visualisation of DNA motif positional bias in digital genomic Footprinting Sites
+  \item \Rfunction{DNaseI\_RoadMap} : Visualisation of promoter/enhancer regions
 \end{itemize}
 
 \subsubsection{Chromatin state}
-There are 3 chromatin states defined in RoadMap project (15 states, 18 states and 25 states). 
-For 18 and 25 states, there are the choice beteen 2 set of colors. First, the colors defined by RoadMap and second, the colors defined by us for a better differentiation between states.
+There are 3 chromatin states defined in NIH Roadmap project (15 states, 18 states and 25 states).
+For 18 and 25 states, there are the choice beteen 2 set of colors. First, the colors defined by NIH Roadmap and second, the colors defined by us for a better differentiation between states.
 
-you can use \emph{chromHMM\_RoadMap} to visualise chromatin state in :
+you can use \Rfunction{chromHMM\_RoadMap} to visualise chromatin state in :
 \begin{itemize}
 \item 15-states, go to \url{http://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final/} and select the MNEMONICS BED FILES, where bins with the same state label are merged and a label is assigned to the entire merged regions, related to your tissue of interest.
 \item 18-states, go to \url{http://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/core_K27ac/jointModel/final/} and select the MNEMONICS BED FILES, where bins with the same state label are merged and a label is assigned to the entire merged regions, related to your tissue of interest .
 \item 25-states, go to \url{http://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/imputed12marks/jointModel/final/} and select your tissue of interest.
 \end{itemize}
 
-You can have more information about these data from ROADMAP website \url{http://egg2.wustl.edu/roadmap/web_portal/chr_state_learning.html#core_15state}.
+You can have more information about these data from NIH Roadmap website \url{http://egg2.wustl.edu/roadmap/web_portal/chr_state_learning.html#core_15state}.
 
-You can visualise this bed using the function \emph{chromHMM\_RoadMap} and you can choice the color between \emph{roadmap15}, \emph{roadmap18}, \emph{comet18}, \emph{roadmap25} and \emph{comet25}.
+You can visualise this bed using the function \Rfunction{chromHMM\_RoadMap} and you can choice the color between \emph{roadmap15}, \emph{roadmap18}, \emph{comet18}, \emph{roadmap25} and \emph{comet25}.
 
 Below you can find the color code for each state depending if 15-,18- or 25-state
 
-Listed below are the colours used for the different elements contained in ROADmap data with 15 states.
+Listed below are the colours used for the different elements contained in NIH Roadmap data with 15 states.
 \\
 \\
-\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/RoadMap15_RoadMap}}
+\centerline{\includegraphics{../inst/extdata/JpegTables/RoadMap15_RoadMap}}
 
-Listed below are the colours used for the different elements contained in ROADmap data with 18 states with RoadMap colors.
+Listed below are the colours used for the different elements contained in NIH Roadmap data with 18 states with NIH Roadmap colors.
 \\
 \\
-\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/RoadMap18_RoadMap}}
+\centerline{\includegraphics{../inst/extdata/JpegTables/RoadMap18_RoadMap}}
 
-Listed below are the colours used for the different elements contained in ROADmap data with 18 states with coMET colors.
+Listed below are the colours used for the different elements contained in NIH Roadmap data with 18 states with \Biocpkg{coMET} colors.
 \\
 \\
-\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/RoadMap18_coMET}}
+\centerline{\includegraphics{../inst/extdata/JpegTables/RoadMap18_coMET}}
 
-Listed below are the colours used for the different elements contained in ROADmap data with 25 states with RoadMap colors.
+Listed below are the colours used for the different elements contained in NIH Roadmap data with 25 states with NIH Roadmap colors.
 \\
 \\
-\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/RoadMap25_RoadMap}}
+\centerline{\includegraphics{../inst/extdata/JpegTables/RoadMap25_RoadMap}}
 
-Listed below are the colours used for the different elements contained in ROADmap data with 25 states with coMET colors.
+Listed below are the colours used for the different elements contained in NIH Roadmap data with 25 states with \Biocpkg{coMET} colors.
 \\
 \\
-\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/RoadMap25_coMET}}
+\centerline{\includegraphics{../inst/extdata/JpegTables/RoadMap25_coMET}}
 
 \subsubsection{DNA Motif Positional Bias in Digital Genomic Footprinting Sites}
-The Digital Genomic Footprinting (DGF) sites in each cell type can be visualised using the function \emph{dgfootprints\_RoadMap} using the file of DNase/DGF Footprint calls \url{http://egg2.wustl.edu/roadmap/data/byDataType/dgfootprints/}
+The Digital Genomic Footprinting (DGF) sites in each cell type can be visualised using the function \Rfunction{dgfootprints\_RoadMap} using the file of DNase/DGF Footprint calls \url{http://egg2.wustl.edu/roadmap/data/byDataType/dgfootprints/}
 
 \subsubsection{DNaseI-accessible regulatory regions}
-Using the core 15-state chromatin state model across any of the 111 Roadmap reference epigenomes, and focusing on states TssA, TssAFlnk, and TssBiv for promoters, and EnhG, Enh, and EnhBiv for enhancers, and state BivFlnk (flanking bivalent Enh/Tss) for ambiguous regions, 3 set of data were constructed. The data can be visualised using the function \emph{DNaseI\_RoadMap} with the good name of data (variable \emph{featureDisplay}) like in Fig. \ref{fig:cometPlotfile}:
+Using the core 15-state chromatin state model across any of the 111 NIH Roadmap reference epigenomes, and focusing on states TssA, TssAFlnk, and TssBiv for promoters, and EnhG, Enh, and EnhBiv for enhancers, and state BivFlnk (flanking bivalent Enh/Tss) for ambiguous regions, 3 set of data were constructed. The data can be visualised using the function \Rfunction{DNaseI\_RoadMap} with the good name of data (variable \Robject{featureDisplay}) like in Fig. \ref{fig:cometPlotfile}:
 \begin{itemize}
 \item for \textbf{promoter} regions the file of tissue of interest \url{http://egg2.wustl.edu/roadmap/data/byDataType/dnase/BED\_files\_prom/} or RData files containing matrice of chromatin state call for promoter. Thus, user can select for different tissues.
 \item for \textbf{enhancer} regions the file of tissue of interest \url{http://egg2.wustl.edu/roadmap/data/byDataType/dnase/BED\_files\_enh/}
@@ -1006,17 +1027,17 @@ gen<-"hg19"
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 prombedFilePath <- file.path(extdata, "/RoadMap/regions_prom_E001.bed")
 
-promRMtrack<- DNaseI_RoadMap(gen,chr,start, end, prombedFilePath, 
+promRMtrack<- DNaseI_RoadMap(gen,chr,start, end, prombedFilePath,
                              featureDisplay='promotor', type_stacking="squish")
 
 enhbedFilePath <- file.path(extdata, "/RoadMap/regions_enh_E001.bed")
 
-enhRMtrack<- DNaseI_RoadMap(gen,chr,start, end, enhbedFilePath, 
+enhRMtrack<- DNaseI_RoadMap(gen,chr,start, end, enhbedFilePath,
                             featureDisplay='enhancer', type_stacking="squish")
 
 dyabedFilePath <- file.path(extdata, "/RoadMap/regions_dyadic_E001.bed")
 
-dyaRMtrack<- DNaseI_RoadMap(gen,chr,start, end, dyabedFilePath, 
+dyaRMtrack<- DNaseI_RoadMap(gen,chr,start, end, dyabedFilePath,
                             featureDisplay='dyadic', type_stacking="squish")
 
 genetrack <-genes_ENSEMBL(gen,chr,start,end,showId=TRUE)
@@ -1025,7 +1046,7 @@ listRoadMap <- list(genetrack,promRMtrack,enhRMtrack,dyaRMtrack)
 plotTracks(listRoadMap, chromosome=chr,from=start,to=end)
 @
 
-\begin{figure}
+\begin{figure*}
 <<Roadmap_example1e2,echo=FALSE>>=
 chr<-"chr2"
 start <- 38290160
@@ -1040,18 +1061,18 @@ data(genetrack4RM)
 listRoadMap <- list(genetrack,promRMtrack,enhRMtrack,dyaRMtrack)
 plotTracks(listRoadMap, chromosome=chr,from=start,to=end)
 @
-\caption{Plot of ROADMAP data.\label{fig:RoadMaptrack}}
-\end{figure}
+\caption{Plot of NIH Roadmap data.\label{fig:RoadMaptrack}}
+\end{figure*}
 
 \subsubsection{Processed data and Imputed data}
-BED and BigWIG file can be visualised with DataTrack objects from files of Gviz package.
+BED and BigWIG file can be visualised with DataTrack objects from files of \Biocpkg{Gviz} package.
 The data are in \url{http://www.genboree.org/EdaccData/Release-9/sample-experiment/}  and \url{http://www.genboree.org/EdaccData/Release-9/experiment-sample/} or go to \url{http://egg2.wustl.edu/roadmap/web_portal/processed_data.html} for processed data or to \url{http://egg2.wustl.edu/roadmap/web_portal/imputed.html#imp_sig} for imputed data.
 
 \clearpage
 \subsection{ENCODE and GENCODE data}
 The ENCODE (Encyclopedia of DNA Elements) Consortium is an international collaboration of research groups funded by the National Human Genome Research Institute (NHGRI) \url{https://www.encodeproject.org/}. The goal of ENCODE is to build a comprehensive parts list of functional elements in the human genome, including elements that act at the protein and RNA levels, and regulatory elements that control cells and circumstances in which a gene is active.
 
-Genes and transcripts of GENCODE are accessible from ENSEMBL biomart or can be visualised wtith GeneRegionTrack of Gviz. Other data are in BED or BAM format that can be visualised with Gviz tracks. 
+Genes and transcripts of GENCODE are accessible from ENSEMBL biomart or can be visualised wtith \Rfunction{GeneRegionTrack} of \Biocpkg{Gviz}. Other data are in BED or BAM format that can be visualised with \Biocpkg{Gviz} tracks.
 
 <<encore_genes,eval=FALSE>>=
 #Genes from GENCODE
@@ -1069,7 +1090,7 @@ grtrack <- GeneRegionTrack(range=gtfFilePath ,chromosome = chr, start= start,
 plotTracks(grtrack, chromosome=chr,from=start,to=end)
 @
 
-\begin{figure}
+\begin{figure*}
 <<encore_genes2,echo=FALSE>>=
 #Genes from GENCODE
 chr<-3
@@ -1077,15 +1098,16 @@ start <- 132239976
 end <- 132541303
 gen<-"hg19"
 
-data(genesGencodetrack) 
-
+data(genesGencodetrack)
+options(ucscChromosomeNames=FALSE)
 plotTracks(grtrack, chromosome=chr,from=start,to=end)
+options(ucscChromosomeNames=TRUE)
 @
 \caption{Plot of genes defined by GeneCode.\label{fig:GeneCodetrack}}
-\end{figure}
+\end{figure*}
 
 \subsubsection{Predicting motifs and active regulators}
-You can browse known and discovered motifs for the ENCODE TF ChIP-seq datasets. The position of motifs can be visualised using the function \textbf{\emph{motif\_ENCODE}} using one of files from \url{http://compbio.mit.edu/encode-motifs/} \citep{Kheradpour2014} such as \url{http://compbio.mit.edu/encode-motifs/matches.txt.gz}
+You can browse known and discovered motifs for the ENCODE TF ChIP-seq datasets. The position of motifs can be visualised using the function \Rfunction{ChIPTF\_ENCODE} using one of files from \url{http://compbio.mit.edu/encode-motifs/} \cite{Kheradpour2014} such as \url{http://compbio.mit.edu/encode-motifs/matches.txt.gz}
 
 <<encode_example,eval=FALSE>>=
 #TF Chip-seq data
@@ -1097,15 +1119,15 @@ extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 bedFilePath <- file.path(extdata, "ENCODE/motifs1000_matches_ENCODE.txt")
 motif_color <- file.path(extdata, "ENCODE/TFmotifs_colors.csv")
 
-chipTFtrack <- ChIPTF_ENCODE(gen,chr,start, end, bedFilePath, 
+chipTFtrack <- ChIPTF_ENCODE(gen,chr,start, end, bedFilePath,
                              featureDisplay=c("AHR::ARNT::HIF1A_1",
-                                              "AIRE_1","AIRE_2","AHR::ARNT_1"), 
+                                              "AIRE_1","AIRE_2","AHR::ARNT_1"),
                              motif_color,type_stacking="squish",showId=TRUE)
 
 plotTracks(chipTFtrack, chromosome=chr,from=start,to=end)
 @
 
-\begin{figure}
+\begin{figure*}
 <<encode_example2,echo=FALSE>>=
 #TF Chip-seq data
 gen <- "hg19"
@@ -1117,11 +1139,11 @@ data(chipTFtrack)
 plotTracks(chipTFtrack, from = start, to = end)
 @
 \caption{Plot ENCODE TF ChIP-seq datasets of ENCODE.\label{fig:ENCODEtrack}}
-\end{figure}
+\end{figure*}
 
 \clearpage
 \subsection{GTEx Portal}
-The Genotype-Tissue Expression (GTEx) \citep{GTEX2013} project aims to provide to the scientific community a resource with which to study human gene expression and regulation and its relationship to genetic variation. By analyzing global RNA expression within individual tissues and treating the expression levels of genes as quantitative traits, variations in gene expression that are highly correlated with genetic variation can be identified as expression quantitative trait loci, or eQTLs.
+The Genotype-Tissue Expression (GTEx) \cite{GTEX2013} project aims to provide to the scientific community a resource with which to study human gene expression and regulation and its relationship to genetic variation. By analyzing global RNA expression within individual tissues and treating the expression levels of genes as quantitative traits, variations in gene expression that are highly correlated with genetic variation can be identified as expression quantitative trait loci, or eQTLs.
 The data are accessible via \url{http://www.gtexportal.org/}.
 A set of data are downloadable from \url{http://www.gtexportal.org/home/datasets2} (need to have login).
 
@@ -1129,9 +1151,12 @@ The data were mapped on the reference genome \textbf{hg19}. Below described the 
 
 2 functions were created to visualise data from GTEx version 6:
 \begin{enumerate}
-\item \textbf{\emph{eQTL\_GTEx}} visualise eGene and significant snp-gene associations based on permutations in a tissue specific. The name of folder in GTEx version 6 is \emph{GTEx\_Analysis\_V6\_eQTLs.tar.gz}.
-\item \textbf{\emph{geneExpression\_GTEx}} (need to update) visualise fully processed, normalized and filtered gene expression data, which was used as input into Matrix eQTL for eQTL discovery in a tissue specific. The name of folder in GTEx version 6 is \emph{GTEx\_Analysis\_V6\_eQTLInputFiles\_geneLevelNormalizedExpression.tar.gz}
-\item \textbf{\emph{GeneRegionTrack}} from Gviz can visualise gene level model based on the GENCODE transcript model (cf. example below. Isoforms have been collapsed to single genes. The name of file in GTEx version 6 is \emph{gencode.v19.genes.patched\_contigs.gtf}.
+\item \Rfunction{eQTL\_GTEx} visualise eGene and significant snp-gene associations based on permutations in a tissue specific. The name of folder in GTEx version 6 is \emph{GTEx\_Analysis\_V6\_eQTLs.tar.gz}.
+\item \Rfunction{geneExpression\_GTEx} (need to update) visualise fully processed, normalized and filtered gene expression data, which was used as input into Matrix eQTL for eQTL discovery in a tissue specific. The name of folder in GTEx version 6 is \emph{GTEx\_Analysis\_V6\_eQTLInputFiles\_geneLevelNormalizedExpression.tar.gz}
+\end{enumerate}
+One function from \Biocpkg{Gviz}:
+\begin{enumerate}
+\item \Rfunction{GeneRegionTrack} can visualise gene level model based on the GENCODE transcript model (cf. example below. Isoforms have been collapsed to single genes. The name of file in GTEx version 6 is \emph{gencode.v19.genes.patched\_contigs.gtf}.
 \end{enumerate}
 
 <<GTEX_example1,eval=FALSE>>=
@@ -1144,17 +1169,17 @@ gen<-"hg19"
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 bedFilePath <- file.path(extdata, "/GTEX/eQTL_Uterus_Analysis_extract100.snpgenes")
 
-eGTex<- eQTL_GTEx(gen,chr, start, end, bedFilePath, featureDisplay = 'all', 
+eGTex<- eQTL_GTEx(gen,chr, start, end, bedFilePath, featureDisplay = 'all',
                   showId=TRUE, type_stacking="squish", just_group="left" )
 
-eGTex_SNP<- eQTL_GTEx(gen,chr, start, end, bedFilePath, 
-                      featureDisplay = 'SNP', showId=FALSE, 
+eGTex_SNP<- eQTL_GTEx(gen,chr, start, end, bedFilePath,
+                      featureDisplay = 'SNP', showId=FALSE,
                       type_stacking="dense", just_group="left")
 
 #Genes from
 gtfFilePath <- file.path(extdata, "/GTEX/gencode.v19.genes.patched_contigs.gtf")
 options(ucscChromosomeNames=FALSE)
-grtrack <- GeneRegionTrack(genome="hg19",range=gtfFilePath ,chromosome = chr, 
+grtrack <- GeneRegionTrack(genome="hg19",range=gtfFilePath ,chromosome = chr,
                            start= start, end= end, name = "Gencode V19",
                            collapseTranscripts=TRUE, showId=TRUE,shape="arrow")
 eGTexTracklist <- list(grtrack,eGTexTrackSNP)
@@ -1162,7 +1187,7 @@ plotTracks(eGTexTracklist, chromosome=chr,from=start,to=end)
 @
 
 
-\begin{figure}
+\begin{figure*}
 <<GTEX_example12,echo=FALSE>>=
 ## eQTL data
 chr<-"chr3"
@@ -1179,18 +1204,18 @@ eGTexTracklist <- list(grtrack,eGTexTrackSNP)
 plotTracks(eGTexTracklist, chromosome=chr,from=start,to=end)
 @
 \caption{Plot eQTL from GTex.\label{fig:eQTLGTextrack}}
-\end{figure}
+\end{figure*}
 
 
 2 other functions were created to visualise supplement data from GTEx version 3
-\begin{enumerate} 
-\item \textbf{\emph{psiQTL\_GTEx}} visualise results from the protein truncating variants QTL (psiQTL) analysis for mine main tissues, plus brain, plus multi-tissue that averages the exons where data for three or more tissues is available. The name of file in GTEX version 3 is \emph{gtex\_psiqtls.zip}.
-\item \textbf{\emph{imprintedGenes\_GTEx}} visuaslise gene imprinting genes in different tissues \citep{Baran2015} via url \url{http://www.gtexportal.org/home/imprintingPage}. There are 33 tissues and 5 classification 
+\begin{enumerate}
+\item \Rfunction{psiQTL\_GTEx} visualise results from the protein truncating variants QTL (psiQTL) analysis for mine main tissues, plus brain, plus multi-tissue that averages the exons where data for three or more tissues is available. The name of file in GTEX version 3 is \emph{gtex\_psiqtls.zip}.
+\item \Rfunction{imprintedGenes\_GTEx} visuaslise gene imprinting genes in different tissues \cite{Baran2015} via url \url{http://www.gtexportal.org/home/imprintingPage}. There are 33 tissues and 5 classification
 \end{enumerate}
 
 
 <<GTEX_example4e,eval=FALSE>>=
-### psiQTL 
+### psiQTL
 chr<-"chr13"
 start <- 52713837
 end <- 52715894
@@ -1199,7 +1224,7 @@ gen<-"hg19"
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 psiQTLFilePath <- file.path(extdata, "/GTEX/psiQTL_Assoc-total.AdiposeTissue.txt")
 
-psiGTex<- psiQTL_GTEx(gen,chr,start, end, psiQTLFilePath, featureDisplay = 'all', 
+psiGTex<- psiQTL_GTEx(gen,chr,start, end, psiQTLFilePath, featureDisplay = 'all',
                       showId=TRUE, type_stacking="squish",just_group="above" )
 
 genetrack <-genes_ENSEMBL(gen,chr,start,end,showId=TRUE)
@@ -1208,9 +1233,9 @@ psiTrack <- list(genetrack,psiGTex)
 plotTracks(psiTrack, chromosome=chr,from=start,to=end)
 @
 
-\begin{figure}
+\begin{figure*}
 <<GTEX_example4e2,echo=FALSE>>=
-### psiQTL 
+### psiQTL
 chr<-"chr13"
 start <- 52713837
 end <- 52715894
@@ -1224,7 +1249,7 @@ psiTrack <- list(genetrack,psiGTexTrackall)
 plotTracks(psiTrack, chromosome=chr,from=start,to=end)
 @
 \caption{Plot psiQTL from GTex.\label{fig:psiQTLGTextrack}}
-\end{figure}
+\end{figure*}
 
 <<TEX_example5e1>>=
 data(imprintedGenesGTEx)
@@ -1241,17 +1266,17 @@ gen<-"hg19"
 
 genesTrack <- genes_ENSEMBL(gen,chr,start,end,showId=TRUE)
 
-allIG <- imprintedGenes_GTEx(gen,chr,start, end, tissues="all", 
+allIG <- imprintedGenes_GTEx(gen,chr,start, end, tissues="all",
                              classification="imprinted",showId=TRUE)
 
-allimprintedIG <- imprintedGenes_GTEx(chr,start, end, tissues="all", 
+allimprintedIG <- imprintedGenes_GTEx(chr,start, end, tissues="all",
                                       classification="imprinted",showId=TRUE)
 
-StomachIG <-imprintedGenes_GTEx(gen,chr,start, end, tissues="Stomach", 
+StomachIG <-imprintedGenes_GTEx(gen,chr,start, end, tissues="Stomach",
                                 classification="all",showId=TRUE)
 
-PancreasIG <- imprintedGenes_GTEx(gen,chr,start, end, 
-                                  tissues="Pancreas", 
+PancreasIG <- imprintedGenes_GTEx(gen,chr,start, end,
+                                  tissues="Pancreas",
                                   classification="all",showId=TRUE)
 PancreasimprintedIG <- imprintedGenes_GTEx(gen,chr,start, end, tissues="Pancreas",
                                            classification="imprinted",showId=TRUE)
@@ -1263,7 +1288,7 @@ plotTracks(list(genesTrack, allIG, allimprintedIG,
 @
 
 
-\begin{figure}
+\begin{figure*}
 <<GTEX_example5e2,echo=FALSE>>=
 ### inprinted genes
 chr<- "chr1"
@@ -1284,7 +1309,7 @@ plotTracks(imprintinglist, from = start, to = end)
 
 @
 \caption{Plot imprinted genes from GTex.\label{fig:IGTextrack}}
-\end{figure}
+\end{figure*}
 
 
 <<GTEX_example3,eval=FALSE,echo=FALSE>>=
@@ -1299,8 +1324,8 @@ extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 ### sQTL from Altran methods
 sQTLAFilePath <- file.path(extdata, "/GTEX/sQTL_HeartLeftVentricle.Altrans.FDR05.bestPerLink")
 
-sAGTex<- sQTL_Altrans_GTEx(gen,chr,start, end, 
-                           sQTLAFilePath, featureDisplay = 'all', showId=TRUE, 
+sAGTex<- sQTL_Altrans_GTEx(gen,chr,start, end,
+                           sQTLAFilePath, featureDisplay = 'all', showId=TRUE,
                            type_stacking="squish",just_group="left" )
 @
 
@@ -1309,7 +1334,7 @@ sAGTex<- sQTL_Altrans_GTEx(gen,chr,start, end,
 \subsection{Hi-C data}
 Below are examples of Hi-C data available for different tissues.
 \subsubsection{Hi-C data at 1kb resolution at Lieberman Aiden lab}
-They \citep{Rao2014} used in situ Hi-C to probe the three-dimensional architecture of genomes, constructing haploid and diploid maps of nine cell types. The densest, in human lymphoblastoid cells, contains 4.9 billion contacts, achieving 1-kilobase resolution.The data were mapped on \textbf{hg19} reference genome.
+They \cite{Rao2014} used in situ Hi-C to probe the three-dimensional architecture of genomes, constructing haploid and diploid maps of nine cell types. The densest, in human lymphoblastoid cells, contains 4.9 billion contacts, achieving 1-kilobase resolution.The data were mapped on \textbf{hg19} reference genome.
 
 You can download intrachromosomal matrice from \url{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE63525} for the cell-type of interest.
 
@@ -1329,28 +1354,28 @@ diag(cor_matrix_HiC)<-1
 corrplot(cor_matrix_HiC, method = "circle")
 @
 
-\begin{figure}
-<<extract_data_1kb2,echo=FALSE>>=
-library('corrplot')
-#Hi-C data
-gen <- "hg19"
-chr<-"chr1"
-start <- 5000000
-end <- 9000000
-
-data(matrix_HiC_Rao)
-cor_matrix_HiC <- cor(matrix_HiC_Rao)
-diag(cor_matrix_HiC)<-1
-corrplot(cor_matrix_HiC, method = "circle")
-@
-\caption{plot HiC data.\label{fig:HiCrack}}
-\end{figure}
+% \begin{figure*}
+% <<extract_data_1kb2,echo=FALSE>>=
+% library('corrplot')
+% #Hi-C data
+% gen <- "hg19"
+% chr<-"chr1"
+% start <- 5000000
+% end <- 9000000
+%
+% data(matrix_HiC_Rao)
+% cor_matrix_HiC <- cor(matrix_HiC_Rao)
+% diag(cor_matrix_HiC)<-1
+% corrplot(cor_matrix_HiC, method = "circle")
+% @
+% \caption{plot HiC data.\label{fig:HiCrack}}
+% \end{figure*}
 
 You can quick visualise this data using this HiC-interaction tool \url{http://promoter.bx.psu.edu/hi-c/view.php?species=human&assembly=hg19&source=inside&tissue=GM12878&resolution=1&c_url=&gene=CTXN1&sessionID=}
 
 
 \subsubsection{Hi-C Data Browser}
-You can download heatmap of your region of interest from two cell-line GM06690 (immortalized lymphoblast) or K562 (leukemia) using their website \url{http://hic.umassmed.edu/heatmap/heatmap.php}. This data was produced by \citep{LiebermanAiden2009}. The region that you want to visualise with this data need to large more than either 100Kb or 1Mb as Heatmaps were generated by dividing the chromosome up into 100 Kb or 1 Mb windows. The data were mapped on \textbf{hg19} reference genome.
+You can download heatmap of your region of interest from two cell-line GM06690 (immortalized lymphoblast) or K562 (leukemia) using their website \url{http://hic.umassmed.edu/heatmap/heatmap.php}. This data was produced by \cite{LiebermanAiden2009}. The region that you want to visualise with this data need to large more than either 100Kb or 1Mb as Heatmaps were generated by dividing the chromosome up into 100 Kb or 1 Mb windows. The data were mapped on \textbf{hg19} reference genome.
 
 You need to create info file to define the position of each bin composing your interaction matrice in using the row name of matrice as the name of bin contain the start and end of bin.
 
@@ -1374,8 +1399,8 @@ data_intrachr_HiC <- read.csv(intrachr_HiC, header = TRUE, sep = "\t", quote = "
 chr_interest <- "chr2"
 start_interest <- "1"
 end_interest <- "160000"
-list_bins <- which(data_info_HiC[,1] == chr_interest & 
-                     data_info_HiC[,2] >= start_interest &  
+list_bins <- which(data_info_HiC[,1] == chr_interest &
+                     data_info_HiC[,2] >= start_interest &
                      data_info_HiC[,2] <= end_interest )
 
 subdata_info_Hic <- data_info_HiC[list_bins,]
@@ -1385,21 +1410,21 @@ subdata_intrachr_HiC <- data_intrachr_HiC[list_bins,list_bins]
 
 \clearpage
 \subsection{FANTOM5 database}
-FANTOM \url{http://fantom.gsc.riken.jp/} established the FANTOM database (transcripts, transcription factors, promoters and enhancers active,TSS) and the FANTOM full-length cDNA clone bank, which are available worldwide for about 400 distinct cell types. Currently, FANTOM is in version FANTOM5 phase 2 where data were mapped on reference genome \textbf{hg19} for human or \textbf{mm9} for mouse \citep{Lizio2015}.
+FANTOM \url{http://fantom.gsc.riken.jp/} established the FANTOM database (transcripts, transcription factors, promoters and enhancers active,TSS) and the FANTOM full-length cDNA clone bank, which are available worldwide for about 400 distinct cell types. Currently, FANTOM is in version FANTOM5 phase 2 where data were mapped on reference genome \textbf{hg19} for human or \textbf{mm9} for mouse \cite{Lizio2015}.
 
-To extract data 
+To extract data
 \begin{itemize}
 \item from \url{http://fantom.gsc.riken.jp/5/}
 \item from \url{http://fantom.gsc.riken.jp/data/} or \url{http://fantom.gsc.riken.jp/views/}
 \item from BED file used by UCSC HUB \url{http://fantom.gsc.riken.jp/5/datahub/}, more information here \url{http://fantom.gsc.riken.jp/5/datahub/description.html}
 \end{itemize}
 
-As the data are in classical format such as BED file, you can use easily Gviz's DataTrack function to visuaslise them. However, there are some comment lines that you need to remove in the top of files.
+As the data are in classical format such as BED file, you can use easily \Biocpkg{Gviz}'s \Rfunction{DataTrack} function to visuaslise them. However, there are some comment lines that you need to remove in the top of files.
 
 2 functions were created :
 \begin{itemize}
-  \item \textbf{\emph{DNaseI\_FANTOM}} helps to visualise enhancer regions defined by FANTOM5
-\item \textbf{\emph{TFBS\_FANTOM}} helps to visualise TFBS regions defined by FANTOM5
+  \item \Rfunction{DNaseI\_FANTOM} helps to visualise enhancer regions defined by FANTOM5
+\item \Rfunction{TFBS\_FANTOM} helps to visualise TFBS regions defined by FANTOM5
 \end{itemize}
 
 
@@ -1412,15 +1437,17 @@ end <- 6500000
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 
 ##Enhancer
-enhFantomFile <- file.path(extdata, "/FANTOM/human_permissive_enhancers_phase_1_and_2.bed")
-enhFANTOMtrack <-DNaseI_FANTOM(gen,chr,start, end, enhFantomFile, featureDisplay='enhancer')
+enhFantomFile <- file.path(extdata,
+                           "/FANTOM/human_permissive_enhancers_phase_1_and_2.bed")
+enhFANTOMtrack <-DNaseI_FANTOM(gen,chr,start, end, enhFantomFile,
+                               featureDisplay='enhancer')
 
 ### TFBS motif
 AP1FantomFile <- file.path(extdata, "/FANTOM/Fantom_hg19.AP1_MA0099.2.sites.txt")
 tfbsFANTOMtrack <- TFBS_FANTOM(gen,chr,start, end, AP1FantomFile)
 @
 
-\begin{figure}
+\begin{figure*}
 <<FANTOM_example2,echo=FALSE>>=
 gen <- "hg19"
 chr<- "chr1"
@@ -1439,7 +1466,7 @@ Fantom5list <- list(enhFANTOMtrack,tfbsFANTOMtrack)
 plotTracks(Fantom5list, from = start, to = end)
 @
 \caption{plot FANTOM5 data.\label{fig:FANTOM5Track}}
-\end{figure}
+\end{figure*}
 
 \clearpage
 \subsection{BLUEprint project}
@@ -1447,53 +1474,53 @@ BLUEprint \url{http://www.blueprint-epigenome.eu/} aims to further the understan
 
 the data were mapped on reference genome partially on \textbf{GRCh37} and all on \textbf{GRCh38}.
 
-As the data are in classical format such as BED file, BigWig of GTF, you can use easily DataTrack or AnnotationTrack of Gviz to visuaslise them.
+As the data are in classical format such as BED file, BigWig of GTF, you can use easily \Rfunction{DataTrack} or \Rfunction{AnnotationTrack} of \Biocpkg{Gviz} to visuaslise them.
 
 \subsection{Our data}
 \subsubsection{eQTL data}
-You can visualise our eQTL using \textbf{\emph{eQTL}} function.
+You can visualise our eQTL using \Rfunction{eQTL} function.
 Listed below are the colours used for the different elements contained in eQTL data.
 \\
 \\
-\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/eQTL}}
+\centerline{\includegraphics{../inst/extdata/JpegTables/eQTL}}
 
 \subsubsection{metQTL data}
-You can visualise our eQTL using \textbf{\emph{metQTL}} function.
+You can visualise our eQTL using \Rfunction{metQTL} function.
 
 Listed below are the colours used for the different elements contained in metQTL data.
 \\
 \\
-\centerline{\includegraphics[scale=0.75]{../inst/extdata/JpegTables/metQTL}}
+\centerline{\includegraphics{../inst/extdata/JpegTables/metQTL}}
 
 \clearpage
-\section{coMET: Shiny web-service}
-\subsection{How to use the coMET web-service}
-If you want to use coMET via its webservice, please go to \url{http://epigen.kcl.ac.uk/comet} and select one of different instances or direcly access one of the instances, for example \url{http://comet.epigen.kcl.ac.uk:3838/coMET/}. We have created different instances of coMET because we did not have access to the pro version of Shiny. All instances use the same version of coMET.
+\section{\Biocpkg{coMET}: \CRANpkg{Shiny} web-service}
+\subsection{How to use the \Biocpkg{coMET} web-service}
+If you want to use \Biocpkg{coMET} via its webservice, please go to \url{http://epigen.kcl.ac.uk/comet} and select one of different instances or direcly access one of the instances, for example \url{http://comet.epigen.kcl.ac.uk:3838/coMET/}. We have created different instances of \Biocpkg{coMET} because we did not have access to the pro version of \CRANpkg{Shiny}. All instances use the same version of \Biocpkg{coMET}.
 
-If you use coMET from a Shiny webservice, you do not need to install the coMET package on your computer. The web service is user friendly and requires input files and configuration of the plot. The creation of the coMET plot can take some time because it makes a live connection to UCSC or/and ENSEMBL for the annotation tracks. First, the plot is created on the webpage, and then it can be saved as an output file. For better quality plots please use the download option and the plot will be recreated in a file in pdf or eps format.
+If you use \Biocpkg{coMET} from a \CRANpkg{Shiny} webservice, you do not need to install the \Biocpkg{coMET} package on your computer. The web service is user friendly and requires input files and configuration of the plot. The creation of the \Biocpkg{coMET} plot can take some time because it makes a live connection to UCSC or/and ENSEMBL for the annotation tracks. First, the plot is created on the webpage, and then it can be saved as an output file. For better quality plots please use the download option and the plot will be recreated in a file in pdf or eps format.
 
 
-\subsection{How to install the coMET web-service}
-These are different steps to install coMET on your Shiny web-service and you need to be root to install it.
+\subsection{How to install the \Biocpkg{coMET} web-service}
+These are different steps to install \Biocpkg{coMET} on your \CRANpkg{Shiny} web-service and you need to be root to install it.
 \begin{enumerate}
-\item You need to install R, Bioconductor and the coMET package under root.
-\item You need first to install the \emph{shiny} and \emph{rmarkdown}
-R package before Shiny Server. 
+\item You need to install \R{}, \Bioconductor{} and the \Biocpkg{coMET} package under root.
+\item You need first to install the \CRANpkg{Shiny} and \CRANpkg{rmarkdown}
+R package before \CRANpkg{Shiny} Server.
 \begin{verbatim}
 sudo su - -c "R -e \"install.packages('shiny', repos='http://cran.rstudio.com/')\""
 sudo su - -c "R -e \"install.packages('rmarkdown', repos='http://cran.rstudio.com/')\""
 \end{verbatim}
-\item You can install Shiny Server \url{http://shiny.rstudio.com/}, go to \url{https://www.rstudio.com/products/shiny/download-server/}.
+\item You can install \CRANpkg{Shiny} Server \url{http://shiny.rstudio.com/}, go to \url{https://www.rstudio.com/products/shiny/download-server/}.
 \begin{verbatim}
  sudo apt-get install gdebi-core
- wget https://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.4.2.786-amd64.deb
+ wget \url{https://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.4.2.786-amd64.deb}
  sudo gdebi shiny-server-1.4.2.786-amd64.deb
 \end{verbatim}
-\item Shiny Server should now be installed and running on port 3838. You should be able to see a default welcome screen at http://your\_server\_ip:3838/. You can make sure your Shiny Server is working properly by going to http://your\_server\_ip:3838/sample-apps/hello/.
-\item You now have a functioning Shiny Server that can host Shiny applications or interactive documents. The configuration file for Shiny Server is at /etc/shiny-server/shiny-server.conf. By default it is configured to serve applications in the /srv/shiny-server/ directory. This means that any Shiny application that is placed at /srv/shiny-server/app\_name will be available to the public at http://your\_server\_ip:3838/app\_name/. 
-\item In a Shiny's folder (e.g. /var/shiny-server/www), you can create a folder called "COMET".
-\item Following this, you can install the two coMET scripts in www of the coMET package, within this new folder.
-\item You need to change owner and permissions to access this folder. Only the user called Shiny can access it.
+\item \CRANpkg{Shiny} Server should now be installed and running on port 3838. You should be able to see a default welcome screen at \url{http://your\_server\_ip:3838/}. You can make sure your \CRANpkg{Shiny} Server is working properly by going to \url{http://your\_server\_ip:3838/sample-apps/hello/}.
+\item You now have a functioning \CRANpkg{Shiny} Server that can host \CRANpkg{Shiny} applications or interactive documents. The configuration file for \CRANpkg{Shiny} Server is at /etc/shiny-server/shiny-server.conf. By default it is configured to serve applications in the /srv/shiny-server/ directory. This means that any \CRANpkg{Shiny} application that is placed at /srv/shiny-server/app\_name will be available to the public at \url{http://your\_server\_ip:3838/app\_name/}.
+\item In a \CRANpkg{Shiny}'s folder (e.g. /var/shiny-server/www), you can create a folder called "COMET".
+\item Following this, you can install the two \Biocpkg{coMET} scripts in www of the \Biocpkg{coMET} package, within this new folder.
+\item You need to change owner and permissions to access this folder. Only the user called \CRANpkg{Shiny} can access it.
 \begin{verbatim}
 mkdir -p /var/shiny-server/www/COMET
 
@@ -1505,13 +1532,15 @@ mkdir -p /var/shiny-server/log
 chmod -R 755 /var/shiny-server/log
 chown -R shiny:shiny /var/shiny-server/log
 \end{verbatim}
-\item You need now to update the configuration file of Shiny (e.g. /etc/shiny-server/shiny-server.conf). 
+\item You need now to update the configuration file of \CRANpkg{Shiny} (e.g. /etc/shiny-server/shiny-server.conf).
 \item You need to change owner and the permission to access this file
+
 \begin{verbatim}
 chmod 744 /etc/shiny-server/shiny-server.conf
 chown shiny:shiny /etc/shiny-server/shiny-server.conf
 \end{verbatim}
-\item At the end, you should restart the service Shiny via the command line:
+
+\item At the end, you should restart the service \CRANpkg{Shiny} via the command line:
 \begin{verbatim}
 ###2.13.0.1 systemd (RedHat 7, Ubuntu 15.04+, SLES 12+)
 #File to change:
@@ -1523,7 +1552,7 @@ Environment="SHINY\_LOG\_LEVEL=TRACE"
 
 #Commands to run for the changes to take effect:
 sudo systemctl stop shiny-server
-sudo systemctl daemon-reload 
+sudo systemctl daemon-reload
 sudo systemctl start shiny-server
 
 
@@ -1570,14 +1599,14 @@ directory_index off;
 \clearpage
 \section{FAQs}
 \begin{itemize}
-\item\textbf{I  cannot see my plot after running comet or comet.web. What should I do?}
+\item\textbf{I  cannot see my plot after running \Rfunction{comet} or \Rfunction{comet.web}. What should I do?}
 \\
-If the previous time comet or comet.web ran and error was produced it prevents the plot from being closed. to fix this use the command '\emph{dev.off()}' as many times as necessary.
+If the previous time \Rfunction{comet} or \Rfunction{comet.web} ran and error was produced it prevents the plot from being closed. to fix this use the command '\emph{dev.off()}' as many times as necessary.
 \leavevmode
 \\
 \item\textbf{How do we know if my track has data? and what the data is?}
 \\
-Type the name of your track, visualise the track with plotTrack or read different parameters with \emph{str} function.
+Type the name of your track, visualise the track with \Rfunction{plotTrack} or read different parameters with \Rfunction{str} function.
 <<faq0,eval=FALSE>>=
 genetrack <-genesENSEMBL(gen,chrom,start,end,showId=TRUE)
 
@@ -1590,7 +1619,7 @@ str(genetrack)
 \item\textbf{How do you increase the size of the font of the name of an object}?
 \leavevmode
 \\
-To enlarge the name of gene, as the object is Gviz object, you can use the option from Gviz
+To enlarge the name of gene, as the object is \Biocpkg{Gviz} object, you can use the option from \Biocpkg{Gviz}.
 \\
 You can see the value of different parameters via this command line:
 <<faq1,eval=FALSE>>=
@@ -1600,12 +1629,12 @@ displayPars(genetrack)
 @
 \leavevmode
 \\
-So if you want to enlarge the name of gene, you need to do use the option fontsize.gviz in the coMET function, an example is given below:
+So if you want to enlarge the name of gene, you need to do use the option \Robject{fontsize.gviz} in the \Rfunction{comet} function, an example is given below:
 \\
 <<faq2,eval=FALSE>>=
 comet(config.file = configfile, mydata.file = myinfofile, mydata.format = "file",
       cormatrix.file = mycorrelation, cormatrix.type = "listfile",
-      mydata.large.file = mylargedata,mydata.large.type = "listfile", 
+      mydata.large.file = mylargedata,mydata.large.type = "listfile",
       tracks.gviz = listGviz, verbose = TRUE,
       print.image=TRUE,fontsize.gviz=10)
 @
@@ -1622,27 +1651,27 @@ geneTrackShow <- geneTrack[gene(geneTrack) %in% c("AHRR")]
 @
 \leavevmode
 \\
-\item\textbf{How can I better understand where the comet function stopped}?
+\item\textbf{How can I better understand where the \Rfunction{comet} function stopped}?
 \\
-Use option \emph{VERBOSE=TRUE} in the function coMET or coMET.web
+Use option \emph{VERBOSE=TRUE} in the function \Rfunction{coMET} or \Rfunction{coMET.web}
 \leavevmode
 \\
-If this does not help resolve the issue, please to send your command line with \emph{VERBOSE=TRUE} and its error message to tiphaine.martin@kcl.ac.uk. Do not forget to give alsoinformation about the session by using sessionInfo().
+If this does not help resolve the issue, please to send your command line with \emph{VERBOSE=TRUE} and its error message to \email{tiphaine.martin@mssm.edu}. Do not forget to give alsoinformation about the session by using \Rfunction{sessionInfo()}.
 \\
-\item\textbf{How do you visualise coMET plots working within a R Markdown framework}?
+\item\textbf{How do you visualise coMET plots working within a R \CRANpkg{Markdown} or \CRANpkg{knitr} framework}?
 \leavevmode
 \\
-When coMET writes to a PDF, it is writing out to a 7X7 square area. So, it turns out that one can 'force; the R Markdown block to also write to a 7 x 7 square PDF, as follows:
+When coMET writes to a PDF, it is writing out to a 7X7 square area. So, it turns out that one can 'force; the R \CRANpkg{Markdown} block as well as \CRANpkg{knitr} block to also write to a 7 x 7 square PDF using option for chunck \Rcode{fig.height=7,fig.width=7} , as follows:
 
 <<faq4,eval=FALSE>>=
-'''{r plot_ex1,fig.keep='last', fig.height=7,fig.width=7,dev='pdf'}
+#'''{r plot_ex1,fig.keep='last', fig.height=7,fig.width=7,dev='pdf'}
 comet(config.gile=configfile,
 mydata.file=myinfofile, mydata_type="file",
-cormatrix.file-mycorrelation, cormatrix.type="listfile", 
+cormatrix.file-mycorrelation, cormatrix.type="listfile",
 mydata.large.file=myexpressfile, mydata.large.type="listfile",
 tracks.gviz=listgviz,
 verbose=FALSE, print.image=FALSE, disp.pvalueplot=FALSE)
-'''
+#'''
 @
 \leavevmode
 \\
@@ -1659,49 +1688,67 @@ T.C.M would like to thank Bioconductor team for their help and advice in the dev
 \clearpage
 \section{SessionInfo}
 The following is the session info that generated this vignette:
-<<session-info, results="asis">>=
+<<session-info, results='asis', echo=FALSE>>=
 toLatex(sessionInfo())
 @
 
 
 
-<<Development, eval=FALSE,echo=FALSE>>=
-#Doc for Shiny Server
-https://www.digitalocean.com/community/tutorials/how-to-set-up-shiny-server-on-ubuntu-14-04
+<<Development, eval=FALSE,echo=FALSE,warning=FALSE>>=
+# #Doc for Shiny Server
+# # https://www.digitalocean.com/community/tutorials/how-to-set-up-shiny-server-on-ubuntu-14-04
+#
+# #Need to have the last version of R associated with Bioconductor in parallele of your original version
+# #install from source  http://bioconductor.org/developers/how-to/useDevel/
+# mkdir /home/tiphaine/Rdevel2.2/
+# cd Rdevel2.2
+# mkdir tar
+# #Extract R source in this latter folder
+# ./configure -prefix=/home/tiphaine/Rdevel2.2/
+#
+# sudo make
+#
+# sudo make install
+#
+# sudo R
+#
+# #Need to have the last version of Bioconductor and BiocCheck
+# #Need to update under Rdev
+# remove.packages("BiocInstaller")
+# source("http://bioconductor.org/biocLite.R")
+# biocLite("BiocInstaller")
+#
+# #Need to update different packages associated with coMET
+# biocLite("coMET")
+#
+# #Go to the parent folder of the package
+# # To create the manual documentation, need to run
+# # need to be the folder parent of coMET
+# cd ../ 
+# Rdevel CMD Rd2pdf --pdf coMET
+#
+# # Need to build the vignette
+# cd coMET/vignettes
+# R CMD Sweave --engine=knitr::knitr --pdf coMET.Rnw
+# R CMD texi2dvi --pdf coMET.tex
+# R CMD pdflatex coMET.tex
+#
+# #Need to build the  new package
+# # Need to be in the folder parent of coMET
+# cd ../../ 
+# R-devel CMD build coMET --resave-data --no-build-vignettes
+#
+# #Need to check if the new package follow the rules of R
+# R-devel CMD check coMET
+#
+# #To check if the new package follow the rules from bioconductor
+# R-devel CMD BiocCheckdev3.3 coMET
 
-#Need to have the last version of R associated with Bioconductor in parallele of your original version
-#install from source  http://bioconductor.org/developers/how-to/useDevel/
-mkdir /home/tiphaine/Rdevel2.2/
-cd Rdevel2.2
-mkdir tar
-#Extract R source in this latter folder
-./configure -prefix=/home/tiphaine/Rdevel2.2/
-  
-sudo make
-
-sudo make install
-
-#Need to have the last version of Bioconductor and BiocCheck
-#Need to update under Rdev
-remove.packages("BiocInstaller")
-source("http://bioconductor.org/biocLite.R")
-biocLite("BiocInstaller")
-
-#Need to update different packages associated with coMET
-biocLite("coMET")
-
-#Go to the parent folder of the package 
-# To create the manual documentation, need to run
-Rdevel CMD Rd2pdf --pdf coMET
-
-#Need to build the  new package
-R-devel CMD build coMET --resave-data --no-build-vignettes
-
-#Need to check if the new package follow the rules of R
-R-devel CMD check coMET
-
-#To check if the new package follow the rules from bioconductor
-R-devel CMD BiocCheckdev3.3 coMET
+# Authors@R: c(person("Tiphaine C.","Martin", role=c("aut","cre"),email="tiphaine.martin@mssm.edu),
+#        person("Thomas","Hardiman",role=c("aut")),
+#        person("Idil","Yet",role=c("aut")),
+#        person("Pei-Chien","Tsai",role=c("aut")),
+#        person("Jordana T.","Bell",role=c("aut")))
 @
 
 \clearpage

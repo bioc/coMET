@@ -1,8 +1,12 @@
-COMET 1.11.1 - 2007-07-27 
+COMET 1.11.3 - 2018-02-25
+-------------------------
+- Update vignette because of the update of BiocStyle
+- Update two data (chipTFtrack.rda and genesGencodetrack.rda) because error formating
+
+COMET 1.11.1 - 2017-07-27 
 -------------------------
 - Update vignette because of the update of BiocStyle
 - Add examples data that was not uploaded correctly the first time
-
 
 COMET 1.5.5 - 2016-06-12
 -------------------------

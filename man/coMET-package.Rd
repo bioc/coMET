@@ -12,8 +12,8 @@ coMET is an R package for visualising EWAS results in a genomic region. Along wi
 \tabular{ll}{
 Package: \tab coMET\cr
 Type: \tab Package\cr
-Version: \tab 1.11.2\cr
-Date: \tab 2017-11-21\cr
+Version: \tab 1.11.3\cr
+Date: \tab 2018-02-25\cr
 License: \tab GPL (>=2)\cr
 }
 coMET is an R package that can generate regional plots of EWAS results, DNA co-methylation patterns, and genomic information. A coMET figure includes 3 panels with a plot of P-values from EWAS, customized annotation tracks, and a triangle heatmap plot which demonstrates the correlation structure of DNA methylation at the CpG sites in the genomic region. Plots are created as PDF or EPS files.
@@ -21,7 +21,7 @@ coMET is an R package that can generate regional plots of EWAS results, DNA co-m
 \author{
 Tiphaine C. Martin, Thomas Hardiman, Idil Yet, Pei-Chien Tsai, Jordana T. Bell
 
-Maintainer: Tiphaine Martin <tiphaine.martin@kcl.ac.uk>
+Maintainer: Tiphaine Martin <tiphaine.martin@mssm.edu>
 
 Website: http://www.epigen.kcl.ac.uk/comet
 }
