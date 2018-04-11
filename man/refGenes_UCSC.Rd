@@ -8,7 +8,8 @@ Create a track of RefSeq genes from the UCSC genome browser
 Create a track of RefSeq genes from the UCSC genome browser using the Gviz bioconductor package
 }
 \usage{
-refGenes_UCSC(gen, chr, start, end, IdType="Ref", showId=TRUE)
+refGenes_UCSC(gen, chr, start, end, title="Ref Genes UCSC", track = "refGene",
+IdType="Ref", showId=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -23,6 +24,12 @@ The first position in the region of interest (the smallest value)
 }
   \item{end}{
 The last position in the region of interest (the largest value)
+}
+    \item{title}{
+    Name of tracks
+}
+  \item{track}{
+the name of table in UCSC for the group "Genes and Gene Prediction"
 }
   \item{IdType}{
 When set to 'ref' shows the gene reference, when set to "name" shows the gene name
@@ -64,9 +71,10 @@ chr <- "chr7"
 start <- 38203219
 end <- 38303219
 IdType <- "name"
+track <- "refGene"
 
 if(interactive()) {
-  genesUcsctrack<-refGenes_UCSC(gen,chr,start,end,IdType)
+  genesUcsctrack<-refGenes_UCSC(gen,chr,start,end,track,IdType)
   plotTracks(genesUcsctrack, from = start, to =end)
 }else {
   data(genesUcsctrack)

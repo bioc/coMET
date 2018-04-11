@@ -8,7 +8,7 @@ create track CpG Island from UCSC
 create track CpG Island from UCSC using the Gviz bioconductor package
 }
 \usage{
-cpgIslands_UCSC(gen, chr, start, end)
+cpgIslands_UCSC(gen, chr, start, end, title="CpG Islands UCSC")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -23,6 +23,9 @@ the first position in the region of interest (the smallest value)
 }
     \item{end}{
 the last position in the region of interest (the largest value)
+}
+    \item{title}{
+    Name of tracks
 }
 }
 %%\details{

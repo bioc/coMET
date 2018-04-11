@@ -8,7 +8,9 @@ Creates a ChromHMM track from a file of RoadMap
 Creates a ChromHMM track from a file of RoadMap using the Gviz bioconductor package. A complete list of features and their associated colours can be found in the user guide.
 }
 \usage{
-chromHMM_RoadMap(gen="hg19",chr, start, end, bedFilePath, featureDisplay = 'all', colorcase='roadmap15')
+chromHMM_RoadMap(gen="hg19",chr, start, end, bedFilePath,
+featureDisplay = 'all', colorcase='roadmap15',
+title=" chromHMM RoadMap")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -35,8 +37,9 @@ A vector of features to be displayed, such as 1_TssA. Spelling and capitalisatio
 }
  \item{colorcase}{
 the type of colors used to visualise different elements contained in ROADmap data with 15-,18-,25- states. choice between roadmap15, roadmap18, comet18, roadmap25 and comet25.
-
-
+}
+  \item{title}{
+ The name of the annotation track
 }
 }
 %% \details{
@@ -75,7 +78,8 @@ extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 bedFilePath <- file.path(extdata, "RoadMap/E063_15_coreMarks_mnemonics.bed")
 
 if(interactive()){
-  chromHMM_RoadMapSingle <- chromHMM_RoadMap(gen="hg19",chr,start, end, bedFilePath, featureDisplay = featureDisplay, colorcase='roadmap15' )
+  chromHMM_RoadMapSingle <- chromHMM_RoadMap(gen="hg19",chr,start, end,
+  bedFilePath, featureDisplay = featureDisplay, colorcase='roadmap15' )
   plotTracks(chromHMM_RoadMapSingle, from = start, to = end)
 } else {
   data(chromHMM_RoadMapSingle)
@@ -85,16 +89,17 @@ if(interactive()){
 ######
 
 library("Gviz")
-chr <- "chr1"
-start <- 4500000
-end <- 4600000
+chr <- "chr22"
+start <- 38291000
+end <- 38301200
 featureDisplay <- c("7_Enh","13_ReprPC")
 
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 bedFilePath <- file.path(extdata, "RoadMap/E063_15_coreMarks_mnemonics.bed")
 
 if(interactive()){
-  chromHMM_RoadMapMultiple <- chromHMM_RoadMap(gen="hg19",chr,start, end, bedFilePath, featureDisplay = featureDisplay, colorcase='roadmap15' )
+  chromHMM_RoadMapMultiple <- chromHMM_RoadMap(gen="hg19",chr,start, end,
+  bedFilePath, featureDisplay = featureDisplay, colorcase='roadmap15' )
   plotTracks(chromHMM_RoadMapMultiple, from = start, to = end)
 } else {
   data(chromHMM_RoadMapMultiple)
@@ -104,16 +109,17 @@ if(interactive()){
 #####
 
 library("Gviz")
-chr <- "chr1"
-start <- 4500000
-end <- 4600000
+chr <- "chr22"
+start <- 38291000
+end <- 38301200
 featureDisplay <- "all"
 
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 bedFilePath <- file.path(extdata, "RoadMap/E063_15_coreMarks_mnemonics.bed")
 
 if(interactive()){
-  chromHMM_RoadMapAll <- chromHMM_RoadMap(gen="hg19",chr,start, end, bedFilePath, featureDisplay = featureDisplay, colorcase='roadmap15' )
+  chromHMM_RoadMapAll <- chromHMM_RoadMap(gen="hg19",chr,start, end,
+  bedFilePath, featureDisplay = featureDisplay, colorcase='roadmap15' )
   plotTracks(chromHMM_RoadMapAll, from = start, to = end)
 } else {
   data(chromHMM_RoadMapAll)

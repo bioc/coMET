@@ -8,7 +8,9 @@ Creates a regulatory feature track from ENSEMBL
 Creates a regulatory feature track from ENSEMBL using the Gviz bioconductor package. A complete list of features and their associated colours can be found in the user guide.
 }
 \usage{
-regulatoryEvidenceBiomart_ENSEMBL (gen, chr, start, end, featureDisplay = "all", datasetEnsembl = "hsapiens_annotated_feature")
+regulatoryEvidenceBiomart_ENSEMBL (gen, chr, start, end,
+featureDisplay = "all", datasetEnsembl = "hsapiens_annotated_feature",
+title="Other Regulatory Regions ENSEMBL")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -29,6 +31,9 @@ A vector of regulatory features to be displayed, such as DNase1. Spelling and ca
 }
   \item{datasetEnsembl}{
 Allows the user to manually set which data set is used if required.
+}
+  \item{title}{
+ The name of the annotation track
 }
 }
 %% \details{
@@ -65,7 +70,8 @@ end <- 50000
 featureDisplay <- "H3K27me3"
 
 if(interactive()){
- regulatoryEvidenceBiomartTrackSingle <- regulatoryEvidenceBiomart_ENSEMBL(gen,chr,start,end,featureDisplay)
+ regulatoryEvidenceBiomartTrackSingle <- regulatoryEvidenceBiomart_ENSEMBL(gen,
+ chr,start,end,featureDisplay)
   plotTracks(regulatoryEvidenceBiomartTrackSingle, from = start, to = end)
 } else {
   data(regulatoryEvidenceBiomartTrackSingle)
@@ -82,7 +88,8 @@ end <- 100000
 featureDisplay <- c("H3K27me3","H3K36me3")
 
 if(interactive()){
- regulatoryEvidenceBiomartTrackMultiple<-regulatoryEvidenceBiomart_ENSEMBL (gen,chr,start,end,featureDisplay)
+ regulatoryEvidenceBiomartTrackMultiple<-regulatoryEvidenceBiomart_ENSEMBL (gen,
+ chr,start,end,featureDisplay)
   plotTracks(regulatoryEvidenceBiomartTrackMultiple, from = start, to = end)
 } else {
   data(regulatoryEvidenceBiomartTrackMultiple)
@@ -98,7 +105,8 @@ start <- 50000
 end <- 100000
 featureDisplay <- "all"
 if(interactive()){
- regulatoryEvidenceBiomartTrackAll<-regulatoryEvidenceBiomart_ENSEMBL (gen,chr,start,end,featureDisplay)
+ regulatoryEvidenceBiomartTrackAll<-regulatoryEvidenceBiomart_ENSEMBL (gen,
+ chr,start,end,featureDisplay)
   plotTracks(regulatoryEvidenceBiomartTrackAll, from = start, to = end)
 } else {
   data(regulatoryEvidenceBiomartTrackAll)

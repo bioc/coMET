@@ -8,7 +8,7 @@ Create one track of the genomic positions of CNV in chromosomal aberration and i
 Create one track of the genomic positions of copy-number variants (CNVs) in chromosomal aberration and inherited disorder cell lines from the NIGMS Human Genetic Cell Repository using the Gviz bioconductor package.
 }
 \usage{
-CoreillCNV_UCSC(gen, chr, start, end, showId=FALSE)
+CoreillCNV_UCSC(gen, chr, start, end,title="Coriell CNVs", showId=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -23,6 +23,9 @@ the first position in the region of interest (the smallest value)
 }
     \item{end}{
 the last position in the region of interest (the largest value)
+}
+  \item{title}{
+ The name of the annotation track
 }
     \item{showId}{
 Show the ID of the genetic elements
@@ -51,7 +54,7 @@ Tiphaine Martin
 \seealso{
     \code{\link{snpLocations_UCSC}}, \code{\link{structureBiomart_ENSEMBL}},
     \code{\link{snpBiomart_ENSEMBL}},
-    \code{\link{COSMIC_UCSC}}, 
+    \code{\link{COSMIC_UCSC}},
     \code{\link{ClinVarMain_UCSC}},
     \code{\link{ClinVarCnv_UCSC}}
 }

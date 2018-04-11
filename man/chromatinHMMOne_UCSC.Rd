@@ -8,7 +8,8 @@ Creating one chromHMM track from the UCSC genome browser
 Create one track of only one type of chromHMM Broad element from the UCSC genome browser using the Gviz bioconductor package
 }
 \usage{
-chromatinHMMOne_UCSC(gen, chr, start, end, mySession, color="coMET", table.name = NULL)
+chromatinHMMOne_UCSC(gen, chr, start, end, mySession, color="coMET",
+title="ENCODE/Broad chromHMM", table.name = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -29,6 +30,9 @@ the object session from the function browserSession of rtracklayer
 }
     \item{color}{
 the color scheme used for plots. By defult this is set to 'coMET' to allow easy indentifcation of differnent elements. The color scheme set by UCSC can also be used. Consult userguide for table of colors.
+}
+    \item{title}{
+    Name of tracks
 }
     \item{table.name}{
 the name of the table from the track
@@ -76,7 +80,8 @@ Tom Hardiman
         track.name="Broad ChromHMM"
         tablestrack<-tableNames(ucscTableQuery(mySession, track=track.name))
         table.name<-tablestrack[1]
-        chromhmmtrackone<-chromatinHMMOne_UCSC(gen,chr,start,end,mySession,color="coMET",table.name)
+        chromhmmtrackone<-chromatinHMMOne_UCSC(gen,chr,start,end
+        ,mySession,color="coMET",table.name)
         plotTracks(chromhmmtrackone, from = start, to =end)
     }else {
         data(chromhmmtrackone)

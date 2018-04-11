@@ -75,7 +75,8 @@ if(interactive()){
   genome(mySession) <- gen
   pattern1 <- "GM12878"
 
-  histonalltrack<-HistoneAll_UCSC(gen,chr,start,end,mySession, pattern=pattern1,track.name="Broad Histone")
+  histonalltrack<-HistoneAll_UCSC(gen,chr,start,end,mySession,
+  pattern=pattern1,track.name="Broad Histone")
   plotTracks(histonalltrack, from = start, to =end)
 } else {
   data(histonalltrack)

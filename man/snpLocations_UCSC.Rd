@@ -8,7 +8,7 @@ Create a SNP track from UCSC
 Create a SNP track from UCSC using the Gviz bioconductor package
 }
 \usage{
-snpLocations_UCSC(gen, chr, start, end, track="All SNPs(142)")
+snpLocations_UCSC(gen, chr, start, end,title= "SNPs UCSC", track="All SNPs(142)")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -24,7 +24,9 @@ the first position in the region of interest (the smallest value)
   \item{end}{
 the last position in the region of interest (the largest value)
 }
-
+    \item{title}{
+    Name of tracks
+}
   \item{track}{
  The name of the database. Default "All SNPs(142)"
 }

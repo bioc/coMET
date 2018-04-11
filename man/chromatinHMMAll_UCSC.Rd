@@ -2,13 +2,14 @@
 \alias{chromatinHMMAll_UCSC}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Creating multiple chromHMM tracks from the UCSC genome browser 
+Creating multiple chromHMM tracks from the UCSC genome browser
 }
 \description{
 Create multiple chromHMM Broad tracks by connecting to the UCSC genome browser using the GViz bioconductor package
 }
 \usage{
-chromatinHMMAll_UCSC(gen, chr, start, end, mySession, color='coMET',pattern = NULL, table.name = NULL)
+chromatinHMMAll_UCSC(gen, chr, start, end, mySession, color='coMET',
+pattern = NULL, table.name = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -37,7 +38,7 @@ the pattern of the track to visualise
 the name of the table from the track
 }
 
- 
+
 }
 %%\details{
 %%%  ~~ If necessary, more details than the description above ~~
@@ -77,11 +78,13 @@ Tiphaine Martin
         tablestrack<-tableNames(ucscTableQuery(mySession, track=track.name))
         table.name<-tablestrack[1]
         PATTERN.REGULATION<-"GM12878"
-        
-        chromhmmPattern<-chromatinHMMAll_UCSC(gen,chr,start,end,mySession,color='coMET',PATTERN.REGULATION)
+
+        chromhmmPattern<-chromatinHMMAll_UCSC(gen,chr,start,end,mySession,
+        color='coMET',PATTERN.REGULATION)
         plotTracks(chromhmmPattern, from = start, to =end)
 
-        chromhmmNoPattern<-chromatinHMMAll_UCSC(gen,chr,start,end,mySession,color='coMET')
+        chromhmmNoPattern<-chromatinHMMAll_UCSC(gen,chr,start,end,
+        mySession,color='coMET')
         plotTracks(chromhmmNoPattern, from = start, to =end)
     } else {
 

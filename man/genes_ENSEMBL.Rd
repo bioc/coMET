@@ -8,7 +8,7 @@ Create one track of the genes in the genomic regions of interest from EMSEMBL
 Create one track of the genes in the genomic regions of interest from EMSEMBL using the Gviz bioconductor package
 }
 \usage{
-genes_ENSEMBL(gen, chr, start, end, showId=FALSE)
+genes_ENSEMBL(gen, chr, start, end, showId=FALSE,title="genes (ENSEMBL)")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -26,6 +26,9 @@ the last position in the region of interest (the largest value)
 }
  \item{showId}{
 Show the ID of the genetic elements
+}
+    \item{title}{
+    Name of tracks
 }
 }
 %%\details{
@@ -49,7 +52,7 @@ Tiphaine Martin
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
- \code{\link{ISCA_UCSC}},  \code{\link{GWAScatalog_UCSC}}, \code{\link{knownGenes_UCSC}}, 
+ \code{\link{ISCA_UCSC}},  \code{\link{GWAScatalog_UCSC}}, \code{\link{knownGenes_UCSC}},
  \code{\link{genesName_ENSEMBL}},  \code{\link{GeneReviews_UCSC}}, \code{\link{GAD_UCSC}},  \code{\link{xenorefGenes_UCSC}}, \code{\link{transcript_ENSEMBL}},
 }
 \examples{
@@ -60,7 +63,7 @@ start <- 38290160
 end <- 38303219
 if(interactive()) {
   genetrack <-genes_ENSEMBL(gen,chrom,start,end,showId=TRUE)
-  plotTracks(genetrack, from = start, to =end) 
+  plotTracks(genetrack, from = start, to =end)
 } else {
   data(geneENSEMBLtrack)
   plotTracks(genetrack, from = start, to =end)

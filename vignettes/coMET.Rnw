@@ -45,7 +45,7 @@ options(replace.assign=TRUE,width=90)
 %\footnote{thomas.hardiman@kcl.ac.uk}, \footnote{idil.yet@kcl.ac.uk}, \footnote{peichien.tsai@kcl.ac.uk}, \footnote{jordana.bell@kcl.ac.uk}
 \bioctitle[The coMET User Guide]{The coMET User Guide}
 \author{Tiphaine C. Martin \footnote{\email{tiphaine.martin@mssm.edu}}, Tom Hardiman, Idil Yet, Pei-Chien Tsai, Jordana T. Bell}
-\date{Edited: July 2015; Compiled: \today}
+\date{Edited: March 2018; Compiled: \today}
 
 \begin{document}
 
@@ -114,8 +114,6 @@ require("rtracklayer")
 require("GenomicRanges")
 require("colortools")
 require("gridExtra")
-require("ggplot2")
-require("trackViewer")
 require("psych")
 
 rdir <- system.file("R", package="coMET",mustWork=TRUE)
@@ -284,8 +282,8 @@ The important options of a \Biocpkg{coMET} figure include three components:
 
 \item The \textbf{\emph{middle panel}} provides customized annotation tracks;
 \begin{itemize}
-\item \Robject{list.tracks} (for \Rfunction{comet.web} function): List of annotation tracks to be visualised. Tracks currently available: geneENSEMBL, CGI, ChromHMM, DNAse, RegENSEMBL, SNP, transcriptENSEMBL, SNPstoma, SNPstru, SNPstrustoma, ISCA, COSMIC, GAD, ClinVar, GeneReviews, GWAS, ClinVarCNV, GCcontent, genesUCSC, xenogenesUCSC, metQTL, eQTL, BindingMotifsBiomart, chromHMM\_RoadMap, miRNATargetRegionsBiomart, OtherRegulatoryRegionsBiomart, RegulatoryEvidenceBiomart, RegulatorySegmentsBiomart and segmentalDupsUCSC. The elements are separated by a comma.
-\item \Robject{tracks.gviz}, \Robject{tracks.ggbio}, \Robject{tracks.trackviewer} (for \Rfunction{comet} function): For each option, it is possible to give a list of annotation tracks that is created by the \Biocpkg{Gviz}, \Biocpkg{GGBio}, and \Biocpkg{TrackViewer} bioconductor packages. The integration of plots from ggbio and trackviewer can be sometimes not really perfect. It is better to create plots from \Biocpkg{Gviz} and use \Robject{tracks.gviz}
+\item \Robject{list.tracks} (for \Rfunction{comet.web} function): List of annotation tracks to be visualised. Tracks currently available: geneENSEMBL, CGI, ChromHMM, DNAse, RegENSEMBL, SNP, transcriptENSEMBL, SNPstoma, SNPstru, SNPstrustoma, GAD, ClinVar, GeneReviews, GWAS, ClinVarCNV, GCcontent, genesUCSC, xenogenesUCSC, metQTL, eQTL, BindingMotifsBiomart, chromHMM\_RoadMap, miRNATargetRegionsBiomart, OtherRegulatoryRegionsBiomart, RegulatoryEvidenceBiomart and segmentalDupsUCSC. The elements are separated by a comma.
+\item \Robject{tracks.gviz} (for \Rfunction{comet} function): For each option, it is possible to give a list of annotation tracks that is created by the \Biocpkg{Gviz} bioconductor packages. \warning{It is noted that the new version of coMET does not support more the visualisation using \Robject{tracks.ggbio} and \Robject{tracks.trackviewer} from  \Biocpkg{GGBio} and \Biocpkg{TrackViewer} because The integration of plots from ggbio and trackviewer can be sometimes not really perfect. So only now, it is possible to create plots from \Biocpkg{Gviz} and use \Robject{tracks.gviz}}
 \end{itemize}
 
 \item The \textbf{\emph{lower panel}} shows the correlation between selected CpG sites in the genomic region (heatmap).
@@ -500,8 +498,10 @@ mySession <- browserSession(BROWSER.SESSION)
 genome(mySession) <- gen
 
 genetrack <-genes_ENSEMBL(gen,chrom,start,end,showId=TRUE)
-snptrack <- snpBiomart_ENSEMBL(chrom, start, end,
+snptrack <- snpBiomart_ENSEMBL(gen,chrom, start, end,
                                dataset="hsapiens_snp_som",showId=FALSE)
+
+#Data no more available in UCSC (from September 2015)
 iscatrack <-ISCA_UCSC(gen,chrom,start,end,mySession, table="iscaPathogenic")
 
 listgviz <- list(genetrack,snptrack,iscatrack)
@@ -584,7 +584,7 @@ gen <- "hg19"
 strand <- "*"
 
 genetrack <-genes_ENSEMBL(gen,chrom,start,end,showId=FALSE)
-snptrack <- snpBiomart_ENSEMBL(chrom, start, end,
+snptrack <- snpBiomart_ENSEMBL(gen, chrom, start, end,
                        dataset="hsapiens_snp_som",showId=FALSE)
 strutrack <- structureBiomart_ENSEMBL(chrom, start, end,
                               strand, dataset="hsapiens_structvar_som")
@@ -653,7 +653,7 @@ gen <- "hg19"
 strand <- "*"
 
 genetrack <-genes_ENSEMBL(gen,chrom,start,end,showId=FALSE)
-snptrack <- snpBiomart_ENSEMBL(chrom, start, end,
+snptrack <- snpBiomart_ENSEMBL(gen, chrom, start, end,
                        dataset="hsapiens_snp_som",showId=FALSE)
 strutrack <- structureBiomart_ENSEMBL(chrom, start, end,
                               strand, dataset="hsapiens_structvar_som")
@@ -760,11 +760,11 @@ This is the list of R functions created in \Biocpkg{coMET} to visualise ENSEMBL 
 \item \Rfunction{interestGenes\_ENSEBML} : Visualise the genes from ENCODE in the genomic region of interest with a specific color for genes of interest
 \item \Rfunction{interestTranscript\_ENSEBML} : Visualise the transcripts from ENCODE in the genomic region of interest with a specific color for exons of interest
 \item \Rfunction{miRNATargetRegionsBiomart\_ENSEBML} : Visualise the miRNA target regions in the genomic region of interest
-\item \Rfunction{otherRegulatoryRegions\_ENSEBML} : Visualise the other regulatory regions in the genomic region of interest
+\item \Rfunction{otherRegulatoryRegionsBiomart\_ENSEBML} : Visualise the other regulatory regions in the genomic region of interest
 \item \Rfunction{regulationBiomart\_ENSEBML} (obselet function): Visualise the other regulatory regions in the genomic region of interest
 \item \Rfunction{regulatoryEvidenceBiomart\_ENSEBML} : Visualise the regulatory  evidence regions in the genomic region of interest
 \item \Rfunction{regulatoryFeaturesBiomart\_ENSEBML} : Visualise the regulatory features regions in the genomic region of interest
-\item \Rfunction{regulatorySegmentsBiomart\_ENSEBML} : Visualise the regulatory segment regions in the genomic region of interest
+\item \Rfunction{regulatorySegmentsBiomart\_ENSEBML} : Visualise the regulatory segment regions in the genomic region of interest. \warning{no more available}
 \item \Rfunction{snpBiomart\_ENSEBML} : Visualise the SNPs in the genomic region of interest
 \item \Rfunction{structureBiomart\_ENSEBML} : Visualise the structural variations in the genomic region of interest
 \item \Rfunction{transcript\_ENSEBML} : Visualise the transcripts in the genomic region of interest
@@ -843,7 +843,7 @@ Listed below are the colours used for the different types of regulatory features
 \centerline{\includegraphics{../inst/extdata/JpegTables/RegulatoryFeaturesBiomart}}
 
 \subsubsection{Other Regulatory Segments Biomart from Ensembl}
-
+\warning(No more available)
 Listed below are the colours used for the different types of regulatory segments. The frequency shown is that found in GRCh38 (hg38). Segments with red text are found only in GRCh37 (hg19)
 \\
 \\
@@ -873,7 +873,7 @@ This is the list of \R{} wrapping functions of some tracks found in UCSC genome 
     \item \Rfunction{ClinVarCnv\_UCSC} : Visualise clinical CNVs found in ClinVar tracks of UCSC genome browser in the genomic region of interest.
     \item \Rfunction{ClinVarMain\_UCSC} : Visualise clinical SNPs found in ClinVar tracks of UCSC genome browser in the genomic region of interest.
     \item \Rfunction{CoreillCNV\_UCSC} : Visualise CNV found in Coreil tracks of UCSC genome browser in the genomic region of interest.
-    \item \Rfunction{COSMIC\_UCSC} : Visualise SNPs found in COSMIIC tracks of UCSC genome browser in the genomic region of interest.
+    \item \Rfunction{COSMIC\_UCSC} : Visualise SNPs found in COSMIC tracks of UCSC genome browser in the genomic region of interest.\warning{We could not more access to COSMIC data from UCSC genome browser, people needs to extract data from COSMIC directly}.
     \item \Rfunction{cpgIslands\_UCSC} : Visualise CpG Island found in CpGIsland tracks of UCSC genome browser in the genomic region of interest.
     \item \Rfunction{DNAse\_UCSC} : Visualise clinical CNV found in ClinVar tracks of UCSC genome browser in the genomic region of interest.
     \item \Rfunction{GAD\_UCSC} : Visualise genes found in GAD tracks of UCSC genome browser in the genomic region of interest.
@@ -936,7 +936,7 @@ the colours used in both schemes are listed below:
 
 \subsubsection{ISCA track (obselete database)}
 International Standards of Cytogenomic Arrays Consortium defined a set of phenotypes for CNVs. Different colours are defined to represent them.
-This database is not more accessible from UCSC.
+This database is not more accessible from UCSC (from September 2015).
 \\
 \\
 \centerline{\includegraphics{../inst/extdata/JpegTables/ISCATrack}}
@@ -1269,7 +1269,7 @@ genesTrack <- genes_ENSEMBL(gen,chr,start,end,showId=TRUE)
 allIG <- imprintedGenes_GTEx(gen,chr,start, end, tissues="all",
                              classification="imprinted",showId=TRUE)
 
-allimprintedIG <- imprintedGenes_GTEx(chr,start, end, tissues="all",
+allimprintedIG <- imprintedGenes_GTEx(gen, chr,start, end, tissues="all",
                                       classification="imprinted",showId=TRUE)
 
 StomachIG <-imprintedGenes_GTEx(gen,chr,start, end, tissues="Stomach",
@@ -1607,13 +1607,13 @@ If the previous time \Rfunction{comet} or \Rfunction{comet.web} ran and error wa
 \item\textbf{How do we know if my track has data? and what the data is?}
 \\
 Type the name of your track, visualise the track with \Rfunction{plotTrack} or read different parameters with \Rfunction{str} function.
-<<faq0,eval=FALSE>>=
+\begin{lstlisting}
 genetrack <-genesENSEMBL(gen,chrom,start,end,showId=TRUE)
 
 plotTracks(genetrack)
 
 str(genetrack)
-@
+\end{lstlisting}
 \leavevmode
 \\
 \item\textbf{How do you increase the size of the font of the name of an object}?
@@ -1622,33 +1622,33 @@ str(genetrack)
 To enlarge the name of gene, as the object is \Biocpkg{Gviz} object, you can use the option from \Biocpkg{Gviz}.
 \\
 You can see the value of different parameters via this command line:
-<<faq1,eval=FALSE>>=
+\begin{lstlisting}
 genetrack <-genesENSEMBL(gen,chrom,start,end,showId=TRUE)
 
 displayPars(genetrack)
-@
+\end{lstlisting}
 \leavevmode
 \\
 So if you want to enlarge the name of gene, you need to do use the option \Robject{fontsize.gviz} in the \Rfunction{comet} function, an example is given below:
 \\
-<<faq2,eval=FALSE>>=
+\begin{lstlisting}
 comet(config.file = configfile, mydata.file = myinfofile, mydata.format = "file",
       cormatrix.file = mycorrelation, cormatrix.type = "listfile",
       mydata.large.file = mylargedata,mydata.large.type = "listfile",
       tracks.gviz = listGviz, verbose = TRUE,
       print.image=TRUE,fontsize.gviz=10)
-@
+\end{lstlisting}
 \leavevmode
 \\
 \item\textbf{Can I make a selection of which genes or transcripts to display}?
 \\
 To make a selection of genes to display first create the track like you would if you were displaying all genes. From this track create another with only the genes you want to display like in the example below. Please note it is not possible to select genes based on their names unless the option to display gene names instead of gene reference is used, in other cases it is possible to make a selection based on the genes reference number.
 \\
-<<faq3,eval=FALSE>>=
+\begin{lstlisting}
 geneTrack <- refGenesUCSC(gen, chr, start, end, IdType ="name", showId = TRUE)
 
 geneTrackShow <- geneTrack[gene(geneTrack) %in% c("AHRR")]
-@
+\end{lstlisting}
 \leavevmode
 \\
 \item\textbf{How can I better understand where the \Rfunction{comet} function stopped}?
@@ -1663,16 +1663,16 @@ If this does not help resolve the issue, please to send your command line with \
 \\
 When coMET writes to a PDF, it is writing out to a 7X7 square area. So, it turns out that one can 'force; the R \CRANpkg{Markdown} block as well as \CRANpkg{knitr} block to also write to a 7 x 7 square PDF using option for chunck \Rcode{fig.height=7,fig.width=7} , as follows:
 
-<<faq4,eval=FALSE>>=
-#'''{r plot_ex1,fig.keep='last', fig.height=7,fig.width=7,dev='pdf'}
+\begin{lstlisting}
+'''{r plot_ex1,fig.keep='last', fig.height=7,fig.width=7,dev='pdf'}
 comet(config.gile=configfile,
 mydata.file=myinfofile, mydata_type="file",
 cormatrix.file-mycorrelation, cormatrix.type="listfile",
 mydata.large.file=myexpressfile, mydata.large.type="listfile",
 tracks.gviz=listgviz,
 verbose=FALSE, print.image=FALSE, disp.pvalueplot=FALSE)
-#'''
-@
+'''
+\end{lstlisting}
 \leavevmode
 \\
 \end{itemize}
@@ -1724,7 +1724,7 @@ toLatex(sessionInfo())
 # #Go to the parent folder of the package
 # # To create the manual documentation, need to run
 # # need to be the folder parent of coMET
-# cd ../ 
+# cd ../
 # Rdevel CMD Rd2pdf --pdf coMET
 #
 # # Need to build the vignette
@@ -1735,11 +1735,17 @@ toLatex(sessionInfo())
 #
 # #Need to build the  new package
 # # Need to be in the folder parent of coMET
-# cd ../../ 
+# cd ../../
 # R-devel CMD build coMET --resave-data --no-build-vignettes
 #
 # #Need to check if the new package follow the rules of R
 # R-devel CMD check coMET
+#
+# #Need to check the examples in R after building and checking
+# # Need to correct any examples that fail
+# example for the function comet
+# R>library(coMET)
+# R>example(comet)
 #
 # #To check if the new package follow the rules from bioconductor
 # R-devel CMD BiocCheckdev3.3 coMET

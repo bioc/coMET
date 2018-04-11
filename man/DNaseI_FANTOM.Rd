@@ -8,7 +8,9 @@ Creates a enhancer/promoter track from FANTOM
 Creates a track of promoters/enhancers from FANTOM using the Gviz bioconductor package. A complete list of features and their associated colours can be found in the user guide.
 }
 \usage{
-DNaseI_FANTOM(gen="hg19", chr, start, end, bedFilePath, featureDisplay='enhancer', stacking_type="dense")
+DNaseI_FANTOM(gen="hg19", chr, start, end, bedFilePath,
+featureDisplay='enhancer', stacking_type="dense",
+title=" DNaseI Fantom")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -32,6 +34,9 @@ A vector of regulatory features to be displayed, such as enhancer. Spelling and 
 }
   \item{stacking_type}{
 Object of class"character", the stacking type of overlapping items on the final plot.One in c(hide, dense, squish, pack,full). More information cf the option "stacking" in Gviz
+}
+  \item{title}{
+ The name of the annotation track
 }
 }
 %% \details{
@@ -65,10 +70,12 @@ start <- 6000000
 end <- 6500000
 
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
-enhFantomFile <- file.path(extdata, "/FANTOM/human_permissive_enhancers_phase_1_and_2.bed")
+enhFantomFile <- file.path(extdata,
+"/FANTOM/human_permissive_enhancers_phase_1_and_2_example970.bed")
 
 if(interactive()){
- enhFANTOMtrack <- DNaseI_FANTOM(gen,chr,start, end, enhFantomFile, featureDisplay='enhancer')
+ enhFANTOMtrack <- DNaseI_FANTOM(gen,chr,start, end,
+ enhFantomFile, featureDisplay='enhancer')
   plotTracks(enhFANTOMtrack, from = start, to = end)
 } else {
   data(enhFANTOMtrack)

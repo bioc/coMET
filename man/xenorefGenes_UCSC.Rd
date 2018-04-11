@@ -8,7 +8,7 @@ Create a track for xeno-reference genes from the UCSC genome browser
 Create a track for xeno-reference genes from the UCSC genome browser using the Gviz bioconductor package
 }
 \usage{
-xenorefGenes_UCSC(gen, chr, start, end,showId=FALSE)
+xenorefGenes_UCSC(gen, chr, start, end,title="Other RefSeq", showId=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -23,6 +23,9 @@ the first position in the region of interest (the smallest value)
 }
   \item{end}{
 the last position in the region of interest (the largest value)
+}
+    \item{title}{
+    Name of tracks
 }
  \item{showId}{
 Show the ID of the genetic elements

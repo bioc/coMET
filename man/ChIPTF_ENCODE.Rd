@@ -8,7 +8,9 @@ Creates a TF motif track from ENCODE
 Creates a track of TF motifs from ENCODE using the Gviz bioconductor package. A complete list of features and their associated colours can be found in the user guide.
 }
 \usage{
-ChIPTF_ENCODE(gen="hg19", chr, start, end, bedFilePath, featureDisplay='all', motifColorFile, type_stacking='dense',showId=FALSE,just_group="above")
+ChIPTF_ENCODE(gen="hg19", chr, start, end, bedFilePath,
+featureDisplay='all', motifColorFile, type_stacking='dense',
+showId=FALSE,just_group="above", title="TF motifs ENCODE")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -41,6 +43,9 @@ logical. say if we write the name of group
 }
 \item{just_group}{
 position. say where we write the name of group (choice in c("above","righ","left"))
+}
+  \item{title}{
+ The name of the annotation track
 }
 }
 %% \details{
@@ -78,7 +83,9 @@ if(interactive()){
     extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
     bedFilePath <- file.path(extdata, "ENCODE/motifs1000_matches_ENCODE.txt")
     motif_color <- file.path(extdata, "ENCODE/TFmotifs_colors.csv")
-    chipTFtrack <- ChIPTF_ENCODE(gen,chr,start, end, bedFilePath, featureDisplay=c("AHR::ARNT::HIF1A_1","AIRE_1","AIRE_2","AHR::ARNT_1"), motif_color,type_stacking="squish",showId=TRUE)
+    chipTFtrack <- ChIPTF_ENCODE(gen,chr,start, end, bedFilePath,
+    featureDisplay=c("AHR::ARNT::HIF1A_1","AIRE_1","AIRE_2","AHR::ARNT_1"),
+    motif_color,type_stacking="squish",showId=TRUE)
     plotTracks(chipTFtrack, from = start, to = end)
 } else {
     data(chipTFtrack)

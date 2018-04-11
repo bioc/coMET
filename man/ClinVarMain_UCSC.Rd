@@ -8,7 +8,7 @@ Create one track of the genomic positions of variants from the ClinVar database 
 Create one track of the genomic positions of variants from the ClinVar database (Variants only, CNV excluded) using the Gviz bioconductor package
 }
 \usage{
-ClinVarMain_UCSC(gen, chr, start, end, showId=FALSE)
+ClinVarMain_UCSC(gen, chr, start, end, title="ClinVar Variants", showId=FALSE)
 }
 
 \arguments{
@@ -23,6 +23,9 @@ the first position in region of interest (the smallest value)
 }
     \item{end}{
 the last position in region of interest (the biggest value)
+}
+  \item{title}{
+ The name of the annotation track
 }
  \item{showId}{
 Show the ID of the genetic elements

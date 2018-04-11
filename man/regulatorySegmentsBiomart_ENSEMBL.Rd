@@ -2,13 +2,16 @@
 \alias{regulatorySegmentsBiomart_ENSEMBL}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Creates a binding motif track from ENSEMBL
+Creates a binding motif track from ENSEMBL [obselete]
 }
 \description{
+[obselete]
 Creates a track of regulatory segments from ENSEMBL using the Gviz bioconductor package. A complete list of features and their associated colours can be found in the user guide.
 }
 \usage{
-regulatorySegmentsBiomart_ENSEMBL(gen, chr, start, end, featureDisplay = 'all', datasetEnsembl = "hsapiens_segmentation_feature")
+regulatorySegmentsBiomart_ENSEMBL(gen, chr, start, end, featureDisplay = 'all',
+datasetEnsembl = "hsapiens_external_feature",
+title="External Regulatory ENSEMBL")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -29,6 +32,9 @@ A vector of regulatory features to be displayed, such as Predicted heterochomati
 }
   \item{datasetEnsembl}{
 Allows the user to manually set which data set is used if required.Default=hsapiens_segmentation_feature
+}
+  \item{title}{
+ The name of the annotation track
 }
 }
 %% \details{
@@ -65,7 +71,8 @@ end <- 50000
 featureDisplay <- "CTCF enriched"
 
 if(interactive()){
- regulatorySegmentsBiomartTrackSingle<-regulatorySegmentsBiomart_ENSEMBL(gen,chr,start,end,featureDisplay)
+ regulatorySegmentsBiomartTrackSingle<-regulatorySegmentsBiomart_ENSEMBL(gen,
+ chr,start,end,featureDisplay)
   plotTracks(regulatorySegmentsBiomartTrackSingle, from = start, to = end)
 } else {
   data(regulatorySegmentsBiomartTrackSingle)
@@ -82,7 +89,8 @@ end <- 50000
 featureDisplay <- c("CTCF enriched","Predicted Promoter Flank")
 
 if(interactive()){
- regulatorySegmentsBiomartTrackMultiple<-regulatorySegmentsBiomart_ENSEMBL(gen,chr,start,end,featureDisplay)
+ regulatorySegmentsBiomartTrackMultiple<-regulatorySegmentsBiomart_ENSEMBL(gen,
+ chr,start,end,featureDisplay)
   plotTracks(regulatorySegmentsBiomartTrackMultiple, from = start, to = end)
 } else {
   data(regulatorySegmentsBiomartTrackMultiple)
@@ -98,7 +106,8 @@ start <- 10000
 end <- 50000
 featureDisplay <- "all"
 if(interactive()){
- regulatorySegmentsBiomartTrackAll<-regulatorySegmentsBiomart_ENSEMBL(gen,chr,start,end,featureDisplay)
+ regulatorySegmentsBiomartTrackAll<-regulatorySegmentsBiomart_ENSEMBL(gen,
+ chr,start,end,featureDisplay)
   plotTracks(regulatorySegmentsBiomartTrackAll, from = start, to = end)
 } else {
   data(regulatorySegmentsBiomartTrackAll)

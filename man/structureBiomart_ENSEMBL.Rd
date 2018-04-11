@@ -8,7 +8,8 @@ Create a structural variation track from ENSEMBL
 Create a 'Structural Variation' track from ENSEMBL using the Gviz bioconductor package
 }
 \usage{
-structureBiomart_ENSEMBL(gen, chr, start, end, strand, dataset, showId=FALSE, title_track = NULL)
+structureBiomart_ENSEMBL(gen, chr, start, end, strand, dataset,
+showId=FALSE, title = "Structural variation")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -34,7 +35,7 @@ the last position in the region of interest (the largest value)
   \item{showId}{
   Show the the ID of the element
 }
-  \item{title_track}{
+  \item{title}{
  The name of the annotation track
 }
 }

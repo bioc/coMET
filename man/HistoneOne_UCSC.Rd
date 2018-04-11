@@ -8,7 +8,8 @@ Create one track of one histone modification profile from the UCSC genome browse
 Create one track of one histone modification profile from the UCSC genome browser (ENCODE/Broad) using the Gviz bioconductor package
 }
 \usage{
-HistoneOne_UCSC(gen, chr, start, end, mySession, track.name = "Broad Histone", table.name = NULL)
+HistoneOne_UCSC(gen, chr, start, end, mySession, title="Broad Histone",
+track.name = "Broad Histone", table.name = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -26,6 +27,9 @@ the last position in the region of interest (the largest value)
 }
   \item{mySession}{
 the object session from the function browserSession of rtracklayer
+}
+    \item{title}{
+    Name of tracks
 }
  \item{track.name}{
 the name of the track, for example: "Broad Histone"

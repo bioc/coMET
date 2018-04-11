@@ -8,7 +8,8 @@ Creates a imprinted genes track from GTEx
 Creates a track of imprinted genes from GTEx using the Gviz bioconductor package. A complete list of features and their associated colours can be found in the user guide.
 }
 \usage{
-imprintedGenes_GTEx(gen="hg19", chr,start, end, tissues="all", classification="all",showId=FALSE)
+imprintedGenes_GTEx(gen="hg19", chr,start, end, tissues="all",
+classification="all",showId=FALSE, title="Imprinted genes GTEx")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -32,6 +33,9 @@ The end position in the region of interest (the largest value)
 }
 \item{showId}{
 logical. say if we write the name of group
+}
+  \item{title}{
+ The name of the annotation track
 }
 }
 %% \details{
@@ -66,16 +70,22 @@ end <- 144330541
 
 %all
 if(interactive()){
-   allIGtrack <- imprintedGenes_GTEx(gen,chr,start, end, tissues="all", classification="imprinted",showId=TRUE)
-   allimprintedIGtrack <- imprintedGenes_GTEx(chr,start, end, tissues="all", classification="imprinted",showId=TRUE)
-   StomachIGtrack <-imprintedGenes_GTEx(chr,start, end, tissues="Stomach", classification="all",showId=TRUE)
-   PancreasIGtrack <- imprintedGenes_GTEx(chr,start, end, tissues="Pancreas", classification="all",showId=TRUE)
-   PancreasimprintedIGtrack <- imprintedGenes_GTEx(chr,start, end, tissues="Pancreas", classification="biallelic",showId=TRUE)
-   
-   imprintinglist <- list(allIGtrack,allimprintedIGtrack,StomachIGtrack,PancreasIGtrack,PancreasimprintedIGtrack)
-   
-  plotTracks(,imprintinglist, from = start, to = end)
-  
+   allIGtrack <- imprintedGenes_GTEx(gen,chr,start, end,
+   tissues="all", classification="imprinted",showId=TRUE)
+   allimprintedIGtrack <- imprintedGenes_GTEx(gen,chr,start, end,
+   tissues="all", classification="imprinted",showId=TRUE)
+   StomachIGtrack <-imprintedGenes_GTEx(gen,chr,start, end,
+   tissues="Stomach", classification="all",showId=TRUE)
+   PancreasIGtrack <- imprintedGenes_GTEx(gen,chr,start, end,
+   tissues="Pancreas", classification="all",showId=TRUE)
+   PancreasimprintedIGtrack <- imprintedGenes_GTEx(gen,chr,start, end,
+   tissues="Pancreas", classification="biallelic",showId=TRUE)
+
+   imprintinglist <- list(allIGtrack,allimprintedIGtrack,
+   StomachIGtrack,PancreasIGtrack,PancreasimprintedIGtrack)
+
+  plotTracks(imprintinglist, from = start, to = end)
+
 } else {
 
   data(allIGtrack)
@@ -83,9 +93,10 @@ if(interactive()){
   data(StomachIGtrack)
   data(PancreasIGtrack)
   data(PancreasimprintedIGtrack)
-  
-   imprintinglist <- list(allIGtrack,allimprintedIGtrack,StomachIGtrack,PancreasIGtrack,PancreasimprintedIGtrack)
-   
+
+   imprintinglist <- list(allIGtrack,allimprintedIGtrack,
+   StomachIGtrack,PancreasIGtrack,PancreasimprintedIGtrack)
+
   plotTracks(imprintinglist, from = start, to = end)
 }
 

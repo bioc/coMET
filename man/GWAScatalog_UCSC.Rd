@@ -8,7 +8,7 @@ Create one track of the genomic positions of variants from the GWAS catalog
 Create one track of the genomic positions of variants from the NHGRI Catalog of Published Genome-Wide Association Studies using the Gviz bioconductor package
 }
 \usage{
-GWAScatalog_UCSC(gen, chr, start, end, showId=FALSE)
+GWAScatalog_UCSC(gen, chr, start, end, title="GWAS Catalog", showId=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -23,6 +23,9 @@ the first position in the region of interest (the smallest value)
 }
   \item{end}{
 the last position in the region of interest (the largest value)
+}
+  \item{title}{
+ The name of the annotation track
 }
  \item{showId}{
 Show the ID of the genetic elements

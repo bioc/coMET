@@ -8,7 +8,7 @@ Create one track of the genomic positions of regions from segmentalDups_UCSC
 Create one track of the genomic positions of regions from segmentalDups_UCSC using the Gviz bioconductor package
 }
 \usage{
-segmentalDups_UCSC(gen, chr, start, end)
+segmentalDups_UCSC(gen, chr, start, end,title="Segmental Dups UCSC")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -24,7 +24,9 @@ the first position in the region of interest (the smallest value)
   \item{end}{
 the last position in the region of interest (the largest value)
 }
-
+  \item{title}{
+ The name of the annotation track
+}
 }
 
 %%\details{

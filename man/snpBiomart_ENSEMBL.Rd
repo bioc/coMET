@@ -8,7 +8,7 @@ Create a short variation track from ENSEMBL
 Create a 'Short Variation' track from ENSEMBL using the Gviz bioconductor package
 }
 \usage{
-snpBiomart_ENSEMBL(gen,chr, start, end, dataset, showId=FALSE, title_track = NULL)
+snpBiomart_ENSEMBL(gen,chr, start, end, dataset, showId=FALSE, title = "SNPs ENSEMBL")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -30,7 +30,7 @@ the last position in the region of interest (the largest value)
   \item{showId}{
   Show the the ID of element or not
 }
-  \item{title_track}{
+  \item{title}{
  The name of the annotation track
 }
 }

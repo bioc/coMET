@@ -15,21 +15,24 @@ comet(mydata.file = NULL, mydata.format = "site", mydata.type = "file",
     cormatrix.color.scheme = "bluewhitered",cormatrix.conf.level=0.05,
     cormatrix.sig.level= 1, cormatrix.adjust="none",
     cormatrix.type = "listfile", mydata.ref = NULL,
-    start = NULL, end = NULL, zoom = FALSE, lab.Y = "log", 
-    pval.threshold = 1e-05,pval.threshold.2 = 0,disp.pval.threshold = 1, 
+    start = NULL, end = NULL, zoom = FALSE, lab.Y = "log",
+    pval.threshold = 1e-05,pval.threshold.2 = 0,disp.pval.threshold = 1,
     disp.association = FALSE, disp.association.large = FALSE,
     disp.region = FALSE, disp.region.large = FALSE,
     disp.beta.association = FALSE, disp.beta.association.large = FALSE, factor.beta = 0.3,
-    symbols = "circle-fill", symbols.large = NA, sample.labels = NULL, sample.labels.large = NULL,
+    symbols = "circle-fill",
+    symbols.large = NA, sample.labels = NULL, sample.labels.large = NULL,
     use.colors = TRUE , disp.color.ref = TRUE, color.list = NULL, color.list.large = NULL,
     disp.mydata = TRUE, biofeat.user.file = NULL, biofeat.user.type = NULL,
-    biofeat.user.type.plot = NULL, genome = "hg19", dataset.gene = "hsapiens_gene_ensembl",
-    tracks.gviz = NULL, tracks.ggbio = NULL, tracks.trackviewer = NULL,
+    biofeat.user.type.plot = NULL,
+    genome = "hg19", dataset.gene = "hsapiens_gene_ensembl",
+    tracks.gviz = NULL,
     disp.mydata.names = TRUE, disp.color.bar = TRUE, disp.phys.dist = TRUE,
     disp.legend = TRUE, disp.marker.lines = TRUE, disp.cormatrixmap = TRUE,
     disp.pvalueplot =TRUE, disp.type = "symbol", disp.mult.lab.X = FALSE,
     disp.connecting.lines = TRUE, palette.file = NULL, image.title = NULL,
-    image.name = "coMET", image.type = NULL, image.size = 3.5, fontsize.gviz=5, font.factor = 1,
+    image.name = "coMET", image.type = NULL, image.size = 3.5,
+    fontsize.gviz=5, font.factor = 1,
     symbol.factor = NULL, print.image = TRUE, connecting.lines.factor = 1.5,
     connecting.lines.adj = 0.01, connecting.lines.vert.adj = -1,
     connecting.lines.flex = 0, config.file = NULL, verbose = FALSE)
@@ -168,12 +171,6 @@ comet(mydata.file = NULL, mydata.format = "site", mydata.type = "file",
     \item{tracks.gviz}{
     list of tracks created by Gviz.
 }
-    \item{tracks.ggbio}{
-    list of tracks created by ggbio.
-}
-    \item{tracks.trackviewer}{
-    list of tracks created by track viewer.
-}
     \item{disp.mydata.names}{
     logical option TRUE or FALSE. If True (default), the names of the CpG sites are displayed.
 }
@@ -285,15 +282,15 @@ gen <- "hg38"
 
 if(interactive()){
     cat("interactive")
-    genetrack <-genesENSEMBL(gen,chrom,start,end,showId=TRUE)
-    snptrack <- snpBiomart(chrom, start, end,
+    genetrack <-genes_ENSEMBL(gen,chrom,start,end,showId=TRUE)
+    snptrack <- snpBiomart_ENSEMBL(gen, chrom, start, end,
                 dataset="hsapiens_snp_som",showId=FALSE)
-    strutrack <- structureBiomart(chrom, start, end,
+    strutrack <- structureBiomart_ENSEMBL(gen, chrom, start, end,
                 strand, dataset="hsapiens_structvar_som")
-    clinVariant<-ClinVarMainTrack(gen,chrom,start,end)
-    clinCNV<-ClinVarCnvTrack(gen,chrom,start,end)
-    gwastrack <-GWASTrack(gen,chrom,start,end)
-    geneRtrack <-GeneReviewsTrack(gen,chrom,start,end)
+    clinVariant<-ClinVarMain_UCSC(gen,chrom,start,end)
+    clinCNV<-ClinVarCnv_UCSC(gen,chrom,start,end)
+    gwastrack <-GWAScatalog_UCSC(gen,chrom,start,end)
+    geneRtrack <-GeneReviews_UCSC(gen,chrom,start,end)
     listgviz <- list(genetrack,snptrack,strutrack,clinVariant,
                  clinCNV,gwastrack,geneRtrack)
     comet(config.file=configfile, mydata.file=myinfofile, mydata.type="file",

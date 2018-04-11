@@ -8,7 +8,8 @@ Creates a eQTL track from GTEx
 Creates a track of eQTL from GTEx using the Gviz bioconductor package. A complete list of features and their associated colours can be found in the user guide.
 }
 \usage{
-eQTL_GTEx(gen="hg19",chr,start, end, bedFilePath, featureDisplay = 'all', showId=FALSE, type_stacking="squish",just_group="above")
+eQTL_GTEx(gen="hg19",chr,start, end, bedFilePath, featureDisplay = 'all',
+showId=FALSE, type_stacking="squish",just_group="above",title="eQTL GTEX")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -38,6 +39,9 @@ Object of class"character", the stacking type of overlapping items on the final 
 }
 \item{just_group}{
 position. say where we write the name of group (choice in c("above","righ","left"))
+}
+  \item{title}{
+ The name of the annotation track
 }
 }
 %% \details{
@@ -74,7 +78,8 @@ bedFilePath <- file.path(extdata, "/GTEX/eQTL_Uterus_Analysis_extract100.snpgene
 
 %all
 if(interactive()){
- eGTexTrackall <- eQTL_GTEx(gen,chr,start, end, bedFilePath, featureDisplay="all", showId=TRUE,just_group="left")
+ eGTexTrackall <- eQTL_GTEx(gen,chr,start, end, bedFilePath,
+ featureDisplay="all", showId=TRUE,just_group="left")
   plotTracks(eGTexTrackall, from = start, to = end)
 } else {
   data(eGTexTrackall)
@@ -83,7 +88,8 @@ if(interactive()){
 
 %SNP
 if(interactive()){
- eGTexTrackSNP <- eQTL_GTEx(gen,chr,start, end, bedFilePath, featureDisplay="SNP", showId=TRUE,just_group="left")
+ eGTexTrackSNP <- eQTL_GTEx(gen,chr,start, end, bedFilePath,
+ featureDisplay="SNP", showId=TRUE,just_group="left")
   plotTracks(eGTexTrackSNP, from = start, to = end)
 } else {
   data(eGTexTrackSNP)

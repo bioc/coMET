@@ -8,7 +8,8 @@ Create one track of the genomic positions of regions from repeatMasker_UCSC
 Create one track of the genomic positions of regions from repeatMasker_UCSC using the Gviz bioconductor package
 }
 \usage{
-repeatMasker_UCSC(gen, chr, start, end, showId=FALSE,type_stacking="full")
+repeatMasker_UCSC(gen, chr, start, end, title="RepeatMasker",
+showId=FALSE,type_stacking="full")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -23,6 +24,9 @@ the first position in the region of interest (the smallest value)
 }
   \item{end}{
 the last position in the region of interest (the largest value)
+}
+  \item{title}{
+ The name of the annotation track
 }
  \item{showId}{
 Show the ID of the genetic elements

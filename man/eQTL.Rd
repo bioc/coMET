@@ -8,7 +8,8 @@ Creates a track from a file for eQTL data
 Creates a track from a BED file for eQTL data using the Gviz bioconductor package. A complete list of features and their associated colours can be found in the user guide.
 }
 \usage{
-eQTL(gen,chr, start, end, bedFilePath, featureDisplay, showId=FALSE,type_stacking="squish",just_group="above" )
+eQTL(gen,chr, start, end, bedFilePath, featureDisplay, showId=FALSE,
+type_stacking="squish",just_group="above", title="eQTL" )
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -39,6 +40,9 @@ Object of class"character", the stacking type of overlapping items on the final 
 }
 \item{just_group}{
 position. say where we write the name of group (choice in c("above","righ","left"))
+}
+  \item{title}{
+ The name of the annotation track
 }
 }
 %% \details{

@@ -8,7 +8,8 @@ Creates a binding motif track from ENSEMBL
 Creates a binding motif track from ENSEMBL using the Gviz bioconductor package. A complete list of features and their associated colours can be found in the user guide.
 }
 \usage{
-bindingMotifsBiomart_ENSEMBL(gen, chr, start, end, featureDisplay="all", datasetEnsembl = NULL)
+bindingMotifsBiomart_ENSEMBL(gen, chr, start, end, featureDisplay="all",
+datasetEnsembl = NULL, title="Binding Motifs ENSEMBL")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -29,6 +30,9 @@ A vector of regulatory features to be displayed, such as Egr1. Spelling and capi
 }
   \item{datasetEnsembl}{
 Allows the user to manually set which data set is used if required.
+}
+  \item{title}{
+ The name of the annotation track
 }
 }
 %% \details{
@@ -65,7 +69,8 @@ end <- 50000
 featureDisplay <- "CTCF"
 
 if(interactive()){
- bindMotifsBiomartTrackSingle<-bindingMotifsBiomart_ENSEMBL(gen,chr,start,end,featureDisplay)
+ bindMotifsBiomartTrackSingle<-bindingMotifsBiomart_ENSEMBL(gen,chr,start,
+ end,featureDisplay)
   plotTracks(bindMotifsBiomartTrackSingle, from = start, to = end)
 } else {
   data(bindMotifsBiomartTrackSingle)

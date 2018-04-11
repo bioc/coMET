@@ -8,7 +8,8 @@ Create one track of the genes in the genomic regions of interest from EMSEMBL
 Create one track of the genes in the genomic regions of interest from EMSEMBL using the Gviz bioconductor package
 }
 \usage{
-interestGenes_ENSEMBL(gen, chr, start, end, interestfeatures,interestcolor, showId=FALSE)
+interestGenes_ENSEMBL(gen, chr, start, end, interestfeatures,interestcolor,
+showId=FALSE,title="genes (ENSEMBL)")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -32,6 +33,9 @@ A list with the color for each new features defined
 }
  \item{showId}{
 Show the ID of the genetic elements
+}
+    \item{title}{
+    Name of tracks
 }
 }
 %%\details{
@@ -68,7 +72,8 @@ interestfeatures <- rbind(c("75011883","75013394","bad"),c("75013932","75014410"
 interestcolor <- list("bad"="red", "good"="green")
 
 if(interactive()) {
-  interestgenesENSMBLtrack<-interestGenes_ENSEMBL(gen,chr,start,end,interestfeatures,interestcolor,showId=TRUE)
+  interestgenesENSMBLtrack<-interestGenes_ENSEMBL(gen,chr,start,end,
+  interestfeatures,interestcolor,showId=TRUE)
   plotTracks(interestgenesENSMBLtrack, from = start, to =end)
 } else {
   data(interestgenesENSMBLtrack)

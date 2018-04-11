@@ -8,7 +8,8 @@ Visualize EWAS results in a genomic region of interest with predefined annotatio
 coMET is an R-based package to visualize EWAS (epigenome-wide association scans) results in a genomic region of interest. The main feature of coMET is to plot the the significance level of EWAS results in the selected region, along with correlation in DNA methylation values between CpG sites in the region. The coMET package generates plots of phenotype-association, co-methylation patterns, and a series of annotation tracks.
 }
 \usage{
-comet.web(mydata.file = NULL, mydata.format = c("site", "region", "site_asso", "region_asso"),
+comet.web(mydata.file = NULL, mydata.format = c("site", "region",
+"site_asso", "region_asso"),
         mydata.large.file = NULL,
         mydata.large.format = c("site", "region", "site_asso", "region_asso"),
         cormatrix.file = NULL, cormatrix.method = c("spearman", "pearson", "kendall"),
@@ -18,7 +19,8 @@ comet.web(mydata.file = NULL, mydata.format = c("site", "region", "site_asso", "
         genome="hg19", start = NULL, end = NULL, zoom = FALSE, lab.Y = "log",
         pval.threshold = 1e-07, pval.threshold.2 = 0,  disp.pval.threshold = 1,
         disp.association= FALSE, disp.association.large = FALSE,
-        disp.beta.association = "FALSE",disp.beta.association.large = "FALSE", factor.beta = 0.3,
+        disp.beta.association = "FALSE", disp.beta.association.large = "FALSE",
+        factor.beta = 0.3,
         disp.region = FALSE, disp.region.large = FALSE, symbols = "circle-fill",
         symbols.large = NA, sample.labels = NULL, sample.labels.large = NULL,
         use.colors = TRUE, disp.color.ref = TRUE, color.list = NULL,

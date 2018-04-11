@@ -8,7 +8,7 @@ Creates a TFBS motif track from FANTOM
 Creates a track of TFBS motifs from FANTOM using the Gviz bioconductor package. A complete list of features and their associated colours can be found in the user guide.
 }
 \usage{
-TFBS_FANTOM(gen, chr, start, end, bedFilePath)
+TFBS_FANTOM(gen, chr, start, end, bedFilePath,title="TF motif FANTOM5")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -26,6 +26,9 @@ The end position in the region of interest (the largest value)
 }
  \item{bedFilePath}{
 The path of the BED file from Kheradpour and Kellis, 2014.
+}
+  \item{title}{
+ The name of the annotation track
 }
 }
 %% \details{
@@ -59,7 +62,7 @@ start <- 6000000
 end <- 6500000
 
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
-AP1FantomFile <- file.path(extdata, "/FANTOM/Fantom_hg19.AP1_MA0099.2.sites.txt")
+AP1FantomFile <- file.path(extdata, "FANTOM/Fantom_hg19.AP1_MA0099.2.sites_example970.txt")
 
 if(interactive()){
   tfbsFANTOMtrack <- TFBS_FANTOM(gen,chr,start, end, AP1FantomFile)

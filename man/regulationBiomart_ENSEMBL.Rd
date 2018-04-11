@@ -8,7 +8,7 @@ Create a regulation track from ENSEMBL
 Create a 'Regulation' track from ENSEMBL using the Gviz bioconductor package
 }
 \usage{
-regulationBiomart_ENSEMBL(gen, chr, start, end)
+regulationBiomart_ENSEMBL(gen, chr, start, end,title="Regulation ENSEMBL")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -24,6 +24,9 @@ the first position in the region of interest (the smallest value)
   \item{end}{
 the last position in the region of interest (the largest value)
 }
+    \item{title}{
+    Name of tracks
+}
 }
 %% \details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -34,7 +37,7 @@ An AnnotationTrack object of Gviz
 \references{
 http://bioconductor.org/packages/release/bioc/html/Gviz.html
 
-Got to ENSEMBLregulation biomart 
+Got to ENSEMBLregulation biomart
 }
 \author{
 Tiphaine Martin
@@ -57,7 +60,7 @@ end <- 38303219
 
 if(interactive()){
   regulationENSEMBLtrack<-regulationBiomart_ENSEMBL(gen,chr,start,end)
-  plotTracks(regulationENSEMBLtrack, from = start, to =end) 
+  plotTracks(regulationENSEMBLtrack, from = start, to =end)
 } else {
   data(regulationENSEMBLtrack)
   plotTracks(regulationENSEMBLtrack, from = start, to =end)

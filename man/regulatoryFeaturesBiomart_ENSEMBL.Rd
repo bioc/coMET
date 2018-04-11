@@ -8,7 +8,9 @@ Creates a regulatory feature track from ENSEMBL
 Creates a regulatory feature track from ENSEMBL using the Gviz bioconductor package. A complete list of features and their associated colours can be found in the user guide.
 }
 \usage{
-regulatoryFeaturesBiomart_ENSEMBL(gen, chr, start, end, featureDisplay = "all",datasetEnsembl = "hsapiens_regulatory_feature")
+regulatoryFeaturesBiomart_ENSEMBL(gen, chr, start, end, featureDisplay = "all",
+datasetEnsembl = "hsapiens_regulatory_feature",
+title="Regulatory Features ENSEMBL")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -29,6 +31,9 @@ A vector of regulatory features to be displayed, such as Promoter. Spelling and 
 }
   \item{datasetEnsembl}{
 Allows the user to manually set which data set is used if required.Default=hsapiens_regulatory_feature
+}
+  \item{title}{
+ The name of the annotation track
 }
 }
 %% \details{
@@ -65,7 +70,8 @@ end <- 500000
 featureDisplay <- "Enhancer"
 
 if(interactive()){
- regulatoryFeaturesBiomartTrackSingle<-regulatoryFeaturesBiomart_ENSEMBL(gen,chr,start,end,featureDisplay)
+ regulatoryFeaturesBiomartTrackSingle<-regulatoryFeaturesBiomart_ENSEMBL(gen,
+ chr,start,end,featureDisplay)
   plotTracks(regulatoryFeaturesBiomartTrackSingle, from = start, to = end)
 } else {
   data(regulatoryFeaturesBiomartTrackSingle)
@@ -82,7 +88,8 @@ end <- 100000
 featureDisplay <- c("CTCF Binding Site","Enhancer")
 
 if(interactive()){
- regulatoryFeaturesBiomartTrackMultiple<-regulatoryFeaturesBiomart_ENSEMBL(gen,chr,start,end,featureDisplay)
+ regulatoryFeaturesBiomartTrackMultiple<-regulatoryFeaturesBiomart_ENSEMBL(gen,
+ chr,start,end,featureDisplay)
   plotTracks(regulatoryFeaturesBiomartTrackMultiple, from = start, to = end)
 } else {
   data(regulatoryFeaturesBiomartTrackMultiple)
@@ -98,7 +105,8 @@ start <- 10000
 end <- 50000
 featureDisplay <- "all"
 if(interactive()){
- regulatoryFeaturesBiomartTrackAll<-regulatoryFeaturesBiomart_ENSEMBL(gen,chr,start,end,featureDisplay)
+ regulatoryFeaturesBiomartTrackAll<-regulatoryFeaturesBiomart_ENSEMBL(gen,
+ chr,start,end,featureDisplay)
   plotTracks(regulatoryFeaturesBiomartTrackAll, from = start, to = end)
 } else {
   data(regulatoryFeaturesBiomartTrackAll)

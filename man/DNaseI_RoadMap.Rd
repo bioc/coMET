@@ -8,7 +8,9 @@ Creates a promoter/enhancer regions track from a file of RoadMap
 Creates a track of promoter/enhancer regions from a file of RoadMap using the Gviz bioconductor package. A complete list of features and their associated colours can be found in the user guide.
 }
 \usage{
-DNaseI_RoadMap(gen="hg19", chr, start, end, bedFilePath, featureDisplay='promotor',showId=TRUE, type_stacking="dense")
+DNaseI_RoadMap(gen="hg19", chr, start, end, bedFilePath,
+featureDisplay='promotor',showId=TRUE, type_stacking="dense",
+title = "DNaseI RoadMap")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -38,7 +40,9 @@ Allows to visualise the Id of DNAse group.
  \item{type_stacking}{
 Object of class"character", the stacking type of overlapping items on the final plot.One in c(hide, dense, squish, pack,full). More information cf the option "stacking" in Gviz
 }
-
+  \item{title}{
+ The name of the annotation track
+}
 }
 %% \details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -67,16 +71,17 @@ Tom Hardiman
 %% }
 \examples{
 library("Gviz")
-chr <- "chr1"
-start <- 707612
-end <- 722151
+chr <- "chr2"
+start <- 38300049
+end <- 38302592
 gen="hg19"
 
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 bedFilePath <- file.path(extdata, "RoadMap/regions_prom_E063.bed")
 
 if(interactive()){
-  DNaseI_RoadMapSingle <- DNaseI_RoadMap(gen,chr,start, end, bedFilePath, featureDisplay='promotor'  )
+  DNaseI_RoadMapSingle <- DNaseI_RoadMap(gen,chr,start, end,
+  bedFilePath, featureDisplay='promotor'  )
   plotTracks(DNaseI_RoadMapSingle, from = start, to = end)
 } else {
   data(DNaseI_RoadMapSingle)

@@ -8,7 +8,9 @@ Creates a track of miRNA target regions from ENSEMBL
 Creates a track of miRNA target regions from ENSEMBL using the Gviz bioconductor package.
 }
 \usage{
-miRNATargetRegionsBiomart_ENSEMBL(gen, chr, start, end, showId=FALSE, datasetEnsembl = "hsapiens_mirna_target_feature")
+miRNATargetRegionsBiomart_ENSEMBL(gen, chr, start, end, showId=FALSE,
+datasetEnsembl = "hsapiens_mirna_target_feature",
+title="miRNA Target Regions ENSEMBL")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -29,6 +31,9 @@ Show the ID of the genetic elements
 }
   \item{datasetEnsembl}{
 Allows the user to manually set which data set is used if required.Default=hsapiens_mirna_target_feature
+}
+  \item{title}{
+ The name of the annotation track
 }
 }
 %% \details{

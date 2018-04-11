@@ -8,7 +8,8 @@ Creates a psiQTL track from GTEx
 Creates a track of psiQTL from GTEx using the Gviz bioconductor package. A complete list of features and their associated colours can be found in the user guide.
 }
 \usage{
-psiQTL_GTEx(gen,chr,start, end, bedFilePath, featureDisplay = 'all', showId=FALSE, type_stacking="squish",just_group="above")
+psiQTL_GTEx(gen,chr,start, end, bedFilePath, featureDisplay = 'all',
+showId=FALSE, type_stacking="squish",just_group="above", title="psiQTL GTEX")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -38,6 +39,9 @@ Object of class"character", the stacking type of overlapping items on the final 
 }
 \item{just_group}{
 position. say where we write the name of group (choice in c("above","righ","left"))
+}
+  \item{title}{
+ The name of the annotation track
 }
 }
 %% \details{
@@ -75,7 +79,9 @@ psiQTLFilePath <- file.path(extdata, "/GTEX/psiQTL_Assoc-total.AdiposeTissue.txt
 
 %all
 if(interactive()){
-  psiGTexTrackall<- psiQTL_GTEx(gen,chr,start, end, psiQTLFilePath, featureDisplay = 'all', showId=TRUE, type_stacking="squish",just_group="above" )
+  psiGTexTrackall<- psiQTL_GTEx(gen,chr,start, end, psiQTLFilePath,
+  featureDisplay = 'all', showId=TRUE, type_stacking="squish",
+  just_group="above" )
   plotTracks(psiGTexTrackall, from = start, to = end)
 } else {
   data(psiGTexTrackall)
@@ -84,7 +90,9 @@ if(interactive()){
 
 %SNP
 if(interactive()){
- psiGTexTrackSNP<- psiQTL_GTEx(gen,chr,start, end, psiQTLFilePath, featureDisplay = 'SNP', showId=TRUE, type_stacking="squish",just_group="left" )
+ psiGTexTrackSNP<- psiQTL_GTEx(gen,chr,start, end, psiQTLFilePath,
+ featureDisplay = 'SNP', showId=TRUE, type_stacking="squish",
+ just_group="left")
   plotTracks(psiGTexTrackSNP, from = start, to = end)
 } else {
   data(psiGTexTrackSNP)

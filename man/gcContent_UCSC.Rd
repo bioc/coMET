@@ -8,7 +8,7 @@ Create one track of GC content from UCSC
 Create a track of GC content from UCSC using the Gviz bioconductor package
 }
 \usage{
-gcContent_UCSC(gen, chr, start, end)
+gcContent_UCSC(gen, chr, start, end, title="GC Percent")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -23,6 +23,9 @@ the first position in the region of interest (the smallest value)
 }
   \item{end}{
 the last position in the region of interest (the largest value)
+}
+    \item{title}{
+    Name of tracks
 }
 }
 %%\details{

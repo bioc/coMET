@@ -7,7 +7,7 @@
 ### base packages
 ###
 import(grid)
-import(grDevices)
+import(grDevices, except = 'windows')
 import(utils)
 
 
@@ -36,13 +36,6 @@ import(biomaRt)
 import(Gviz)
 import(rtracklayer)
 
-importFrom("trackViewer",viewTracks)
-importClassesFrom("trackViewer",track, trackList)
-importFrom("trackViewer", trackList)
-
-importFrom("ggplot2",ggplotGrob)
-importFrom("ggbio",tracks)
-
 
 ## ============================================================
 ## Export
@@ -50,7 +43,7 @@ importFrom("ggbio",tracks)
 
 # Export all names
 #exportPattern("^[[:alpha:]]+")
-#exportPattern("^[^\\.]") 
+#exportPattern("^[^\\.]")
 
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ### Primary functions
@@ -88,7 +81,7 @@ export(chrUCSC2ENSEMBL,
     bindingMotifsBiomart_ENSEMBL,
     regulatorySegmentsBiomart_ENSEMBL,
     regulatoryFeaturesBiomart_ENSEMBL,
-    otherRegulatoryRegions_ENSEMBL,
+    otherRegulatoryRegionsBiomart_ENSEMBL,
     regulatoryEvidenceBiomart_ENSEMBL,
     miRNATargetRegionsBiomart_ENSEMBL,
     repeatMasker_UCSC,

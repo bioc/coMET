@@ -8,7 +8,7 @@ Create a plot of pvalue of CpG with DataTrack of Gviz
 Create a plot of pvalue of CpG with DataTrack of Gviz
 }
 \usage{
-cpgPvalue(cprange, data, chr, start, end, typefunction, title)
+cpgPvalue(cprange, data, chr, start, end, typefunction, title="CpG pvalue")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

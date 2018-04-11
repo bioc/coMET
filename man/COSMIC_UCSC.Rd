@@ -2,13 +2,16 @@
 \alias{COSMIC_UCSC}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Create one track of the genomic positions of variants from COSMIC
+Create one track of the genomic positions of variants from COSMIC [obselete]
 }
 \description{
-Create one track of the genomic positions of variants from COSMIC, the "Catalogue Of Somatic Mutations In Cancer" using the Gviz bioconductor package
+[obselete] No more possible to extract COSMIC data from UCSC.
+
+
+Create one track of the genomic positions of variants from COSMIC, the "Catalogue Of Somatic Mutations In Cancer" in extracting data from UCSC and using the Gviz bioconductor package.
 }
 \usage{
-COSMIC_UCSC(gen, chr, start, end, showId=FALSE)
+COSMIC_UCSC(gen, chr, start, end,title= "COSMIC", showId=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -23,6 +26,9 @@ the first position in the region of interest (the smallest value)
 }
     \item{end}{
 the last position in the region of interest (the largest value)
+}
+  \item{title}{
+ The name of the annotation track
 }
  \item{showId}{
 Show the ID of the genetic elements

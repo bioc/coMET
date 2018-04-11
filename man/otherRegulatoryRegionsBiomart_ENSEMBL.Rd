@@ -1,5 +1,5 @@
-\name{otherRegulatoryRegions_ENSEMBL}
-\alias{otherRegulatoryRegions_ENSEMBL}
+\name{otherRegulatoryRegionsBiomart_ENSEMBL}
+\alias{otherRegulatoryRegionsBiomart_ENSEMBL}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Creates a track of other regulatory regions from ENSEMBL
@@ -8,7 +8,9 @@ Creates a track of other regulatory regions from ENSEMBL
 Creates a track from ENSEMBL of other regulatory regions using the Gviz bioconductor package. A complete list of features and their associated colours can be found in the user guide.
 }
 \usage{
-otherRegulatoryRegions_ENSEMBL(gen, chr, start, end, featureDisplay = "all",datasetEnsembl = "hsapiens_external_feature")
+otherRegulatoryRegionsBiomart_ENSEMBL(gen, chr, start, end,
+featureDisplay = "all",datasetEnsembl = "hsapiens_external_feature",
+title="Other Regulatory Regions ENSEMBL")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -29,6 +31,9 @@ A vector of regulatory features to be displayed, such as Enhancer. Spelling and 
 }
   \item{datasetEnsembl}{
 Allows the user to manually set which data set is used if required.
+}
+  \item{title}{
+ The name of the annotation track
 }
 }
 %% \details{
@@ -65,7 +70,8 @@ end <- 5000000
 featureDisplay <- "Enhancer"
 
 if(interactive()){
- otherRegulatoryRegionsTrackSingle<-otherRegulatoryRegions_ENSEMBL(gen,chr,start,end,featureDisplay)
+ otherRegulatoryRegionsTrackSingle<-otherRegulatoryRegionsBiomart_ENSEMBL(gen,
+ chr,start,end,featureDisplay)
   plotTracks(otherRegulatoryRegionsTrackSingle, from = start, to = end)
 } else {
   data(otherRegulatoryRegionsTrackSingle)
@@ -80,8 +86,10 @@ chr <- "chr1"
 start <- 100000
 end <- 5000000
 featureDisplay <- "all"
+
 if(interactive()){
- otherRegulatoryRegionsTrackAll<-otherRegulatoryRegions_ENSEMBL(gen,chr,start,end,featureDisplay)
+ otherRegulatoryRegionsTrackAll<-otherRegulatoryRegionsBiomart_ENSEMBL(gen,
+ chr,start,end,featureDisplay)
   plotTracks(otherRegulatoryRegionsTrackAll, from = start, to = end)
 } else {
   data(otherRegulatoryRegionsTrackAll)

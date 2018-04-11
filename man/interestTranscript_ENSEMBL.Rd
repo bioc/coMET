@@ -8,7 +8,8 @@ Create a track of transcripts from ENSEMBL
 Create a track to visualize different transcripts from ENSEMBL using the Gviz bioconductor package
 }
 \usage{
-interestTranscript_ENSEMBL(gen, chr, start, end,interestfeatures,interestcolor,showId = FALSE)
+interestTranscript_ENSEMBL(gen, chr, start, end,interestfeatures,
+interestcolor,showId = FALSE, title="transcripts ENSEMBL")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -32,6 +33,9 @@ A list with the color for each new features defined
 }
   \item{showId}{
   Show the ID of the genetic elements
+}
+    \item{title}{
+    Name of tracks
 }
 }
 %%\details{
@@ -68,7 +72,8 @@ interestfeatures <- rbind(c("75017782","75017835","bad"),c("75013755","75013844"
 interestcolor <- list("bad"="red", "good"="green")
 
 if(interactive()){
-  interesttransENSMBLtrack<-interestTranscript_ENSEMBL(gen,chr,start,end,interestfeatures,interestcolor,showId=TRUE)
+  interesttransENSMBLtrack<-interestTranscript_ENSEMBL(gen,chr,start,end,
+  interestfeatures,interestcolor,showId=TRUE)
   plotTracks(interesttransENSMBLtrack, from=start, to=end)
 } else {
   data(interesttransENSMBLtrack)

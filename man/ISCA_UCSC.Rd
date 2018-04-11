@@ -2,13 +2,13 @@
 \alias{ISCA_UCSC}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Create one track of the genomic positions of variants from ISCA (obselete database)
+Create one track of the genomic positions of variants from ISCA [obselete database]
 }
 \description{
 Create one track of the genomic positions of variants from International Standards for Cytogenomic Arrays (ISCA) Consortium using the Gviz bioconductor package (obselete datbase, Impossible to access to data from UCSC from September 2015)
 }
 \usage{
-ISCA_UCSC(gen, chr, start, end, mySession, table.name, showId=FALSE)
+ISCA_UCSC(gen, chr, start, end, mySession, table.name,title="ISCA", showId=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -29,6 +29,9 @@ the object session from the function browserSession of rtracklayer
 }
   \item{table.name}{
 A table of ISCAT classifications: iscaBenign, iscaCuratedBenign, iscaCuratedPathogenic, iscaLikelyBenign, iscaLikelyPathogenic, iscaPathGainCum, iscaPathLossCum, iscaPathogenic, iscaUncertain
+}
+  \item{title}{
+ The name of the annotation track
 }
  \item{showId}{
 Show the ID of the genetic elements
@@ -58,25 +61,25 @@ Tiphaine Martin
 }
 \examples{
 
-# Oboselet function 
+# Oboselet function
 
-#library("Gviz")
-#library("rtracklayer")
-#gen <- "hg19"
-#chr <- "chr2"
-#start <- 38292433
-#end <- 38305492
+library("Gviz")
+library("rtracklayer")
+gen <- "hg19"
+chr <- "chr2"
+start <- 38292433
+end <- 38305492
 
-#if(interactive()){
-#  BROWSER.SESSION="UCSC"
-#  mySession <- browserSession(BROWSER.SESSION)
-#  genome(mySession) <- gen
-#  iscatrack <-ISCA_UCSC(gen,chrom,start,end,mySession, table="iscaPathogenic")
-#  plotTracks(iscatrack, from = start, to =end)
-#} else {
-#  data(ISCAtrack_Grch38)
-#  plotTracks(iscatrack, from = start, to =end)
-#}
+if(interactive()){
+  BROWSER.SESSION="UCSC"
+  mySession <- browserSession(BROWSER.SESSION)
+  genome(mySession) <- gen
+  iscatrack <-ISCA_UCSC(gen,chrom,start,end,mySession,title="ISCA", table="iscaPathogenic")
+  plotTracks(iscatrack, from = start, to =end)
+} else {
+  data(ISCAtrack_Grch38)
+  plotTracks(iscatrack, from = start, to =end)
+}
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

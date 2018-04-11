@@ -8,7 +8,8 @@ Creates a track from a file for metQTL data
 Creates a track from a BED file for metQTL data using the Gviz bioconductor package. A complete list of features and their associated colours can be found in the user guide.
 }
 \usage{
-metQTL(gen, chr, start, end, bedFilePath, featureDisplay, showId=FALSE,type_stacking="squish",just_group="above")
+metQTL(gen, chr, start, end, bedFilePath, featureDisplay, showId=FALSE,
+type_stacking="squish",just_group="above", title="metQTL")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -40,7 +41,9 @@ Sets the type of stacking used by Gviz for plots. By default this is set to 'squ
 \item{just_group}{
 position. say where we write the name of group (choice in c("above","righ","left"))
 }
-
+  \item{title}{
+ The name of the annotation track
+}
 }
 %% \details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -81,7 +84,8 @@ extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 mqtlbedFilePath <- file.path(extdata, "metQTL.bed")
 
 if(interactive()){
-  metQTLTrackSingle <- metQTL(gen,chr,start, end,mqtlbedFilePath, featureDisplay = featureDisplay )
+  metQTLTrackSingle <- metQTL(gen,chr,start, end,mqtlbedFilePath,
+  featureDisplay = featureDisplay )
   plotTracks(metQTLTrackSingle, from = start, to = end)
 } else {
   data(metQTLTrackSingle)
@@ -103,7 +107,8 @@ extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 bedFilePath <- file.path(extdata, "metQTL.bed")
 
 if(interactive()){
-  metQTLTrackMultiple <- metQTL(gen,chr,start, end, bedFilePath, featureDisplay = featureDisplay )
+  metQTLTrackMultiple <- metQTL(gen,chr,start, end, bedFilePath,
+  featureDisplay = featureDisplay )
   plotTracks(metQTLTrackMultiple, from = start, to = end)
 } else {
   data(metQTLTrackMultiple)
@@ -125,7 +130,8 @@ extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 bedFilePath <- file.path(extdata, "metQTL.bed")
 
 if(interactive()){
-  metQTLTrackAll <- metQTL(gen,chr,start, end, bedFilePath, featureDisplay = featureDisplay )
+  metQTLTrackAll <- metQTL(gen,chr,start, end, bedFilePath,
+  featureDisplay = featureDisplay )
   plotTracks(metQTLTrackAll, from = start, to = end)
 } else {
   data(metQTLTrackAll)

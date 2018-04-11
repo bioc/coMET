@@ -8,7 +8,7 @@ Create a track of known genes from the UCSC genome browser
 Create a track of known genes from the UCSC genome browser using the Gviz bioconductor package
 }
 \usage{
-knownGenes_UCSC(gen, chr, start, end, showId=TRUE)
+knownGenes_UCSC(gen, chr, start, end,title="UCSC known Genes", showId=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -23,6 +23,9 @@ the first position in the region of interest (the smallest value)
 }
   \item{end}{
 the last position in the region of interest (the largest value)
+}
+    \item{title}{
+    Name of tracks
 }
  \item{showId}{
 Show the ID of the genetic elements

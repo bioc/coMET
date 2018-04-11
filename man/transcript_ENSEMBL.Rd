@@ -8,7 +8,7 @@ Create a track of transcripts from ENSEMBL
 Create a track to visualize different transcripts from ENSEMBL using the Gviz bioconductor package
 }
 \usage{
-transcript_ENSEMBL(gen, chr, start, end,showId = FALSE)
+transcript_ENSEMBL(gen, chr, start, end,showId = FALSE, title="transcripts ENSEMBL")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -26,6 +26,9 @@ the last position in the region of interest (the largest value)
 }
   \item{showId}{
   Show the ID of the genetic elements
+}
+    \item{title}{
+    Name of tracks
 }
 }
 %%\details{
@@ -49,7 +52,7 @@ Tiphaine Martin
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
- \code{\link{ISCA_UCSC}},  \code{\link{GWAScatalog_UCSC}}, \code{\link{knownGenes_UCSC}}, 
+ \code{\link{ISCA_UCSC}},  \code{\link{GWAScatalog_UCSC}}, \code{\link{knownGenes_UCSC}},
  \code{\link{genesName_ENSEMBL}},  \code{\link{GeneReviews_UCSC}}, \code{\link{GAD_UCSC}},  \code{\link{genes_ENSEMBL}}, \code{\link{xenorefGenes_UCSC}},
 }
 \examples{
@@ -66,7 +69,7 @@ if(interactive()){
   data(transENSMBLtrack)
   plotTracks(transENSMBLtrack, from=start, to=end)
 }
- 
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
