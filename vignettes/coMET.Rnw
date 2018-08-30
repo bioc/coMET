@@ -87,8 +87,9 @@ The current version of \Biocpkg{coMET} can visualise EWAS results and annotation
 \end{itemize}
 
 <<installPackages,eval=FALSE>>=
-source("http://bioconductor.org/biocLite.R")
-biocLite("coMET")
+if (!requireNamespace("BiocManager", quietly=TRUE))
+    install.packages("BiocManager")
+BiocManager::install("coMET")
 @
 
 \Biocpkg{coMET} uses the packages called \CRANpkg{psych}, \CRANpkg{corrplot} and \CRANpkg{colortools}, which are not available from bioconductor. This must be installed before the installation of \Biocpkg{coMET}
@@ -142,8 +143,9 @@ The configuration file specifies the options for the coMET plot. Example configu
 To install \Biocpkg{coMET} from the development version of Bioconductor, the user must install R-devel from \url{http://www.bioconductor.org/developers/how-to/useDevel/}. Following this installation, use standard Bioconductor command line, e.g.
 
 <<installPackages_develbioc,eval=FALSE>>=
-source("http://bioconductor.org/biocLite.R")
-biocLite("coMET")
+if (!requireNamespace("BiocManager", quietly=TRUE))
+    install.packages("BiocManager")
+BiocManager::install("coMET")
 @
 \subsection{Install the version of coMET from gitHub}
 Another way to install \Biocpkg{coMET} is to download the master package from gitHUB \url{https://github.com/TiphaineCMartin/coMET} or the devel package \url{https://github.com/TiphaineCMartin/coMET/tree/devel}. Once downloaded use command line:
