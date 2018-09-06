@@ -1726,10 +1726,9 @@ toLatex(sessionInfo())
 #
 # #Need to have the last version of Bioconductor and BiocCheck
 # #Need to update under Rdev
-# remove.packages("BiocInstaller")
+# remove.packages("BiocManager")
 # if (!requireNamespace("BiocManager", quietly=TRUE))
     # install.packages("BiocManager")
-# BiocManager::install("BiocInstaller")
 #
 # #Need to update different packages associated with coMET
 # BiocManager::install("coMET")
