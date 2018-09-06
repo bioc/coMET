@@ -1727,11 +1727,12 @@ toLatex(sessionInfo())
 # #Need to have the last version of Bioconductor and BiocCheck
 # #Need to update under Rdev
 # remove.packages("BiocInstaller")
-# source("http://bioconductor.org/biocLite.R")
-# biocLite("BiocInstaller")
+# if (!requireNamespace("BiocManager", quietly=TRUE))
+    # install.packages("BiocManager")
+# BiocManager::install("BiocInstaller")
 #
 # #Need to update different packages associated with coMET
-# biocLite("coMET")
+# BiocManager::install("coMET")
 #
 # #Go to the parent folder of the package
 # # To create the manual documentation, need to run
