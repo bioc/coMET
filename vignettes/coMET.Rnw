@@ -140,11 +140,12 @@ The configuration file specifies the options for the coMET plot. Example configu
 @
 
 \subsection{Install the development version of coMET from Bioconductor}
-To install \Biocpkg{coMET} from the development version of Bioconductor, the user must install R-devel from \url{http://www.bioconductor.org/developers/how-to/useDevel/}. Following this installation, use standard Bioconductor command line, e.g.
+To install \Biocpkg{coMET} from the development version of Bioconductor, the user must install the appropriate R version. See \url{http://www.bioconductor.org/developers/how-to/useDevel/} for more details. Following this installation, use the standard Bioconductor command:
 
 <<installPackages_develbioc,eval=FALSE>>=
 if (!requireNamespace("BiocManager", quietly=TRUE))
     install.packages("BiocManager")
+BiocManager::install(version = "devel")
 BiocManager::install("coMET")
 @
 \subsection{Install the version of coMET from gitHub}
