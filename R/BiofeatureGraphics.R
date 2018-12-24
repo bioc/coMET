@@ -411,7 +411,7 @@ chromatinHMMAll_UCSC<-function(gen,chr,start,end,mySession,color= 'coMET',patter
   lltrack=list()
   for(i in patterntable){
     table.name<-tablestrack[i]
-    tmp<-chromatinHMMOne_UCSC(genTrunk, chr, start, end, mySession, color, table.name)
+    tmp<-chromatinHMMOne_UCSC(gen=genTrunk, chr=chr, start=start, end=end, mySession=mySession, color=color, table.name=table.name)
     if(!is.null(tmp) | length(feature(tmp)) > 0){
       lltrack=c(lltrack,tmp)
     }
@@ -956,8 +956,8 @@ snpBiomart_ENSEMBL <- function(gen,chr, start, end, dataset,
   if(is.null(dataset)){
     stop("Invalid in function snpBiomart :dataset null:\n")
   }
-  if(is.null(title_track)){
-    title_track="Short Variation"
+  if(is.null(title)){
+    title="Short Variation"
   }
 
   genTrunk <- gsub("\\..*","",gen)
@@ -1016,8 +1016,8 @@ structureBiomart_ENSEMBL <- function(gen,chr, start, end, strand, dataset,showId
   if(is.null(dataset)){
     stop("Invalid in function snpBiomart :dataset null:\n")
   }
-  if(is.null(title_track)){
-    title_track="Structural Variation"
+  if(is.null(title)){
+    title="Structural Variation"
   }
   genTrunk <- gsub("\\..*","",gen)
   chrEnsembl=chrUCSC2ENSEMBL(chr)

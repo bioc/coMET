@@ -46,7 +46,7 @@ options(replace.assign=TRUE,width=90)
 %\footnote{thomas.hardiman@kcl.ac.uk}, \footnote{idil.yet@kcl.ac.uk}, \footnote{peichien.tsai@kcl.ac.uk}, \footnote{jordana.bell@kcl.ac.uk}
 \bioctitle[The coMET User Guide]{The coMET User Guide}
 \author{Tiphaine C. Martin \footnote{\email{tiphaine.martin@mssm.edu}}, Tom Hardiman, Idil Yet, Pei-Chien Tsai, Jordana T. Bell}
-\date{Edited: March 2018; Compiled: \today}
+\date{Edited: December 2018; Compiled: \today}
 
 \begin{document}
 
@@ -330,16 +330,16 @@ comet.web(config.file=configfile, mydata.file=myinfofile,
 
 \begin{figure}
 <<cometwebPlot, echo=FALSE, fig.keep='last',fig.width=7, fig.height=7 >>=
-extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
-myinfofile <- file.path(extdata, "cyp1b1_infofile_Grch38.txt")
-myexpressfile <- file.path(extdata, "cyp1b1_infofile_exprGene_region_Grch38.txt")
-mycorrelation <- file.path(extdata, "cyp1b1_res37_rawMatrix.txt")
-configfile <- file.path(extdata, "config_cyp1b1_zoom_4webserver_Grch38.txt")
-comet.web(config.file=configfile, mydata.file=myinfofile,
-          cormatrix.file=mycorrelation ,mydata.large.file=myexpressfile,
-          print.image=FALSE,verbose=FALSE)
-@
-%\incfig{fig:cometweb_simple}{\textwidth}{Plot with comet.web function.}
+  extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
+  myinfofile <- file.path(extdata, "cyp1b1_infofile_Grch38.txt")
+  myexpressfile <- file.path(extdata, "cyp1b1_infofile_exprGene_region_Grch38.txt")
+  mycorrelation <- file.path(extdata, "cyp1b1_res37_rawMatrix.txt")
+  configfile <- file.path(extdata, "config_cyp1b1_zoom_4webserver_Grch38.txt")
+  comet.web(config.file=configfile, mydata.file=myinfofile,
+            cormatrix.file=mycorrelation ,mydata.large.file=myexpressfile,
+            print.image=FALSE,verbose=FALSE)
+  @
+    %\incfig{fig:cometweb_simple}{\textwidth}{Plot with comet.web function.}
 \caption{Plot with \Rfunction{comet.web} function.\label{fig:cometweb_simple}}
 \end{figure}
 
@@ -1316,22 +1316,22 @@ plotTracks(imprintinglist, from = start, to = end)
 \end{figure*}
 
 
-<<GTEX_example3,eval=FALSE,echo=FALSE>>=
-## sQTL data
-chr<-3
-start <- 132239976
-end <- 132541303
-gen<-"hg19"
-
-extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
-
-### sQTL from Altran methods
-sQTLAFilePath <- file.path(extdata, "/GTEX/sQTL_HeartLeftVentricle.Altrans.FDR05.bestPerLink")
-
-sAGTex<- sQTL_Altrans_GTEx(gen,chr,start, end,
-                           sQTLAFilePath, featureDisplay = 'all', showId=TRUE,
-                           type_stacking="squish",just_group="left" )
-@
+% <<GTEX_example3,eval=FALSE,echo=FALSE>>=
+% ## sQTL data
+% chr<-3
+% start <- 132239976
+% end <- 132541303
+% gen<-"hg19"
+%
+% extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
+%
+% ### sQTL from Altran methods
+% sQTLAFilePath <- file.path(extdata, "/GTEX/sQTL_HeartLeftVentricle.Altrans.FDR05.bestPerLink")
+%
+% sAGTex<- sQTL_Altrans_GTEx(gen,chr,start, end,
+%                            sQTLAFilePath, featureDisplay = 'all', showId=TRUE,
+%                            type_stacking="squish",just_group="left" )
+% @
 
 
 \clearpage
@@ -1717,11 +1717,15 @@ toLatex(sessionInfo())
 # cd Rdevel2.2
 # mkdir tar
 # #Extract R source in this latter folder
-# ./configure -prefix=/home/tiphaine/Rdevel2.2/
+# ./configure -prefix=/home/tiphaine/Rdevel2.2/ --enable-R-shlib=yes
 #
 # sudo make
 #
+# sudo make check
+#
 # sudo make install
+#
+# if need to recompile, do "sudo make uninstall" "sudo make clean" and rerun from ./configure line https://stackoverflow.com/questions/28096239/how-to-configure-r-3-1-2-with-enable-r-shlib
 #
 # sudo R
 #
@@ -1738,21 +1742,25 @@ toLatex(sessionInfo())
 # # To create the manual documentation, need to run
 # # need to be the folder parent of coMET
 # cd ../
-# Rdevel CMD Rd2pdf --pdf coMET
+# R-devel CMD Rd2pdf --pdf coMET
 #
 # # Need to build the vignette
 # cd coMET/vignettes
-# R CMD Sweave --engine=knitr::knitr --pdf coMET.Rnw
-# R CMD texi2dvi --pdf coMET.tex
-# R CMD pdflatex coMET.tex
+# R-devel CMD Sweave --engine=knitr::knitr --pdf coMET.Rnw
+# R-devel CMD texi2dvi --pdf coMET.tex
+# R-devel CMD pdflatex coMET.tex
 #
 # #Need to build the  new package
+# to  addd some parameters for R CMD build/ check/install  https://support.rstudio.com/hc/en-us/articles/200486518-Customizing-Package-Build-Options
 # # Need to be in the folder parent of coMET
 # cd ../../
 # R-devel CMD build coMET --resave-data --no-build-vignettes
 #
 # #Need to check if the new package follow the rules of R
 # R-devel CMD check coMET
+#
+# #Need to install if the new package follow the rules of R
+# R-devel CMD INSTALL coMET
 #
 # #Need to check the examples in R after building and checking
 # # Need to correct any examples that fail
@@ -1763,11 +1771,18 @@ toLatex(sessionInfo())
 # #To check if the new package follow the rules from bioconductor
 # R-devel CMD BiocCheckdev3.3 coMET
 
+# To install the new package
+# R-devel CMD INSTALL coMET
+
 # Authors@R: c(person("Tiphaine C.","Martin", role=c("aut","cre"),email="tiphaine.martin@mssm.edu),
 #        person("Thomas","Hardiman",role=c("aut")),
 #        person("Idil","Yet",role=c("aut")),
 #        person("Pei-Chien","Tsai",role=c("aut")),
 #        person("Jordana T.","Bell",role=c("aut")))
+
+#other version of R with Rstudio
+#https://support.rstudio.com/hc/en-us/articles/200486138-Changing-R-versions-for-RStudio-desktop
+
 @
 
 \clearpage
