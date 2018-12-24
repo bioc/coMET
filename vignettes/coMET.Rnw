@@ -88,7 +88,7 @@ The current version of \Biocpkg{coMET} can visualise EWAS results and annotation
 
 <<installPackages,eval=FALSE>>=
 if (!requireNamespace("BiocManager", quietly=TRUE))
-    install.packages("BiocManager")
+  install.packages("BiocManager")
 BiocManager::install("coMET")
 @
 
@@ -144,7 +144,7 @@ To install \Biocpkg{coMET} from the development version of Bioconductor, the use
 
 <<installPackages_develbioc,eval=FALSE>>=
 if (!requireNamespace("BiocManager", quietly=TRUE))
-    install.packages("BiocManager")
+  install.packages("BiocManager")
 BiocManager::install(version = "devel")
 BiocManager::install("coMET")
 @
@@ -329,19 +329,20 @@ comet.web(config.file=configfile, mydata.file=myinfofile,
 @
 
 \begin{figure}
-<<cometwebPlot, echo=FALSE, fig.keep='last',fig.width=7, fig.height=7 >>=
-  extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
-  myinfofile <- file.path(extdata, "cyp1b1_infofile_Grch38.txt")
-  myexpressfile <- file.path(extdata, "cyp1b1_infofile_exprGene_region_Grch38.txt")
-  mycorrelation <- file.path(extdata, "cyp1b1_res37_rawMatrix.txt")
-  configfile <- file.path(extdata, "config_cyp1b1_zoom_4webserver_Grch38.txt")
-  comet.web(config.file=configfile, mydata.file=myinfofile,
-            cormatrix.file=mycorrelation ,mydata.large.file=myexpressfile,
-            print.image=FALSE,verbose=FALSE)
-  @
-    %\incfig{fig:cometweb_simple}{\textwidth}{Plot with comet.web function.}
+<<cometwebPlot, echo=FALSE, fig.keep='last',fig.width=7, fig.height=7,warning=FALSE >>=
+extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
+myinfofile <- file.path(extdata, "cyp1b1_infofile_Grch38.txt")
+myexpressfile <- file.path(extdata, "cyp1b1_infofile_exprGene_region_Grch38.txt")
+mycorrelation <- file.path(extdata, "cyp1b1_res37_rawMatrix.txt")
+configfile <- file.path(extdata, "config_cyp1b1_zoom_4webserver_Grch38.txt")
+comet.web(config.file=configfile, mydata.file=myinfofile,
+          cormatrix.file=mycorrelation ,mydata.large.file=myexpressfile,
+          print.image=FALSE,verbose=FALSE)
+@
+%\incfig{fig:cometweb_simple}{\textwidth}{Plot with comet.web function.}
 \caption{Plot with \Rfunction{comet.web} function.\label{fig:cometweb_simple}}
 \end{figure}
+
 
 \subsection{Hidden values of \Rfunction{comet.web} function}
 Hidden values of \Rfunction{comet.web} function are shown in the section. If these values do not correspond to what you want to visualise, you need to use the function \Rfunction{comet}, as a more generic option.
@@ -398,6 +399,8 @@ DATASET.STRU.STOMA &  hsapiens\_structvar\_som\\
 BROWSER.SESSION & UCSC\\
 \end{longtable}
 
+
+
 \clearpage
 \section{Creating a plot with the generic function: \Rfunction{comet}}
 It is possible to create the annotation tracks by \Biocpkg{Gviz}, \Biocpkg{trackviewer} or \Biocpkg{ggbio}, for example see Figure \ref{fig:cometPlotfile}.
@@ -407,7 +410,7 @@ Currently, the \Biocpkg{Gviz} option for annotation tracks, in combination with 
 \subsubsection{Input from data files}
 In this figure \ref{fig:cometPlotfile}, we create different tracks outside to \Biocpkg{coMET} with \Biocpkg{Gviz}. The list of annotation tracks and different files are given to the function \Rfunction{coMET}.
 
-<<cometPlotText, eval=FALSE, fig.keep='last' >>=
+<<cometPlotText, eval=FALSE, fig.keep='last'>>=
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 configfile <- file.path(extdata, "config_cyp1b1_zoom_4comet.txt")
 myinfofile <- file.path(extdata, "cyp1b1_infofile.txt")
@@ -431,7 +434,7 @@ cpgIstrack <- cpgIslands_UCSC(gen,chrom,start,end)
 
 prombedFilePath <- file.path(extdata, "/RoadMap/regions_prom_E063.bed")
 promRMtrackE063<- DNaseI_RoadMap(gen,chrom,start, end, prombedFilePath,
-                             featureDisplay='promotor', type_stacking="squish")
+                                 featureDisplay='promotor', type_stacking="squish")
 
 bedFilePath <- file.path(extdata, "RoadMap/E063_15_coreMarks_mnemonics.bed")
 chromHMM_RoadMapAllE063 <- chromHMM_RoadMap(gen,chrom,start, end,
@@ -447,7 +450,7 @@ comet(config.file=configfile, mydata.file=myinfofile, mydata.type="file",
 @
 
 \begin{figure}
-<<cometPlotfile, echo=FALSE, fig.keep='last',fig.width=7, fig.height=7 >>=
+<<cometPlotfile, echo=FALSE, fig.keep='last',fig.width=7, fig.height=7 ,warning=FALSE>>=
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 configfile <- file.path(extdata, "config_cyp1b1_zoom_4comet.txt")
 myinfofile <- file.path(extdata, "cyp1b1_infofile.txt")
@@ -484,7 +487,7 @@ In addition, if the user would like to visualise only the correlations between C
 
 Eventually, we increase the size of font using the option \Robject{fontsize.gviz}
 
-<<cometPlotmatrix, eval=FALSE, fig.keep='last' >>=
+<<cometPlotmatrix, eval=FALSE, fig.keep='last' ,warning=FALSE>>=
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 configfile <- file.path(extdata, "config_cyp1b1_zoom_4comet.txt")
 myinfofile <- file.path(extdata, "cyp1b1_infofile.txt")
@@ -529,7 +532,7 @@ comet(config.file=configfile, mydata.file=matrix.dnamethylation,
 @
 
 \begin{figure}
-<<cometPlotMatrix, echo=FALSE, fig.keep='last',fig.width=7, fig.height=7 >>=
+<<cometPlotMatrix, echo=FALSE, fig.keep='last',fig.width=7, fig.height=7 ,warning=FALSE>>=
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 configfile <- file.path(extdata, "config_cyp1b1_zoom_4comet.txt")
 myinfofile <- file.path(extdata, "cyp1b1_infofile.txt")
@@ -575,7 +578,7 @@ comet(config.file=configfile, mydata.file=matrix.dnamethylation,
 It is possible to visualise only annotation tracks and the correlation between genetic elements.
 In this case, we need to use the option \Robject{disp.pvalueplot=FALSE}, for example see Figure \ref{fig:cometPlotNopval}.
 
-<<cometPlotNopvalText, eval=FALSE, fig.keep='last' >>=
+<<cometPlotNopvalText, eval=FALSE, fig.keep='last' ,warning=FALSE>>=
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 configfile <- file.path(extdata, "config_cyp1b1_zoom_4cometnopval.txt")
 myinfofile <- file.path(extdata, "cyp1b1_infofile.txt")
@@ -589,9 +592,9 @@ strand <- "*"
 
 genetrack <-genes_ENSEMBL(gen,chrom,start,end,showId=FALSE)
 snptrack <- snpBiomart_ENSEMBL(gen, chrom, start, end,
-                       dataset="hsapiens_snp_som",showId=FALSE)
+                               dataset="hsapiens_snp_som",showId=FALSE)
 strutrack <- structureBiomart_ENSEMBL(chrom, start, end,
-                              strand, dataset="hsapiens_structvar_som")
+                                      strand, dataset="hsapiens_structvar_som")
 clinVariant<-ClinVarMain_UCSC(gen,chrom,start,end)
 clinCNV<-ClinVarCnv_UCSC(gen,chrom,start,end)
 gwastrack <-GWAScatalog_UCSC(gen,chrom,start,end)
@@ -607,7 +610,7 @@ comet(config.file=configfile, mydata.file=myinfofile, mydata.type="file",
 @
 
 \begin{figure}
-<<cometPlot_nopval, echo=FALSE, fig.keep='last',fig.width=7, fig.height=7 >>=
+<<cometPlot_nopval, echo=FALSE, fig.keep='last',fig.width=7, fig.height=7 ,warning=FALSE>>=
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 configfile <- file.path(extdata, "config_cyp1b1_zoom_4cometnopval.txt")
 #configfile <- "../inst/extdata/config_cyp1b1_zoom_4comet.txt"
@@ -639,12 +642,13 @@ comet(config.file=configfile, mydata.file=myinfofile, mydata.type="file",
 \caption{Plot with \Rfunction{comet} function without pvalue plot.\label{fig:cometPlotNopval}}
 \end{figure}
 
+
 \clearpage
 \subsection{\Biocpkg{coMET} plot: Manhattan plot and anonation track}
 It is possible to visualise only The Manhattan plot and the annotation tracks.
 In this case, we need to use the option \Robject{disp.cormatrixmap = FALSE}, for example see Figure \ref{fig:cometPlotNomatrix}.
 
-<<cometPlotNomatrixtext, eval=FALSE, fig.keep='last' >>=
+<<cometPlotNomatrixtext, eval=FALSE, fig.keep='last' ,warning=FALSE>>=
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 configfile <- file.path(extdata, "config_cyp1b1_zoom_4nomatrix.txt")
 myinfofile <- file.path(extdata, "cyp1b1_infofile.txt")
@@ -658,9 +662,9 @@ strand <- "*"
 
 genetrack <-genes_ENSEMBL(gen,chrom,start,end,showId=FALSE)
 snptrack <- snpBiomart_ENSEMBL(gen, chrom, start, end,
-                       dataset="hsapiens_snp_som",showId=FALSE)
+                               dataset="hsapiens_snp_som",showId=FALSE)
 strutrack <- structureBiomart_ENSEMBL(chrom, start, end,
-                              strand, dataset="hsapiens_structvar_som")
+                                      strand, dataset="hsapiens_structvar_som")
 clinVariant<-ClinVarMain_UCSC(gen,chrom,start,end)
 clinCNV<-ClinVarCnv_UCSC(gen,chrom,start,end)
 gwastrack <-GWAScatalog_UCSC(gen,chrom,start,end)
@@ -675,7 +679,7 @@ comet(config.file=configfile, mydata.file=myinfofile, mydata.type="file",
 @
 
 \begin{figure*}
-<<cometPlot_nomatrix, echo=FALSE, fig.keep='last' >>=
+<<cometPlot_nomatrix, echo=FALSE, fig.keep='last' ,warning=FALSE>>=
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 configfile <- file.path(extdata, "config_cyp1b1_zoom_4nomatrix.txt")
 myinfofile <- file.path(extdata, "cyp1b1_infofile.txt")
@@ -722,7 +726,7 @@ The output file has 7 columns:
 \end{enumerate}
 
 
-<<cometlist>>=
+<<cometlist,warning=FALSE>>=
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 mycorrelation <- file.path(extdata, "cyp1b1_res37_rawMatrix.txt")
 myoutput <- file.path(extdata, "cyp1b1_res37_cormatrix_list_BH05.txt")
@@ -739,6 +743,9 @@ listcorr <- read.csv(myoutput, header = TRUE,
 dim(listcorr)
 head(listcorr)
 @
+
+
+
 
 \clearpage
 \section{Annotation tracks}
@@ -781,7 +788,7 @@ The color of the genetic elements is defined by the R package \Biocpkg{Gviz}.
 
 It is possible to chagne the colour of some exsons by using the function \Rfunction{interestGenesENSEMBL} or \Rfunction{interestTranscriptENSEMBL}. The elements and the colours to be displayed must be given as list. An example is given below:
 
-<<GenesAndTranscript,eval=FALSE >>=
+<<GenesAndTranscript,eval=FALSE ,warning=FALSE>>=
 gen <- "hg38"
 chr <- "chr15"
 start <- 75011669
@@ -791,12 +798,12 @@ interestfeatures <- rbind(c("75011883","75013394","bad"),
 interestcolor <- list("bad"="red", "good"="green")
 
 interestgenesENSMBLtrack<-interestGenes_ENSEMBL(gen,chr,start,end,interestfeatures,
-                                               interestcolor,showId=TRUE)
+                                                interestcolor,showId=TRUE)
 plotTracks(interestgenesENSMBLtrack, from=start, to=end)
 @
 
 \begin{figure*}
-<<GenesAndTranscript2,echo=FALSE >>=
+<<GenesAndTranscript2,echo=FALSE ,warning=FALSE>>=
 gen <- "hg38"
 chr <- "chr15"
 start <- 75011669
@@ -872,27 +879,27 @@ the UCSC Genome Browser \cite{UCSC2002} website \url{http://genome-euro.ucsc.edu
 
 This is the list of \R{} wrapping functions of some tracks found in UCSC genome browser. Below described the colors of tracks and specific characteristics of some annotation tracks.
 \begin{itemize}
-    \item \Rfunction{chromatinHMMAll\_UCSC} : Visualise the chromHMM Broad found in UCSC genome browser of all tissues in the genomic region of interest.
-    \item \Rfunction{chromatinHMMOne\_UCSC} : Visualise the chromHMM Broad found in UCSC genome browser of the tissue of interest in the genomic region of interest.
-    \item \Rfunction{ClinVarCnv\_UCSC} : Visualise clinical CNVs found in ClinVar tracks of UCSC genome browser in the genomic region of interest.
-    \item \Rfunction{ClinVarMain\_UCSC} : Visualise clinical SNPs found in ClinVar tracks of UCSC genome browser in the genomic region of interest.
-    \item \Rfunction{CoreillCNV\_UCSC} : Visualise CNV found in Coreil tracks of UCSC genome browser in the genomic region of interest.
-    \item \Rfunction{COSMIC\_UCSC} : Visualise SNPs found in COSMIC tracks of UCSC genome browser in the genomic region of interest.\warning{We could not more access to COSMIC data from UCSC genome browser, people needs to extract data from COSMIC directly}.
-    \item \Rfunction{cpgIslands\_UCSC} : Visualise CpG Island found in CpGIsland tracks of UCSC genome browser in the genomic region of interest.
-    \item \Rfunction{DNAse\_UCSC} : Visualise clinical CNV found in ClinVar tracks of UCSC genome browser in the genomic region of interest.
-    \item \Rfunction{GAD\_UCSC} : Visualise genes found in GAD tracks of UCSC genome browser in the genomic region of interest.
-    \item \Rfunction{gcContent\_UCSC} : Visualise GC content found in  UCSC genome browser in the genomic region of interest.
-    \item \Rfunction{GeneReviews\_UCSC} : Visualise clinical genes found in GeneReviews tracks of UCSC genome browser in the genomic region of interest.
-    \item \Rfunction{GWAScatalog\_UCSC} : Visualise SNPS found in GWAS catalog tracks of UCSC genome browser in the genomic region of interest.
-    \item \Rfunction{HistoneAll\_UCSC} : Visualise histone patterns found in UCSC genome browser of all tissues in the genomic region of interest.
-    \item \Rfunction{HistoneOne\_UCSC} : Visualise histone patterns found in UCSC genome browser of one tissue of interest in the genomic region of interest.
-    \item \Rfunction{ISCA\_UCSC} (obselete) : Visualise clinical CNV found in UCSC genome browser in the genomic region of interest.
-    \item \Rfunction{knownGenes\_UCSC} : Visualise known genes found in UCSC genome browser in the genomic region of interest.
-    \item \Rfunction{refGenes\_UCSC} : Visualise reference genes found in UCSC genome browser in the genomic region of interest.
-    \item \Rfunction{repeatMasker\_UCSC} : Visualise repeat elements found in UCSC genome browser in the genomic region of interest.
-    \item \Rfunction{segmentalDups\_UCSC} : Visualise segmental duplcations found in UCSC genome browser in the genomic region of interest.
-    \item \Rfunction{snpLocations\_UCSC} : Visualise SNPs found in UCSC genome browser in the genomic region of interest.
-    \item \Rfunction{xenorefGenes\_UCSC} : Visualise xeno reference genes found in UCSC genome browser in the genomic region of interest.
+\item \Rfunction{chromatinHMMAll\_UCSC} : Visualise the chromHMM Broad found in UCSC genome browser of all tissues in the genomic region of interest.
+\item \Rfunction{chromatinHMMOne\_UCSC} : Visualise the chromHMM Broad found in UCSC genome browser of the tissue of interest in the genomic region of interest.
+\item \Rfunction{ClinVarCnv\_UCSC} : Visualise clinical CNVs found in ClinVar tracks of UCSC genome browser in the genomic region of interest.
+\item \Rfunction{ClinVarMain\_UCSC} : Visualise clinical SNPs found in ClinVar tracks of UCSC genome browser in the genomic region of interest.
+\item \Rfunction{CoreillCNV\_UCSC} : Visualise CNV found in Coreil tracks of UCSC genome browser in the genomic region of interest.
+\item \Rfunction{COSMIC\_UCSC} : Visualise SNPs found in COSMIC tracks of UCSC genome browser in the genomic region of interest.\warning{We could not more access to COSMIC data from UCSC genome browser, people needs to extract data from COSMIC directly}.
+\item \Rfunction{cpgIslands\_UCSC} : Visualise CpG Island found in CpGIsland tracks of UCSC genome browser in the genomic region of interest.
+\item \Rfunction{DNAse\_UCSC} : Visualise clinical CNV found in ClinVar tracks of UCSC genome browser in the genomic region of interest.
+\item \Rfunction{GAD\_UCSC} : Visualise genes found in GAD tracks of UCSC genome browser in the genomic region of interest.
+\item \Rfunction{gcContent\_UCSC} : Visualise GC content found in  UCSC genome browser in the genomic region of interest.
+\item \Rfunction{GeneReviews\_UCSC} : Visualise clinical genes found in GeneReviews tracks of UCSC genome browser in the genomic region of interest.
+\item \Rfunction{GWAScatalog\_UCSC} : Visualise SNPS found in GWAS catalog tracks of UCSC genome browser in the genomic region of interest.
+\item \Rfunction{HistoneAll\_UCSC} : Visualise histone patterns found in UCSC genome browser of all tissues in the genomic region of interest.
+\item \Rfunction{HistoneOne\_UCSC} : Visualise histone patterns found in UCSC genome browser of one tissue of interest in the genomic region of interest.
+\item \Rfunction{ISCA\_UCSC} (obselete) : Visualise clinical CNV found in UCSC genome browser in the genomic region of interest.
+\item \Rfunction{knownGenes\_UCSC} : Visualise known genes found in UCSC genome browser in the genomic region of interest.
+\item \Rfunction{refGenes\_UCSC} : Visualise reference genes found in UCSC genome browser in the genomic region of interest.
+\item \Rfunction{repeatMasker\_UCSC} : Visualise repeat elements found in UCSC genome browser in the genomic region of interest.
+\item \Rfunction{segmentalDups\_UCSC} : Visualise segmental duplcations found in UCSC genome browser in the genomic region of interest.
+\item \Rfunction{snpLocations\_UCSC} : Visualise SNPs found in UCSC genome browser in the genomic region of interest.
+\item \Rfunction{xenorefGenes\_UCSC} : Visualise xeno reference genes found in UCSC genome browser in the genomic region of interest.
 \end{itemize}
 
 \subsubsection{ChromHMM from UCSC}
@@ -964,9 +971,9 @@ More information on each type data are on the site of NIH Roadmap Epigenomics Pr
 
 The current data are done on Release 9. The data are mapped on the reference genome \textbf{hg19}. Below described the colors of tracks and specific characteristics of some annotation tracks.
 \begin{itemize}
-  \item \Rfunction{chromHMM\_RoadMap} : Visualisation of chromatin states defined in NIH Roadmap project
-  \item \Rfunction{dgfootprints\_RoadMap}: Visualisation of DNA motif positional bias in digital genomic Footprinting Sites
-  \item \Rfunction{DNaseI\_RoadMap} : Visualisation of promoter/enhancer regions
+\item \Rfunction{chromHMM\_RoadMap} : Visualisation of chromatin states defined in NIH Roadmap project
+\item \Rfunction{dgfootprints\_RoadMap}: Visualisation of DNA motif positional bias in digital genomic Footprinting Sites
+\item \Rfunction{DNaseI\_RoadMap} : Visualisation of promoter/enhancer regions
 \end{itemize}
 
 \subsubsection{Chromatin state}
@@ -1022,7 +1029,7 @@ Using the core 15-state chromatin state model across any of the 111 NIH Roadmap 
 \item for \textbf{dyadic} promoter/enhancer region the file of tissue of interest \url{http://egg2.wustl.edu/roadmap/data/byDataType/dnase/BED\_files\_dyadic/}
 \end{itemize}
 
-<<Roadmap_example1e,eval=FALSE>>=
+<<Roadmap_example1e,eval=FALSE,warning=FALSE>>=
 chr<-"chr2"
 start <- 38290160
 end <- 38303219
@@ -1051,7 +1058,7 @@ plotTracks(listRoadMap, chromosome=chr,from=start,to=end)
 @
 
 \begin{figure*}
-<<Roadmap_example1e2,echo=FALSE>>=
+<<Roadmap_example1e2,echo=FALSE,warning=FALSE>>=
 chr<-"chr2"
 start <- 38290160
 end <- 38303219
@@ -1078,7 +1085,7 @@ The ENCODE (Encyclopedia of DNA Elements) Consortium is an international collabo
 
 Genes and transcripts of GENCODE are accessible from ENSEMBL biomart or can be visualised wtith \Rfunction{GeneRegionTrack} of \Biocpkg{Gviz}. Other data are in BED or BAM format that can be visualised with \Biocpkg{Gviz} tracks.
 
-<<encore_genes,eval=FALSE>>=
+<<encore_genes,eval=FALSE,warning=FALSE>>=
 #Genes from GENCODE
 chr<-3
 start <- 132239976
@@ -1095,7 +1102,7 @@ plotTracks(grtrack, chromosome=chr,from=start,to=end)
 @
 
 \begin{figure*}
-<<encore_genes2,echo=FALSE>>=
+<<encore_genes2,echo=FALSE,warning=FALSE>>=
 #Genes from GENCODE
 chr<-3
 start <- 132239976
@@ -1113,7 +1120,7 @@ options(ucscChromosomeNames=TRUE)
 \subsubsection{Predicting motifs and active regulators}
 You can browse known and discovered motifs for the ENCODE TF ChIP-seq datasets. The position of motifs can be visualised using the function \Rfunction{ChIPTF\_ENCODE} using one of files from \url{http://compbio.mit.edu/encode-motifs/} \cite{Kheradpour2014} such as \url{http://compbio.mit.edu/encode-motifs/matches.txt.gz}
 
-<<encode_example,eval=FALSE>>=
+<<encode_example,eval=FALSE,warning=FALSE>>=
 #TF Chip-seq data
 gen <- "hg19"
 chr<-"chr1"
@@ -1132,7 +1139,7 @@ plotTracks(chipTFtrack, chromosome=chr,from=start,to=end)
 @
 
 \begin{figure*}
-<<encode_example2,echo=FALSE>>=
+<<encode_example2,echo=FALSE,warning=FALSE>>=
 #TF Chip-seq data
 gen <- "hg19"
 chr<-"chr1"
@@ -1163,7 +1170,7 @@ One function from \Biocpkg{Gviz}:
 \item \Rfunction{GeneRegionTrack} can visualise gene level model based on the GENCODE transcript model (cf. example below. Isoforms have been collapsed to single genes. The name of file in GTEx version 6 is \emph{gencode.v19.genes.patched\_contigs.gtf}.
 \end{enumerate}
 
-<<GTEX_example1,eval=FALSE>>=
+<<GTEX_example1,eval=FALSE,warning=FALSE>>=
 ## eQTL data
 chr<-"chr3"
 start <- 132239976
@@ -1192,7 +1199,7 @@ plotTracks(eGTexTracklist, chromosome=chr,from=start,to=end)
 
 
 \begin{figure*}
-<<GTEX_example12,echo=FALSE>>=
+<<GTEX_example12,echo=FALSE,warning=FALSE>>=
 ## eQTL data
 chr<-"chr3"
 start <- 132239976
@@ -1218,7 +1225,7 @@ plotTracks(eGTexTracklist, chromosome=chr,from=start,to=end)
 \end{enumerate}
 
 
-<<GTEX_example4e,eval=FALSE>>=
+<<GTEX_example4e,eval=FALSE,warning=FALSE>>=
 ### psiQTL
 chr<-"chr13"
 start <- 52713837
@@ -1238,7 +1245,7 @@ plotTracks(psiTrack, chromosome=chr,from=start,to=end)
 @
 
 \begin{figure*}
-<<GTEX_example4e2,echo=FALSE>>=
+<<GTEX_example4e2,echo=FALSE,warning=FALSE>>=
 ### psiQTL
 chr<-"chr13"
 start <- 52713837
@@ -1255,13 +1262,13 @@ plotTracks(psiTrack, chromosome=chr,from=start,to=end)
 \caption{Plot psiQTL from GTex.\label{fig:psiQTLGTextrack}}
 \end{figure*}
 
-<<TEX_example5e1>>=
+<<TEX_example5e1,warning=FALSE>>=
 data(imprintedGenesGTEx)
 as.character(unique(imprintedGenesGTEx$Tissue.Name))
 as.character(unique(imprintedGenesGTEx$Classification))
 @
 
-<<GTEX_example5e,eval=FALSE>>=
+<<GTEX_example5e,eval=FALSE,warning=FALSE>>=
 ### inprinted genes
 chr<- "chr1"
 start <- 7895752
@@ -1293,7 +1300,7 @@ plotTracks(list(genesTrack, allIG, allimprintedIG,
 
 
 \begin{figure*}
-<<GTEX_example5e2,echo=FALSE>>=
+<<GTEX_example5e2,echo=FALSE,warning=FALSE>>=
 ### inprinted genes
 chr<- "chr1"
 start <- 7895752
@@ -1316,7 +1323,7 @@ plotTracks(imprintinglist, from = start, to = end)
 \end{figure*}
 
 
-% <<GTEX_example3,eval=FALSE,echo=FALSE>>=
+% <<GTEX_example3,eval=FALSE,echo=FALSE,warning=FALSE>>=
 % ## sQTL data
 % chr<-3
 % start <- 132239976
@@ -1342,7 +1349,7 @@ They \cite{Rao2014} used in situ Hi-C to probe the three-dimensional architectur
 
 You can download intrachromosomal matrice from \url{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE63525} for the cell-type of interest.
 
-<<extract_data_1kb,eval=FALSE>>=
+<<extract_data_1kb,eval=FALSE,warning=FALSE>>=
 library('corrplot')
 #Hi-C data
 gen <- "hg19"
@@ -1359,7 +1366,7 @@ corrplot(cor_matrix_HiC, method = "circle")
 @
 
 % \begin{figure*}
-% <<extract_data_1kb2,echo=FALSE>>=
+% <<extract_data_1kb2,echo=FALSE,warning=FALSE>>=
 % library('corrplot')
 % #Hi-C data
 % gen <- "hg19"
@@ -1392,7 +1399,7 @@ You need to :
 \item Extract in either raw or normalised matrice only the sub-matrice of interest
 \end{enumerate}
 
-<<extract_data,eval=FALSE>>=
+<<extract_data,eval=FALSE,warning=FALSE>>=
 extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 info_HiC <- file.path(extdata, "Human_IMR90_Fibroblast_topological_domains.txt")
 data_info_HiC <-read.csv(info_HiC, header = FALSE, sep = "\t", quote = "")
@@ -1427,12 +1434,12 @@ As the data are in classical format such as BED file, you can use easily \Biocpk
 
 2 functions were created :
 \begin{itemize}
-  \item \Rfunction{DNaseI\_FANTOM} helps to visualise enhancer regions defined by FANTOM5
+\item \Rfunction{DNaseI\_FANTOM} helps to visualise enhancer regions defined by FANTOM5
 \item \Rfunction{TFBS\_FANTOM} helps to visualise TFBS regions defined by FANTOM5
 \end{itemize}
 
 
-<<FANTOM_example,eval=FALSE>>=
+<<FANTOM_example,eval=FALSE,warning=FALSE>>=
 gen <- "hg19"
 chr<- "chr1"
 start <- 6000000
@@ -1452,7 +1459,7 @@ tfbsFANTOMtrack <- TFBS_FANTOM(gen,chr,start, end, AP1FantomFile)
 @
 
 \begin{figure*}
-<<FANTOM_example2,echo=FALSE>>=
+<<FANTOM_example2,echo=FALSE,warning=FALSE>>=
 gen <- "hg19"
 chr<- "chr1"
 start <- 6000000
@@ -1516,9 +1523,9 @@ sudo su - -c "R -e \"install.packages('rmarkdown', repos='http://cran.rstudio.co
 \end{verbatim}
 \item You can install \CRANpkg{Shiny} Server \url{http://shiny.rstudio.com/}, go to \url{https://www.rstudio.com/products/shiny/download-server/}.
 \begin{verbatim}
- sudo apt-get install gdebi-core
- wget \url{https://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.4.2.786-amd64.deb}
- sudo gdebi shiny-server-1.4.2.786-amd64.deb
+sudo apt-get install gdebi-core
+wget \url{https://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.4.2.786-amd64.deb}
+sudo gdebi shiny-server-1.4.2.786-amd64.deb
 \end{verbatim}
 \item \CRANpkg{Shiny} Server should now be installed and running on port 3838. You should be able to see a default welcome screen at \url{http://your\_server\_ip:3838/}. You can make sure your \CRANpkg{Shiny} Server is working properly by going to \url{http://your\_server\_ip:3838/sample-apps/hello/}.
 \item You now have a functioning \CRANpkg{Shiny} Server that can host \CRANpkg{Shiny} applications or interactive documents. The configuration file for \CRANpkg{Shiny} Server is at /etc/shiny-server/shiny-server.conf. By default it is configured to serve applications in the /srv/shiny-server/ directory. This means that any \CRANpkg{Shiny} application that is placed at /srv/shiny-server/app\_name will be available to the public at \url{http://your\_server\_ip:3838/app\_name/}.
@@ -1574,28 +1581,28 @@ sudo restart shiny-server
 
 \clearpage
 Your Shiny's configuration file:
-\begin{verbatim}
+  \begin{verbatim}
 run_as shiny;
 # Define a top-level server which will listen on a port
 server {
-# Instruct this server to listen on port 3838
-listen 3838;
-# Define the location available at the base URL
-location / {
-# Run this location in 'site_dir' mode, which hosts the entire directory
-# tree at '/srv/shiny-server'
-site_dir /var/shiny-server/www;
+  # Instruct this server to listen on port 3838
+  listen 3838;
+  # Define the location available at the base URL
+  location / {
+    # Run this location in 'site_dir' mode, which hosts the entire directory
+    # tree at '/srv/shiny-server'
+    site_dir /var/shiny-server/www;
 
-# Define where we should put the log files for this location
-log_dir /var/shiny-server/log;
+    # Define where we should put the log files for this location
+    log_dir /var/shiny-server/log;
 
-# Should we list the contents of a (non-Shiny-App) directory when the user
-# visits the corresponding URL?
-directory_index off;
+    # Should we list the contents of a (non-Shiny-App) directory when the user
+    # visits the corresponding URL?
+    directory_index off;
 
-#   app_init_timeout 3600;
-#   app_idle_timeout 3600;
-}
+    #   app_init_timeout 3600;
+    #   app_idle_timeout 3600;
+  }
 
 }
 \end{verbatim}
@@ -1613,7 +1620,7 @@ If the previous time \Rfunction{comet} or \Rfunction{comet.web} ran and error wa
 Type the name of your track, visualise the track with \Rfunction{plotTrack} or read different parameters with \Rfunction{str} function.
 \begin{lstlisting}
 genetrack <-genesENSEMBL(gen,chrom,start,
-                    end,showId=TRUE)
+                         end,showId=TRUE)
 
 plotTracks(genetrack)
 
@@ -1627,16 +1634,16 @@ str(genetrack)
 To enlarge the name of gene, as the object is \Biocpkg{Gviz} object, you can use the option from \Biocpkg{Gviz}.
 \\
 You can see the value of different parameters via this command line:
-\begin{lstlisting}
+  \begin{lstlisting}
 genetrack <-genesENSEMBL(gen,chrom,start,
-       end,showId=TRUE)
+                         end,showId=TRUE)
 
 displayPars(genetrack)
 \end{lstlisting}
 \leavevmode
 \\
 So if you want to enlarge the name of gene, you need to do use the option \Robject{fontsize.gviz} in the \Rfunction{comet} function, an example is given below:
-\\
+  \\
 \begin{lstlisting}
 comet(config.file = configfile, mydata.file = myinfofile,
       mydata.format = "file",
@@ -1655,7 +1662,7 @@ To make a selection of genes to display first create the track like you would if
 \\
 \begin{lstlisting}
 geneTrack <- refGenesUCSC(gen, chr, start, end,
-IdType ="name", showId = TRUE)
+                          IdType ="name", showId = TRUE)
 
 geneTrackShow <- geneTrack[gene(geneTrack) %in% c("AHRR")]
 \end{lstlisting}
@@ -1676,14 +1683,14 @@ When coMET writes to a PDF, it is writing out to a 7X7 square area. So, it turns
 \begin{lstlisting}
 '''{r plot_ex1,fig.keep='last', fig.height=7, fig.width=7,dev='pdf'}
 comet(config.gile=configfile,
-mydata.file=myinfofile, mydata_type="file",
-cormatrix.file-mycorrelation,
-cormatrix.type="listfile",
-mydata.large.file=myexpressfile,
-mydata.large.type="listfile",
-tracks.gviz=listgviz,
-verbose=FALSE, print.image=FALSE,
-disp.pvalueplot=FALSE)
+      mydata.file=myinfofile, mydata_type="file",
+      cormatrix.file-mycorrelation,
+      cormatrix.type="listfile",
+      mydata.large.file=myexpressfile,
+      mydata.large.type="listfile",
+      tracks.gviz=listgviz,
+      verbose=FALSE, print.image=FALSE,
+      disp.pvalueplot=FALSE)
 '''
 \end{lstlisting}
 \leavevmode
@@ -1694,14 +1701,14 @@ disp.pvalueplot=FALSE)
 \section{Acknowledgement}
 T.C.M would like to thank Bioconductor team for their help and advice in the development of a R Bioconductor package. Moreover, T.C.M would like to thank different users for their feedback that help to improve this present R package.
 \begin{itemize}
-  \item Prof Daniel Weeks and Dr Annie Infancia Arockiaraj to share with us how to visualise correctly coMET plot in R Markdown code.
+\item Prof Daniel Weeks and Dr Annie Infancia Arockiaraj to share with us how to visualise correctly coMET plot in R Markdown code.
 \end{itemize}
 
 
 \clearpage
 \section{SessionInfo}
 The following is the session info that generated this vignette:
-<<session-info, results='asis', echo=FALSE>>=
+<<session-info, results='asis', echo=FALSE,warning=FALSE>>=
 toLatex(sessionInfo())
 @
 
@@ -1733,7 +1740,7 @@ toLatex(sessionInfo())
 # #Need to update under Rdev
 # remove.packages("BiocManager")
 # if (!requireNamespace("BiocManager", quietly=TRUE))
-    # install.packages("BiocManager")
+# install.packages("BiocManager")
 #
 # #Need to update different packages associated with coMET
 # BiocManager::install("coMET")
@@ -1788,5 +1795,6 @@ toLatex(sessionInfo())
 \clearpage
 %\bibliographystyle{authordate1}
 \bibliography{biblio}
+
 
 \end{document}

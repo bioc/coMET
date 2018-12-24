@@ -1,3 +1,7 @@
+COMET 1.15.2 - 2018-12-24
+-------------------------
+- Update vignette (add warning=False)
+
 COMET 1.15.1 - 2018-12-24
 -------------------------
 - Update script to snp_ensembL
