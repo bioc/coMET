@@ -1,6 +1,7 @@
 COMET 1.23.1 - 2021-05-16
 -------------------------
-- Update data with Biomart
+- Update datasets with Biomart
+For example:
 data(allIG)
 allIG@biomart@httr_config <- list()
 save(allIG,file="XXXX")
