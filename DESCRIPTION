@@ -1,14 +1,14 @@
 Package: coMET
 Type: Package
 Title: coMET: visualisation of regional epigenome-wide association scan (EWAS) results and DNA co-methylation patterns
-Version: 1.27.1
-Date: 2021-11-17
+Version: 1.27.2
+Date: 2022-04-18
 Author: Tiphaine C. Martin [aut,cre], Thomas Hardiman [aut], Idil Yet [aut],
         Pei-Chien Tsai [aut], Jordana T. Bell [aut]
 Maintainer: Tiphaine Martin <tiphaine.martin@mssm.edu>
 Description: Visualisation of EWAS results in a genomic region. In addition to phenotype-association P-values, coMET also generates plots of co-methylation patterns and provides a series of annotation tracks. It can be used to other omic-wide association scans as long as the data can be translated to genomic level and for any species.
-Depends: R (>= 3.7.0), grid, utils, biomaRt, Gviz, psych
-Suggests: BiocStyle, knitr, RUnit, BiocGenerics 
+Depends: R (>= 4.0.0), grid, utils, biomaRt, Gviz, psych
+Suggests: BiocStyle, knitr, RUnit, BiocGenerics, showtext 
 Imports: colortools, hash,grDevices, gridExtra, rtracklayer, IRanges, S4Vectors, GenomicRanges, stats, corrplot
 License: GPL (>= 2)
 URL:  http://epigen.kcl.ac.uk/comet

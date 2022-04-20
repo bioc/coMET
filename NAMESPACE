@@ -73,10 +73,7 @@ export(chrUCSC2ENSEMBL,
     ClinVarCnv_UCSC, ClinVarMain_UCSC,
     CoreillCNV_UCSC,
     COSMIC_UCSC,
-    chromatinHMMAll_UCSC, chromatinHMMOne_UCSC,
-    HistoneAll_UCSC, HistoneOne_UCSC,
     cpgIslands_UCSC,
-    DNAse_UCSC,
     regulationBiomart_ENSEMBL,
     bindingMotifsBiomart_ENSEMBL,
     regulatorySegmentsBiomart_ENSEMBL,
@@ -96,9 +93,12 @@ export(chrUCSC2ENSEMBL,
     TFBS_FANTOM,
     DNaseI_FANTOM,
     ChIPTF_ENCODE,
+    chromatinHMMAll_UCSC, chromatinHMMOne_UCSC,
+    HistoneAll_UCSC, HistoneOne_UCSC,
     HiCdata2matrix)
 
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ### obselete tracks
 ###
 #ISCATrack
+#    DNAse_UCSC,

@@ -1,3 +1,10 @@
+COMET 1.27.2 - 2022-04-18
+------------------------
+- Update ENSEMBL functions for https
+- Remove DNase_UCSC functions
+- Add information about font.family for plotTrack and other Gviz functions
+- Add showtext library in coMET.Rnw vignette
+
 COMET 1.23.1 - 2021-05-16
 -------------------------
 - Update datasets with Biomart
