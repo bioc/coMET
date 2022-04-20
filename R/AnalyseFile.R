@@ -697,7 +697,7 @@ check.configVar <- function(config.var) {
   if(is.null(config.var$list.tracks)) {
     if (config.var$verbose)   cat("No value of annotation tracks\n
            Parameter: list.tracks\n
-           Potential value: geneENSEMBL,CGI,ChromHMM,DNAse,RegENSEMBL,SNP\n")
+           Potential value: geneENSEMBL,CGI,ChromHMM,RegENSEMBL,SNP\n")
   }else {
     
     if(is.null(config.var$tracks.gviz)) {

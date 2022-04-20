@@ -275,7 +275,8 @@ printPlot.comet.web <- function(config.var, gbl.var){
                height=as.numeric(imagesize),
                paper="special",
                pagecentre=TRUE,
-               fonts=c("sans"))
+               fonts=c("sans"),
+               family="URWHelvetica")
   } else {
     stop("Invalid image type: ", imagetype, " and image size: ", 
          imagesize, " combination.\n")
@@ -318,7 +319,8 @@ printPlot.comet <- function(config.var, gbl.var){
                height=as.numeric(imagesize),
                paper="special",
                pagecentre=TRUE,
-               fonts=c("sans"))
+               fonts=c("sans"),
+               family="URWHelvetica")
   } else {
     stop("Invalid image type: ", imagetype, " and image size: ", 
          imagesize, " combination.\n")
@@ -362,7 +364,8 @@ printPlot.comet.nopval <- function(config.var, gbl.var){
                height=as.numeric(imagesize),
                paper="special",
                pagecentre=TRUE,
-               fonts=c("sans"))
+               fonts=c("sans"),
+               family="URWHelvetica")
   } else {
     stop("Invalid image type: ", imagetype, " and image size: ", 
          imagesize, " combination.\n")

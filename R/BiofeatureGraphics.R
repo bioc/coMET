@@ -53,7 +53,7 @@ genesName_ENSEMBL<-function(gen,chr,start,end,dataset){
 
   ens_ENSEMBL <- NULL
   if(!is.na(match(tolower(genTrunk), c("grch37","hg19")))){
-    martENSEMBL=useMart(host='grch37.ensembl.org', biomart='ENSEMBL_MART_ENSEMBL',
+    martENSEMBL=useMart(host='https://grch37.ensembl.org', biomart='ENSEMBL_MART_ENSEMBL',
                         dataset=dataset)
     ens_ENSEMBL <- getBM(c("ensembl_gene_id","external_gene_name"),
                          filters = c("chromosome_name","start","end"),
@@ -96,7 +96,7 @@ genes_ENSEMBL<-function(gen,chr,start,end,showId=FALSE,title="genes (ENSEMBL)"){
 
   biomTrack=NULL
   if(!is.na(match(tolower(genTrunk), c("grch37","hg19")))){
-    martENSEMBL=useMart(host='grch37.ensembl.org', biomart='ENSEMBL_MART_ENSEMBL',
+    martENSEMBL=useMart(host='https://grch37.ensembl.org', biomart='ENSEMBL_MART_ENSEMBL',
                         dataset='hsapiens_gene_ensembl')
     #  fm <- Gviz:::.getBMFeatureMap()
     #  fm["symbol"] <- "external_gene_id"
@@ -112,7 +112,8 @@ genes_ENSEMBL<-function(gen,chr,start,end,showId=FALSE,title="genes (ENSEMBL)"){
                                         groupAnnotation = "group",
                                         just.group = "above",
                                         fontcolor="black",showId=showId,size=2,
-                                        col.line = NULL, col = NULL)
+                                        col.line = NULL, col = NULL,
+                                        fontfamily="sans",fontfamily.title="sans")
 
 
   } else {
@@ -123,7 +124,8 @@ genes_ENSEMBL<-function(gen,chr,start,end,showId=FALSE,title="genes (ENSEMBL)"){
                                         groupAnnotation = "group",
                                         just.group = "above",
                                         fontcolor="black",showId=showId,size=2,
-                                        col.line = NULL, col = NULL)
+                                        col.line = NULL, col = NULL,
+                                        fontfamily="sans",fontfamily.title="sans")
   }
 
 
@@ -148,7 +150,8 @@ genes_ENSEMBL<-function(gen,chr,start,end,showId=FALSE,title="genes (ENSEMBL)"){
 }
 
 #-------------------- CREATION track all elements but only one line per element with specific color for features of interest ------------------
-interestGenes_ENSEMBL<-function(gen,chr,start,end,interestfeatures,interestcolor,showId=FALSE,title="genes (ENSEMBL)"){
+interestGenes_ENSEMBL<-function(gen,chr,start,end,interestfeatures,
+                                interestcolor,showId=FALSE,title="genes (ENSEMBL)"){
   if(is.null(gen)){
     stop("Invalid in function interestGenesENSEMBL :gen null:\n")
   }
@@ -175,7 +178,7 @@ interestGenes_ENSEMBL<-function(gen,chr,start,end,interestfeatures,interestcolor
 
   biomTrack=NULL
   if(!is.na(match(tolower(genTrunk), c("grch37","hg19")))){
-    martENSEMBL=useMart(host='grch37.ensembl.org', biomart='ENSEMBL_MART_ENSEMBL',
+    martENSEMBL=useMart(host='https://grch37.ensembl.org', biomart='ENSEMBL_MART_ENSEMBL',
                         dataset='hsapiens_gene_ensembl')
     #  fm <- Gviz:::.getBMFeatureMap()
     #  fm["symbol"] <- "external_gene_id"
@@ -191,7 +194,8 @@ interestGenes_ENSEMBL<-function(gen,chr,start,end,interestfeatures,interestcolor
                                         groupAnnotation = "group",
                                         just.group = "above",
                                         fontcolor="black",showId=showId,size=2,
-                                        col.line = NULL, col = NULL)
+                                        col.line = NULL, col = NULL,
+                                        fontfamily="sans",fontfamily.title="sans")
 
 
   } else {
@@ -202,7 +206,8 @@ interestGenes_ENSEMBL<-function(gen,chr,start,end,interestfeatures,interestcolor
                                         groupAnnotation = "group",
                                         just.group = "above",
                                         fontcolor="black",showId=showId,size=2,
-                                        col.line = NULL, col = NULL)
+                                        col.line = NULL, col = NULL,
+                                        fontfamily="sans",fontfamily.title="sans")
   }
 
 
@@ -263,7 +268,7 @@ transcript_ENSEMBL<-function(gen,chr,start,end,showId=FALSE, title="transcripts 
 
   biomTrack=NULL
   if(!is.na(match(tolower(genTrunk), c("grch37","hg19")))){
-    martENSEMBL=useMart(host='grch37.ensembl.org', biomart='ENSEMBL_MART_ENSEMBL',
+    martENSEMBL=useMart(host='https://grch37.ensembl.org', biomart='ENSEMBL_MART_ENSEMBL',
                         dataset='hsapiens_gene_ensembl')
     #  fm <- Gviz:::.getBMFeatureMap()
     #  fm["symbol"] <- "external_gene_id"
@@ -277,7 +282,8 @@ transcript_ENSEMBL<-function(gen,chr,start,end,showId=FALSE, title="transcripts 
                                         end = end,  name = title,
                                         fontcolor="black",groupAnnotation = "group",
                                         just.group = "above",showId=showId,size=2,
-                                        col.line = NULL, col = NULL)
+                                        col.line = NULL, col = NULL,
+                                        fontfamily="sans",fontfamily.title="sans")
 
   } else {
     martENSEMBL=useMart("ensembl",dataset='hsapiens_gene_ensembl')
@@ -286,7 +292,8 @@ transcript_ENSEMBL<-function(gen,chr,start,end,showId=FALSE, title="transcripts 
                                         end = end,  name = title,
                                         fontcolor="black", groupAnnotation = "group",
                                         just.group = "above",showId=showId,size=2,
-                                        col.line = NULL, col = NULL)
+                                        col.line = NULL, col = NULL,
+                                        fontfamily="sans",fontfamily.title="sans")
   }
 
   #cat("data",gen,"\t",chr,"\t",start,"\t",end,"\n")
@@ -299,7 +306,9 @@ transcript_ENSEMBL<-function(gen,chr,start,end,showId=FALSE, title="transcripts 
 
 
 #-------------------- CREATION track for all transcript in the region with color for features of interest------------------
-interestTranscript_ENSEMBL<-function(gen,chr,start,end,interestfeatures,interestcolor,showId=FALSE, title="transcripts ENSEMBL"){
+interestTranscript_ENSEMBL<-function(gen,chr,start,end,interestfeatures,
+                                     interestcolor,showId=FALSE, 
+                                     title="transcripts ENSEMBL"){
   if(is.null(gen)){
     stop("Invalid in function interestTranscriptENSEMBL: gen null:\n")
   }
@@ -325,7 +334,7 @@ interestTranscript_ENSEMBL<-function(gen,chr,start,end,interestfeatures,interest
 
   biomTrack=NULL
   if(!is.na(match(tolower(genTrunk), c("grch37","hg19")))){
-    martENSEMBL=useMart(host='grch37.ensembl.org', biomart='ENSEMBL_MART_ENSEMBL',
+    martENSEMBL=useMart(host='https://grch37.ensembl.org', biomart='ENSEMBL_MART_ENSEMBL',
                         dataset='hsapiens_gene_ensembl')
     #  fm <- Gviz:::.getBMFeatureMap()
     #  fm["symbol"] <- "external_gene_id"
@@ -339,7 +348,8 @@ interestTranscript_ENSEMBL<-function(gen,chr,start,end,interestfeatures,interest
                                         end = end,  name = title,
                                         fontcolor="black",groupAnnotation = "group",
                                         just.group = "above",showId=showId,size=2,
-                                        col.line = NULL, col = NULL, collapse= FALSE)
+                                        col.line = NULL, col = NULL, collapse= FALSE,
+                                        fontfamily="sans",fontfamily.title="sans")
 
   } else {
     martENSEMBL=useMart("ensembl",dataset='hsapiens_gene_ensembl')
@@ -348,7 +358,8 @@ interestTranscript_ENSEMBL<-function(gen,chr,start,end,interestfeatures,interest
                                         end = end,  name = title,
                                         fontcolor="black", groupAnnotation = "group",
                                         just.group = "above",showId=showId,size=2,
-                                        col.line = NULL, col = NULL, collapse= FALSE)
+                                        col.line = NULL, col = NULL, collapse= FALSE,
+                                        fontfamily="sans",fontfamily.title="sans")
   }
 
   #cat("data",gen,"\t",chr,"\t",start,"\t",end,"\n")
@@ -376,7 +387,8 @@ interestTranscript_ENSEMBL<-function(gen,chr,start,end,interestfeatures,interest
 
 
 #-------------------- CREATION track all type of chromatineHMM from UCSC ------------------
-chromatinHMMAll_UCSC<-function(gen,chr,start,end,mySession,color= 'coMET',pattern=NULL,table.name=NULL){
+chromatinHMMAll_UCSC<-function(gen,chr,start,end,mySession,color= 'coMET',
+                               pattern=NULL,table.name=NULL){
   if(is.null(gen)){
     stop("Invalid in function chromatinHMMAll :gen null:\n")
   }
@@ -401,7 +413,7 @@ chromatinHMMAll_UCSC<-function(gen,chr,start,end,mySession,color= 'coMET',patter
     stop("Invalid in function chromatinHMMOne :genome not supported, only available for hg19\n")
   }
   track.name="Broad ChromHMM"
-  tablestrack<-tableNames(ucscTableQuery(mySession, track=track.name))
+  tablestrack<-ucscTables(genTrunk, track.name)
   if(is.null(pattern)) {
     patterntable<-1:length(tablestrack)
   } else{
@@ -411,7 +423,9 @@ chromatinHMMAll_UCSC<-function(gen,chr,start,end,mySession,color= 'coMET',patter
   lltrack=list()
   for(i in patterntable){
     table.name<-tablestrack[i]
-    tmp<-chromatinHMMOne_UCSC(gen=genTrunk, chr=chr, start=start, end=end, mySession=mySession, color=color, table.name=table.name)
+    tmp<-chromatinHMMOne_UCSC(gen=genTrunk, chr=chr, start=start, end=end,
+                              mySession=mySession, color=color, 
+                              table.name=table.name)
     if(!is.null(tmp) | length(feature(tmp)) > 0){
       lltrack=c(lltrack,tmp)
     }
@@ -427,7 +441,8 @@ chromatinHMMAll_UCSC<-function(gen,chr,start,end,mySession,color= 'coMET',patter
 }
 
 #-------------------- CREATION track one type of chromaHMM from UCSC ------------------
-chromatinHMMOne_UCSC<-function(gen,chr,start,end,mySession, color= 'coMET', title="ENCODE/Broad chromHMM", table.name=NULL){
+chromatinHMMOne_UCSC<-function(gen,chr,start,end,mySession, color= 'coMET', 
+                               title="ENCODE/Broad chromHMM", table.name=NULL){
   if(is.null(chr)){
     stop("Invalid in function chromatinHMMOne :chr null:\n")
   }
@@ -456,8 +471,8 @@ chromatinHMMOne_UCSC<-function(gen,chr,start,end,mySession, color= 'coMET', titl
   track.name="Broad ChromHMM"
   colorcase <- tolower(color)
   mygrange <- GRanges(chr, IRanges(start, end))
-  dataUCSC <- getTable(ucscTableQuery (mySession, range=mygrange,
-                                       track=track.name, table=table.name))
+  dataUCSC <- getTable(ucscTableQuery(gen, range=mygrange,
+                                       table=table.name))
 
   data_trackfunc <- AnnotationTrack()
   if(nrow(dataUCSC) > 0) {
@@ -465,7 +480,8 @@ chromatinHMMOne_UCSC<-function(gen,chr,start,end,mySession, color= 'coMET', titl
                                       start=dataUCSC[,"chromStart"],end=dataUCSC[,"chromEnd"],
                                       feature=dataUCSC[,"name"],group=dataUCSC[,"name"],
                                       id=dataUCSC[,"name"], name = title,
-                                      stacking="dense", col.line = NULL, col = NULL)
+                                      stacking="dense", col.line = NULL, col = NULL,
+                                      fontfamily="sans",fontfamily.title="sans")
     chromosome(data_trackfunc) <- chr
 
     if(colorcase == "ucsc"){
@@ -518,7 +534,8 @@ chromatinHMMOne_UCSC<-function(gen,chr,start,end,mySession, color= 'coMET', titl
 }
 
 #-------------------- CREATION track all types of Histone density from UCSC ------------------
-HistoneAll_UCSC<-function(gen,chr,start,end,mySession,pattern=NULL,track.name="Broad Histone",table.name=NULL){
+HistoneAll_UCSC<-function(gen,chr,start,end,mySession,pattern=NULL,
+                          track.name="Broad Histone",table.name=NULL){
   if(is.null(chr)){
     stop("Invalid in function HistoneAll :chr null:\n")
   }
@@ -536,7 +553,7 @@ HistoneAll_UCSC<-function(gen,chr,start,end,mySession,pattern=NULL,track.name="B
   }else if(is.null(track.name) & gen != "hg19"){
     stop("Invalid in function HistoneAll :track.namenull:\n")
   }
-  tablestrack<-tableNames(ucscTableQuery(mySession, track=track.name))
+  tablestrack<-ucscTables(gen, track.name)
 
   #patternPk="PkV*[0-9]*$"
   patternPk="Pk$"
@@ -574,7 +591,8 @@ HistoneAll_UCSC<-function(gen,chr,start,end,mySession,pattern=NULL,track.name="B
 }
 
 #-------------------- CREATION track one type of Histone density from UCSC ------------------
-HistoneOne_UCSC<-function(gen,chr,start,end,mySession,title="Broad Histone",track.name="Broad Histone",table.name=NULL){
+HistoneOne_UCSC<-function(gen,chr,start,end,mySession,title="Broad Histone",
+                          track.name="Broad Histone",table.name=NULL){
   if(is.null(chr)){
     stop("Invalid in function HistoneOne :chr null:\n")
   }
@@ -598,8 +616,8 @@ HistoneOne_UCSC<-function(gen,chr,start,end,mySession,title="Broad Histone",trac
     stop("Invalid in function HistoneOne :gen null:\n")
   }
   mygrange <- GRanges(chr, IRanges(start, end))
-  dataUCSC <- getTable(ucscTableQuery (mySession, range=mygrange,
-                                       track=track.name, table=table.name))
+  dataUCSC <- getTable(ucscTableQuery(gen, range=mygrange,
+                                      table=table.name))
 
 
   data_trackfunc <- AnnotationTrack()
@@ -608,7 +626,8 @@ HistoneOne_UCSC<-function(gen,chr,start,end,mySession,title="Broad Histone",trac
                                       start=dataUCSC[,"chromStart"],end=dataUCSC[,"chromEnd"],
                                       feature=dataUCSC[,"score"],group=dataUCSC[,"name"],
                                       id=dataUCSC[,"name"], name = title,
-                                      stacking="dense", col.line = NULL, col = NULL)
+                                      stacking="dense", col.line = NULL, col = NULL,
+                                      fontfamily="sans",fontfamily.title="sans")
     chromosome(data_trackfunc) <- chr
     a<-0:1000
     b<-gray(0:1000 /1000)
@@ -625,7 +644,13 @@ HistoneOne_UCSC<-function(gen,chr,start,end,mySession,title="Broad Histone",trac
 }
 
 #-------------------- CREATION track DNA cluster from UCSC ------------------
-DNAse_UCSC<-function(gen,chr,start,end,mySession,title="DNA cluster",track.name="DNase Clusters",table.name=NULL){
+#obselete function
+DNAse_UCSC<-function(gen,chr,start,end,mySession,title="DNA cluster",
+                     track.name="DNase Clusters",table.name=NULL){
+  obselete=1
+  if(obselete == 1){
+    stop("Obselete function\n")
+  }else {
   if(is.null(gen)){
     stop("Invalid in function DNAseUCS :gen null:\n")
   }
@@ -652,8 +677,8 @@ DNAse_UCSC<-function(gen,chr,start,end,mySession,title="DNA cluster",track.name=
     stop("Invalid in function DNAseUCS :gen null:\n")
   }
   mygrange <- GRanges(chr, IRanges(start, end))
-  dataUCSC <- getTable(ucscTableQuery (mySession, range=mygrange,
-                                       track=track.name, table=table.name))
+  dataUCSC <- ucscTableQuery(mySession, table.name,
+                             GRangesForUCSCGenome(gen,chr,IRanges(start,end)))
 
   data_trackfunc <- AnnotationTrack()
   if(nrow(dataUCSC) > 0) {
@@ -661,7 +686,8 @@ DNAse_UCSC<-function(gen,chr,start,end,mySession,title="DNA cluster",track.name=
                                       start=dataUCSC[,"chromStart"],end=dataUCSC[,"chromEnd"],
                                       feature=dataUCSC[,"score"],group=dataUCSC[,"name"],
                                       id=dataUCSC[,"name"], name = title,
-                                      stacking = "dense", col.line = NULL, col = NULL)
+                                      stacking = "dense", col.line = NULL, col = NULL,
+                                      fontfamily="sans",fontfamily.title="sans")
     chromosome(data_trackfunc) <- chr
     if(nrow(dataUCSC) > 0) {
       a<-0:1000
@@ -677,6 +703,7 @@ DNAse_UCSC<-function(gen,chr,start,end,mySession,title="DNA cluster",track.name=
     end(data_trackfunc) <- end
   }
   data_trackfunc
+}
 }
 
 #-------------------- CREATION track GC content from UCSC ------------------
@@ -700,7 +727,8 @@ gcContent_UCSC <- function(gen,chr,start,end,title="GC Percent"){
             from = start,    to = end, trackType = "DataTrack", start = "start",
             end = "end", data = "score", type = "hist", window = -1,    windowSize = 1500,
             fill.histogram = "black",    col.histogram = "red", ylim = c(30, 70),
-            name = title, col.line = NULL, col = NULL)
+            name = title, col.line = NULL, col = NULL,
+            fontfamily="sans",fontfamily.title="sans")
 }
 
 #-------------------- CREATION track Known genes from UCSC ------------------
@@ -726,13 +754,15 @@ knownGenes_UCSC<-function(gen,chr,start,end,title="UCSC known Genes",showId=TRUE
                                  gene = "name", symbol = "name", transcript = "name", strand = "strand",
                                  fill = "#8282d2", name = title ,stacking="squish", group="name",
                                  fontcolor="black", groupAnnotation = "group", just.group = "above",
-                                 size=2, showId=TRUE,col.line = NULL, col = NULL)
+                                 size=2, showId=TRUE,col.line = NULL, col = NULL,
+                                 fontfamily="sans",fontfamily.title="sans")
   } else {
     knowngenestrack <- UcscTrack(genome = genTrunk, chromosome = chr,track = "knownGene", from = start, to = end,
                                  trackType = "GeneRegionTrack", rstarts = "exonStarts", rends = "exonEnds",
                                  gene = "name", symbol = "name", transcript = "name", strand = "strand",
                                  fill = "#8282d2", name = title ,stacking="dense",size=2,
-                                 col.line = NULL, col = NULL)
+                                 col.line = NULL, col = NULL,
+                                 fontfamily="sans",fontfamily.title="sans")
   }
 
   knowngenestrack
@@ -772,13 +802,15 @@ refGenes_UCSC <-function(gen,chr,start,end, title="Ref Genes UCSC", track="refGe
                                gene = IDShow, symbol = IDShow, transcript = IDShow, strand = "strand",
                                fill = "#8282d2", name = title ,stacking="squish", group=IDShow,
                                fontcolor="black", groupAnnotation = "group", just.group = "above",
-                               size=2, showId=TRUE,col.line = NULL, col = NULL)
+                               size=2, showId=TRUE,col.line = NULL, col = NULL,
+                               fontfamily="sans",fontfamily.title="sans")
   } else {
     refgenestrack <- UcscTrack(genome = genTrunk, chromosome = chr,track = track, from = start, to = end,
                                trackType = "GeneRegionTrack", rstarts = "exonStarts", rends = "exonEnds",
                                gene = IDShow, symbol = IDShow, transcript = IDShow, strand = "strand",
                                fill = "#8282d2", name = title ,stacking="dense",size=2,
-                               col.line = NULL, col = NULL)
+                               col.line = NULL, col = NULL,
+                               fontfamily="sans",fontfamily.title="sans")
   }
 
   refgenestrack
@@ -808,14 +840,16 @@ xenorefGenes_UCSC<-function(gen,chr,start,end,title="Other RefSeq", showId=FALSE
               symbol = "name2", transcript = "name", strand = "strand",
               fill = "#8282d2", stacking="squish", name = title, group="name",
               groupAnnotation = "group", just.group = "above", showId=TRUE,
-              col.line = NULL, col = NULL, fontcolor="black")
+              col.line = NULL, col = NULL, fontcolor="black",
+              fontfamily="sans",fontfamily.title="sans")
   }else {
     UcscTrack(genome = genTrunk, chromosome = chr, track = "xenoRefGene",
               from = start, to = end, trackType = "GeneRegionTrack",
               rstarts = "exonStarts", rends = "exonEnds", gene = "name",
               symbol = "name2", transcript = "name", strand = "strand",
               fill = "#8282d2", stacking="dense", name = title,
-              col.line = NULL, col = NULL)
+              col.line = NULL, col = NULL,
+              fontfamily="sans",fontfamily.title="sans")
   }
 
 }
@@ -841,7 +875,8 @@ cpgIslands_UCSC <-function(gen,chr,start,end, title="CpG Islands UCSC"){
             from = start, to = end, trackType = "AnnotationTrack",
             start = "chromStart", end = "chromEnd", id = "name", shape = "box",
             fill = "#006400", name = title,stacking="dense",
-            col.line = NULL, col = NULL)
+            col.line = NULL, col = NULL,
+            fontfamily="sans",fontfamily.title="sans")
 }
 
 #-------------------- CREATION track SNPs from UCSC ------------------
@@ -870,7 +905,8 @@ snpLocations_UCSC <-function(gen,chr,start,end,title= "SNPs UCSC", track="All SN
             trackType = "AnnotationTrack", start = "chromStart", end = "chromEnd",
             id = "name", feature = "func", strand = "strand", shape = "box",
             stacking="dense", fill = "black", name = title ,
-            col.line = NULL, col = NULL)
+            col.line = NULL, col = NULL,
+            fontfamily="sans",fontfamily.title="sans")
 }
 
 #-------------------- CREATION track Regulation from ENSEMBL ------------------
@@ -894,7 +930,7 @@ regulationBiomart_ENSEMBL <- function(gen, chr, start, end,title="Regulation ENS
   dataset="hsapiens_motif_feature"
 
   if(!is.na(match(tolower(genTrunk), c("grch37","hg19")))){
-    martfunc=useMart(host='grch37.ensembl.org', biomart='ENSEMBL_MART_FUNCGEN',
+    martfunc=useMart(host='https://grch37.ensembl.org', biomart='ENSEMBL_MART_FUNCGEN',
                      dataset='hsapiens_regulatory_feature')
   } else {
 
@@ -911,7 +947,8 @@ regulationBiomart_ENSEMBL <- function(gen, chr, start, end,title="Regulation ENS
                                       end=ensfunc[,3],
                                       feature=ensfunc[,4],group=ensfunc[,1],id=ensfunc[,1],
                                       name = title,stacking="dense",
-                                      col.line = NULL, col = NULL)
+                                      col.line = NULL, col = NULL,
+                                      fontfamily="sans",fontfamily.title="sans")
     displayPars(data_trackfunc) <- list(
       "Promoter Associated"="darkolivegreen",
       "CTCF Binding Site" = "cadetblue1",
@@ -965,7 +1002,7 @@ snpBiomart_ENSEMBL <- function(gen,chr, start, end, dataset,
   martsnp=NULL
 
   if(!is.na(match(tolower(genTrunk), c("grch37","hg19")))){
-    martsnp=useMart(host='grch37.ensembl.org', biomart='ENSEMBL_MART_SNP',
+    martsnp=useMart(host='https://grch37.ensembl.org', biomart='ENSEMBL_MART_SNP',
                     dataset=dataset)
   } else {
 
@@ -981,7 +1018,8 @@ snpBiomart_ENSEMBL <- function(gen,chr, start, end, dataset,
     data_tracksnp <- AnnotationTrack(genome=genTrunk,chromosome=ens_snp[,4],strand ="*",start=ens_snp[,2],
                                      end=ens_snp[,2],feature="snp",group=ens_snp[,1],
                                      id=ens_snp[,1], name = title,stacking="dense",
-                                     showId=showId,  col.line = NULL, col = NULL)
+                                     showId=showId,  col.line = NULL, col = NULL,
+                                     fontfamily="sans",fontfamily.title="sans")
     displayPars(data_tracksnp) <- list(snp="red",
                                        insertion ="blueviolet",
                                        deletion = "orange",
@@ -1024,7 +1062,7 @@ structureBiomart_ENSEMBL <- function(gen,chr, start, end, strand, dataset,showId
   martstruct=NULL
 
   if(!is.na(match(tolower(genTrunk), c("grch37","hg19")))){
-    martstruct=useMart(host='grch37.ensembl.org', biomart='ENSEMBL_MART_SNP',
+    martstruct=useMart(host='https://grch37.ensembl.org', biomart='ENSEMBL_MART_SNP',
                        dataset=dataset)
   } else {
 
@@ -1041,7 +1079,9 @@ structureBiomart_ENSEMBL <- function(gen,chr, start, end, strand, dataset,showId
     data_track <- AnnotationTrack(genome=genTrunk, chromosome=chr,strand =ens[,4],start=ens[,2],end=ens[,3],
                                   feature=ens[,6],group=ens[,1],id=ens[,1],
                                   name = title ,stacking="squish",
-                                  showId=showId,  col.line = NULL, col = NULL)
+                                  showId=showId,  col.line = NULL, col = NULL,
+                                  fontfamily="sans",fontfamily.title="sans")
+    
     displayPars(data_track) <- list(copy_number_variation="cornsilk",
                                     inversion="darkolivegreen",
                                     translocation="cyan",
@@ -1085,14 +1125,16 @@ ClinVarMain_UCSC <-function(gen,chr,start,end,title="ClinVar Variants", showId=F
               id = "name", feature = "func", strand = "*", shape = "box",
               stacking="squish", fill = "black", name = title, group="name",
               groupAnnotation = "group", just.group = "above",  showId=TRUE,
-              col.line = NULL, col = NULL)
+              col.line = NULL, col = NULL,
+              fontfamily="sans",fontfamily.title="sans")
   } else {
     UcscTrack(genome = genTrunk, chromosome = chr, from = start, to = end,
               track="ClinVar Variants", table="clinvarMain",
               trackType = "AnnotationTrack", start = "chromStart", end = "chromEnd",
               id = "name", feature = "func", strand = "*", shape = "box",
               stacking="dense", fill = "black", name = title,
-              col.line = NULL, col = NULL)
+              col.line = NULL, col = NULL,
+              fontfamily="sans",fontfamily.title="sans")
   }
 
 }
@@ -1122,14 +1164,16 @@ ClinVarCnv_UCSC <-function(gen,chr,start,end,title="ClinVar Variants", showId=FA
               id = "name", feature = "func", strand = "*", shape = "box",
               stacking="squish", fill = "black", name = title , group="name",
               groupAnnotation = "group", just.group = "above",  showId=TRUE,
-              col.line = NULL, col = NULL)
+              col.line = NULL, col = NULL,
+              fontfamily="sans",fontfamily.title="sans")
   } else {
     UcscTrack(genome = genTrunk, chromosome = chr, from = start, to = end,
               track="ClinVar Variants", table="clinvarCnv",
               trackType = "AnnotationTrack", start = "chromStart", end = "chromEnd",
               id = "name", feature = "func", strand = "*", shape = "box",
               stacking="dense", fill = "black", name = title,
-              col.line = NULL, col = NULL)
+              col.line = NULL, col = NULL,
+              fontfamily="sans",fontfamily.title="sans")
   }
 
 }
@@ -1158,7 +1202,8 @@ CoreillCNV_UCSC <-function(gen,chr,start,end,title="Coriell CNVs", showId=FALSE)
               id = "name", feature = "func", strand = "*", shape = "box",
               stacking="squish", fill = "blue", name = title , group="name",
               groupAnnotation = "group", just.group = "above",  showId=TRUE,
-              col.line = NULL, col = NULL)
+              col.line = NULL, col = NULL,
+              fontfamily="sans",fontfamily.title="sans")
 
   }else {
     UcscTrack(genome = genTrunk, chromosome = chr, from = start, to = end,
@@ -1166,7 +1211,8 @@ CoreillCNV_UCSC <-function(gen,chr,start,end,title="Coriell CNVs", showId=FALSE)
               trackType = "AnnotationTrack", start = "chromStart", end = "chromEnd",
               id = "name", feature = "func", strand = "*", shape = "box",
               stacking="dense", fill = "blue", name = title,
-              col.line = NULL, col = NULL)
+              col.line = NULL, col = NULL,
+              fontfamily="sans",fontfamily.title="sans")
   }
 
 }
@@ -1200,14 +1246,16 @@ COSMIC_UCSC <-function(gen,chr,start,end,title= "COSMIC", showId=FALSE){
                 id = "name", feature = "func", strand = "*", shape = "box",
                 stacking="squish", fill = "firebrick1", name = title , group="name",
                 groupAnnotation = "group", just.group = "above",  showId=TRUE,
-                col.line = NULL, col = NULL)
+                col.line = NULL, col = NULL,
+                fontfamily="sans",fontfamily.title="sans")
     } else {
       UcscTrack(genome = genTrunk, chromosome = chr, from = start, to = end,
                 track="COSMIC", table="cosmic",
                 trackType = "AnnotationTrack", start = "chromStart", end = "chromEnd",
                 id = "name", feature = "func", strand = "*", shape = "box",
                 stacking="dense", fill = "firebrick1", name = title,
-                col.line = NULL, col = NULL)
+                col.line = NULL, col = NULL,
+                fontfamily="sans",fontfamily.title="sans")
     }
   }
 }
@@ -1235,14 +1283,16 @@ GAD_UCSC <-function(gen,chr,start,end,title="GAD", showId=FALSE){
               trackType = "AnnotationTrack", start = "chromStart", end = "chromEnd",
               id = "name", group ="name", feature = "func", strand = "*", shape = "box",
               stacking="squish", fill = "darkslategray1", name = title ,groupAnnotation = "group",
-              just.group = "above", showId=TRUE, col.line = NULL, col = NULL)
+              just.group = "above", showId=TRUE, col.line = NULL, col = NULL,
+              fontfamily="sans",fontfamily.title="sans")
   } else {
     UcscTrack(genome = genTrunk, chromosome = chr, from = start, to = end,
               track="GAD View", table="gad",
               trackType = "AnnotationTrack", start = "chromStart", end = "chromEnd",
               id = "name", feature = "func", strand = "*", shape = "box",
               stacking="dense", fill = "darkslategray1", name = title,
-              col.line = NULL, col = NULL)
+              col.line = NULL, col = NULL,
+              fontfamily="sans",fontfamily.title="sans")
   }
 
 }
@@ -1270,13 +1320,16 @@ GWAScatalog_UCSC <-function(gen,chr,start,end,title= "GWAS Catalog",showId=FALSE
               trackType = "AnnotationTrack", start = "chromStart", end = "chromEnd",
               id = "name", group="name", feature = "func", strand = "*", shape = "box",
               stacking="squish", fill = "black", name = title ,groupAnnotation = "group",
-              just.group = "above",  col.line = NULL, col = NULL, showId=TRUE)
+              just.group = "above",  col.line = NULL, col = NULL, showId=TRUE,
+              fontfamily="sans",fontfamily.title="sans")
   }else {
     UcscTrack(genome = genTrunk, chromosome = chr, from = start, to = end,
               track="GWAS Catalog", table="gwasCatalog",
               trackType = "AnnotationTrack", start = "chromStart", end = "chromEnd",
               id = "name", feature = "func", strand = "*", shape = "box",
-              stacking="dense", fill = "black", name = title ,  col.line = NULL, col = NULL)
+              stacking="dense", fill = "black", name = title ,  
+              col.line = NULL, col = NULL,
+              fontfamily="sans",fontfamily.title="sans")
   }
 
 }
@@ -1304,13 +1357,15 @@ GeneReviews_UCSC <-function(gen,chr,start,end,title="GeneReviews", showId=FALSE)
               trackType = "AnnotationTrack", start = "chromStart", end = "chromEnd",
               id = "name", group="name", feature = "func", strand = "*", shape = "box",
               stacking="squish", fill = "red", name = title,
-              groupAnnotation = "group",just.group = "above", showId=TRUE)
+              groupAnnotation = "group",just.group = "above", showId=TRUE,
+              fontfamily="sans",fontfamily.title="sans")
   }else {
     UcscTrack(genome = genTrunk, chromosome = chr, from = start, to = end,
               track="GeneReviews", table="geneReviews",
               trackType = "AnnotationTrack", start = "chromStart", end = "chromEnd",
               id = "name", feature = "func", strand = "*", shape = "box",
-              stacking="dense", fill = "red", name = title)
+              stacking="dense", fill = "red", name = title,
+              fontfamily="sans",fontfamily.title="sans")
   }
 
 }
@@ -1363,7 +1418,8 @@ ISCA_UCSC <-function(gen,chr,start,end,mySession,table.name,title="ISCA", showId
                                         id=dataUCSC[,"name"], name = title,
                                         stacking = "squish", showId=TRUE,
                                         groupAnnotation = "group",just.group = "above",
-                                        col.line = NULL, col = NULL)
+                                        col.line = NULL, col = NULL,
+                                        fontfamily="sans",fontfamily.title="sans")
       chromosome(data_trackfunc) <- chr
 
       if(table.name == "iscaPathogenic") {
@@ -1405,7 +1461,8 @@ ISCA_UCSC <-function(gen,chr,start,end,mySession,table.name,title="ISCA", showId
 }
 
 #-------------------- CREATION track repeatMasker from UCSC ------------------
-repeatMasker_UCSC <-function(gen,chr,start,end, title="RepeatMasker", showId=FALSE,type_stacking="full"){
+repeatMasker_UCSC <-function(gen,chr,start,end, title="RepeatMasker",
+                             showId=FALSE,type_stacking="full"){
   if(is.null(chr)){
     stop("Invalid in function repeatMasker:chr null:\n")
   }
@@ -1427,12 +1484,16 @@ repeatMasker_UCSC <-function(gen,chr,start,end, title="RepeatMasker", showId=FAL
             id = "repName", group="repName", feature = "repClass", strand = "*",
             shape = "box", stacking=type_stacking, fill = "grey", name = title,
             groupAnnotation = "group",just.group = "above",
-            showId=showId, col.line = NULL, col = NULL)
+            showId=showId, col.line = NULL, col = NULL,
+            fontfamily="sans",fontfamily.title="sans")
 }
 
 ## New database in Regulation ENSEMBL
 #-------------------- CREATION track for all other regulatory regions from ENSEMBL or a list of them ------------
-otherRegulatoryRegionsBiomart_ENSEMBL <- function (gen, chr, start, end, featureDisplay = "all",datasetEnsembl = "hsapiens_external_feature",title="Other Regulatory Regions ENSEMBL") {
+otherRegulatoryRegionsBiomart_ENSEMBL <- function (gen, chr, start, end, 
+                                                   featureDisplay = "all",
+                                                   datasetEnsembl = "hsapiens_external_feature",
+                                                   title="Other Regulatory Regions ENSEMBL") {
   if(is.null(gen)){
     stop("Invalid function OtherRegulatoryRegions :gen null:\n")
   }
@@ -1462,7 +1523,7 @@ otherRegulatoryRegionsBiomart_ENSEMBL <- function (gen, chr, start, end, feature
   genTrunk <- gsub("\\..*","",gen)
 
   if(!is.na(match(tolower(genTrunk), c("grch37","hg19")))){
-    martfunc <- useMart(host='grch37.ensembl.org', biomart='ENSEMBL_MART_FUNCGEN',
+    martfunc <- useMart(host='https://grch37.ensembl.org', biomart='ENSEMBL_MART_FUNCGEN',
                         dataset='hsapiens_external_feature')
 
   } else if(!is.na(match(tolower(genTrunk), c("grch38","hg38")))) {
@@ -1497,7 +1558,8 @@ otherRegulatoryRegionsBiomart_ENSEMBL <- function (gen, chr, start, end, feature
                                     end=biomTrackDisplay[,3],
                                     feature=biomTrackDisplay[,4],group=biomTrackDisplay[,1],
                                     id=biomTrackDisplay[,1], name = title ,stacking="dense",
-                                    col.line = "black", col = NULL, collapse= FALSE)
+                                    col.line = "black", col = NULL, collapse= FALSE,
+                                    fontfamily="sans",fontfamily.title="sans")
 
   displayPars(data_trackfunc) <- list("Enhancer" = "#e41a1c", "Transcription Start Site" = "#4daf4a","Empty" = "#ffffff")
 
@@ -1540,7 +1602,7 @@ regulatoryEvidenceBiomart_ENSEMBL <- function (gen, chr, start, end, featureDisp
   genTrunk <- gsub("\\..*","",gen)
 
   if(!is.na(match(tolower(genTrunk), c("grch37","hg19")))){
-    martfunc <- useMart(host='grch37.ensembl.org', biomart='ENSEMBL_MART_FUNCGEN',
+    martfunc <- useMart(host='https://grch37.ensembl.org', biomart='ENSEMBL_MART_FUNCGEN',
                         dataset='hsapiens_annotated_feature')
 
   } else if(!is.na(match(tolower(genTrunk), c("grch38","hg38")))) {
@@ -1574,7 +1636,8 @@ regulatoryEvidenceBiomart_ENSEMBL <- function (gen, chr, start, end, featureDisp
                                     end=biomTrackDisplay[,3],
                                     feature=biomTrackDisplay[,4],group=biomTrackDisplay[,1],
                                     id=biomTrackDisplay[,1], name = title,stacking="dense",
-                                    col.line = "black", col = NULL, collapse= FALSE)
+                                    col.line = "black", col = NULL, collapse= FALSE,
+                                    fontfamily="sans",fontfamily.title="sans")
 
   displayPars(data_trackfunc) <- list('H3K23me2' = '#41B4EE', 'H2BK5ac' = '#CDB47B','H3K9me1' = '#D5DEF6', 'MEF2C' = '#184173',
                                       'PolIII' = '#737B7B', 'XRCC4' = '#5A4120', 'BHLHE40' = '#60A8BC', 'H3K23ac' = '#E3E186',
@@ -1637,7 +1700,7 @@ regulatoryFeaturesBiomart_ENSEMBL  <- function (gen, chr, start, end,
   genTrunk <- gsub("\\..*","",gen)
 
   if(!is.na(match(tolower(genTrunk), c("grch37","hg19")))){
-    martfunc <- useMart(host='grch37.ensembl.org', biomart='ENSEMBL_MART_FUNCGEN',
+    martfunc <- useMart(host='https://grch37.ensembl.org', biomart='ENSEMBL_MART_FUNCGEN',
                         dataset='hsapiens_regulatory_feature')
 
   } else if(!is.na(match(tolower(genTrunk), c("grch38","hg38")))) {
@@ -1672,7 +1735,8 @@ regulatoryFeaturesBiomart_ENSEMBL  <- function (gen, chr, start, end,
                                     end=biomTrackDisplay[,3],
                                     feature=biomTrackDisplay[,4],group=biomTrackDisplay[,1],
                                     id=biomTrackDisplay[,1], name = title,stacking="dense",
-                                    col.line = "black", col = NULL, collapse= FALSE)
+                                    col.line = "black", col = NULL, collapse= FALSE,
+                                    fontfamily="sans",fontfamily.title="sans")
 
   displayPars(data_trackfunc) <- list("Promoter" = "#1b9e77", "TF binding site" = "#d95f02",
                                       "Open chromatin" = "#7570b3", "Promoter Flanking Region" =  "#e7298a",
@@ -1721,7 +1785,7 @@ regulatorySegmentsBiomart_ENSEMBL  <- function (gen, chr, start, end,
     genTrunk <- gsub("\\..*","",gen)
 
     if(!is.na(match(tolower(genTrunk), c("grch37","hg19")))){
-      martfunc <- useMart(host='grch37.ensembl.org', biomart='ENSEMBL_MART_FUNCGEN',
+      martfunc <- useMart(host='https://grch37.ensembl.org', biomart='ENSEMBL_MART_FUNCGEN',
                           dataset='hsapiens_external_feature')
 
     } else if(!is.na(match(tolower(genTrunk), c("grch38","hg38")))) {
@@ -1759,7 +1823,8 @@ regulatorySegmentsBiomart_ENSEMBL  <- function (gen, chr, start, end,
                                       end=biomTrackDisplay[,3],
                                       feature=biomTrackDisplay[,4],group=biomTrackDisplay[,1],
                                       id=biomTrackDisplay[,1], name = title ,stacking="dense",
-                                      col.line = "black", col = NULL, collapse= FALSE)
+                                      col.line = "black", col = NULL, collapse= FALSE,
+                                      fontfamily="sans",fontfamily.title="sans")
 
     displayPars(data_trackfunc) <- list('Predicted Promoter with TSS' = '#a6cee3','CTCF enriched' = '#1f78b4',
                                         'Predicted Poised' = '#b2df8a', 'Predicted Promoter Flank' = '#33a02c',
@@ -1797,7 +1862,7 @@ bindingMotifsBiomart_ENSEMBL <- function (gen, chr, start, end, featureDisplay =
   genTrunk <- gsub("\\..*","",gen)
 
   if(!is.na(match(tolower(genTrunk), c("grch37","hg19")))){
-    martfunc <- useMart(host='grch37.ensembl.org', biomart='ENSEMBL_MART_FUNCGEN',
+    martfunc <- useMart(host='https://grch37.ensembl.org', biomart='ENSEMBL_MART_FUNCGEN',
                         dataset='hsapiens_motif_feature')
 
   } else if(!is.na(match(tolower(genTrunk), c("grch38","hg38")))) {
@@ -1833,7 +1898,8 @@ bindingMotifsBiomart_ENSEMBL <- function (gen, chr, start, end, featureDisplay =
                                     end=biomTrackDisplay[,3],
                                     feature=biomTrackDisplay[,4],group=biomTrackDisplay[,1],
                                     id=biomTrackDisplay[,1], name = title ,stacking="dense",
-                                    col.line = "black", col = NULL, collapse= FALSE)
+                                    col.line = "black", col = NULL, collapse= FALSE,
+                                    fontfamily="sans",fontfamily.title="sans")
   displayPars(data_trackfunc) <- list(
     "Egr1" = "#a6cee3", "CTCF" = "#1f78b4", "Cjun" = "#b2df8a", "USF1" = "#33a02c", "PU1" = "#fb9a99",
     "Gabp" = "#e31a1c", "JUN::FOS" = "#fdbf6f", "Jund" = "#ff7f00", "Znf263" = "#cab2d6",
@@ -1882,7 +1948,7 @@ miRNATargetRegionsBiomart_ENSEMBL  <- function (gen, chr, start, end, showId=FAL
   genTrunk <- gsub("\\..*","",gen)
 
   if(!is.na(match(tolower(genTrunk), c("grch37","hg19")))){
-    martfunc <- useMart(host='grch37.ensembl.org', biomart='ENSEMBL_MART_FUNCGEN',
+    martfunc <- useMart(host='https://grch37.ensembl.org', biomart='ENSEMBL_MART_FUNCGEN',
                         dataset='hsapiens_mirna_target_feature')
 
   } else if(!is.na(match(tolower(genTrunk), c("grch38","hg38")))) {
@@ -1904,7 +1970,9 @@ miRNATargetRegionsBiomart_ENSEMBL  <- function (gen, chr, start, end, showId=FAL
                                     end=biomTrack[,3],
                                     feature=biomTrack[,5],group=biomTrack[,1],
                                     id=biomTrack[,6], name = title,stacking="dense",
-                                    col.line = "plum4", col = NULL, collapse= FALSE,showId=showId)
+                                    col.line = "plum4", col = NULL, collapse= FALSE,
+                                    showId=showId,
+                                    fontfamily="sans",fontfamily.title="sans")
   displayPars(data_trackfunc) <- list(RNA="plum4")
 
   data_trackfunc
@@ -1929,7 +1997,8 @@ segmentalDups_UCSC <- function(gen, chr, start, end,title="Segmental Dups UCSC")
   Dupregions <- UcscTrack(genome = gen, chromosome = chr, from = start, to = end,
                           track = "Segmental Dups", table = "genomicSuperDups",
                           trackType = "AnnotationTrack", start = "chromStart",
-                          end="chromEnd", id = "name", name = title)
+                          end="chromEnd", id = "name", name = title,
+                          fontfamily="sans",fontfamily.title="sans")
 
   Dupregions
 
@@ -1988,7 +2057,9 @@ ChIPTF_ENCODE <- function(gen="hg19",chr,start, end, bedFilePath,
                            feature=desiredRegionDisplay[,1], name = title,
                            id=desiredRegionDisplay[,1],just.group = just_group,
                            stacking=type_stacking, group=desiredRegionDisplay[,1],
-                           col.line = "black", col = NULL, collapse= FALSE,showId=showId)
+                           col.line = "black", col = NULL, collapse= FALSE,
+                           showId=showId,
+                           fontfamily="sans",fontfamily.title="sans")
 
   colortab <- read.table(motifColorFile,header = TRUE,sep="\t")
   colortab[,2] <- paste("#",colortab[,2],sep="")
@@ -2100,7 +2171,8 @@ chromHMM_RoadMap <- function(gen="hg19",chr,start, end, bedFilePath,
   track <- AnnotationTrack(genome=gen,chromosome=chrEnsembl,strand ="*",start=desiredRegionDisplay[,2],
                            end=desiredRegionDisplay[,3],
                            feature=desiredRegionDisplay[,4], name =title ,stacking="dense",
-                           col.line = "black", col = NULL, collapse= FALSE)
+                           col.line = "black", col = NULL, collapse= FALSE,
+                           fontfamily="sans",fontfamily.title="sans")
 
   if(colorcase == "roadmap15"){
     displayPars(track) <- list("1_TssA" = "#FF0000", "2_TssAFlnk" = "#FF6E00","3_TxFlnk" = "#32CD32",
@@ -2195,7 +2267,8 @@ DNaseI_RoadMap <- function(gen="hg19",chr,start, end, bedFilePath,
                            feature=desiredRegionDisplay[,5], name = title ,
                            id=desiredRegionDisplay[,4],
                            stacking=type_stacking,showId=showId,
-                           col.line = "black", col = NULL, collapse= FALSE)
+                           col.line = "black", col = NULL, collapse= FALSE,
+                           fontfamily="sans",fontfamily.title="sans")
 
   displayPars(track) <- list("promoter" = "#FF0000", "enhancer" = "#006400",
                              "dyadic" = "#8A91D0","Empty" = "#ffffff")
@@ -2252,7 +2325,8 @@ dgfootprints_RoadMap <- function(gen="hg19",chr,start, end, bedFilePath,
                            feature=desiredRegionDisplay[,5], name = title ,
                            id=desiredRegionDisplay[,4], just.group="above",
                            stacking=type_stacking, group=desiredRegionDisplay[,4],
-                           col.line = "black", col = NULL, collapse= FALSE,showId=showId)
+                           col.line = "black", col = NULL, collapse= FALSE,showId=showId,
+                           fontfamily="sans",fontfamily.title="sans")
 
   displayPars(track) <- list("Neurosph"="#FFD924","Epithelial"="#FF9D0C",
                              "IMR90"="#E41A1C","Thymus"="#DAB92E",
@@ -2309,7 +2383,8 @@ DNaseI_FANTOM <- function(gen="hg19",chr,start, end, bedFilePath,
                            feature=desiredRegionDisplay[,5], name = title ,
                            id=desiredRegionDisplay[,4], group= desiredRegionDisplay[,5],
                            stacking=stacking_type, just.group="above",
-                           col.line = "black", col = NULL, collapse= FALSE)
+                           col.line = "black", col = NULL, collapse= FALSE,
+                           fontfamily="sans",fontfamily.title="sans")
 
   displayPars(track) <- list("promoter" = "#FF0000", "enhancer" = "#006400",
                              "dyadic" = "#8A91D0","Empty" = "#ffffff")
@@ -2358,7 +2433,8 @@ TFBS_FANTOM <- function(gen,chr,start, end, bedFilePath,title="TF motif FANTOM5"
                            name = title ,
                            id=desiredRegionDisplay[,4],
                            stacking="dense",
-                           col.line = "black", col = NULL, collapse= FALSE)
+                           col.line = "black", col = NULL, collapse= FALSE,
+                           fontfamily="sans",fontfamily.title="sans")
 
   track
 }
@@ -2409,7 +2485,8 @@ metQTL <- function(gen,chr,start, end, bedFilePath, featureDisplay = 'all',
                            feature=desiredRegionDisplay[,5], group=desiredRegionDisplay[,7],
                            id=desiredRegionDisplay[,7], name = title , groupAnnotation = "group",
                            just.group = just_group, stacking=type_stacking,
-                           col.line = "black", col = NULL, collapse= FALSE,showId=showId)
+                           col.line = "black", col = NULL, collapse= FALSE,showId=showId,
+                           fontfamily="sans",fontfamily.title="sans")
 
   displayPars(track) <- list("SNP_pheno" = "#A6CEE3", "SNP" = "#1F78B4", "CpG_pheno" = "#B2DF8A",
                              "CpG" ="#33A02C", "cis_local_metQTL" = "#FB9A99",
@@ -2465,7 +2542,8 @@ eQTL <- function(gen,chr,start, end, bedFilePath, featureDisplay = 'all',
                            feature=desiredRegionDisplay[,5], group=desiredRegionDisplay[,7],
                            id=desiredRegionDisplay[,7], name = title, groupAnnotation = "group",
                            just.group = just_group, stacking=type_stacking,
-                           col.line = "black", col = NULL, collapse= FALSE,showId=showId)
+                           col.line = "black", col = NULL, collapse= FALSE,showId=showId,
+                           fontfamily="sans",fontfamily.title="sans")
 
   displayPars(track) <- list("SNP_pheno" = "#A6CEE3", "SNP" = "#1F78B4","exon" = "#33A02C",
                              "exon_pheno" = "#B2DF8A", "mRNA" = "#E31A1C",
@@ -2567,7 +2645,8 @@ eQTL_GTEx <- function(gen= "hg19",chr,start, end, bedFilePath, featureDisplay = 
                            feature=desiredRegionDisplay[,6], group=desiredRegionDisplay[,8],
                            id=desiredRegionDisplay[,8], name = title , groupAnnotation = "group",
                            just.group = just_group , stacking=type_stacking,
-                           col.line = "black", col = NULL, collapse= FALSE,showId=showId)
+                           col.line = "black", col = NULL, collapse= FALSE,showId=showId,
+                           fontfamily="sans",fontfamily.title="sans")
 
   displayPars(track) <- list("SNP" = "#A6CEE3", "CNV" = "#1F78B4",
                              "other_genetic" = "#33A02C","exon" = "#B2DF8A",
@@ -2651,7 +2730,8 @@ psiQTL_GTEx <- function(gen,chr,start, end, bedFilePath, featureDisplay = 'all',
                            feature=desiredRegionDisplay[,4], group=desiredRegionDisplay[,6],
                            id=desiredRegionDisplay[,6], name = title, groupAnnotation = "group",
                            just.group = just_group , stacking=type_stacking,
-                           col.line = "black", col = NULL, collapse= FALSE,showId=showId)
+                           col.line = "black", col = NULL, collapse= FALSE,showId=showId,
+                           fontfamily="sans",fontfamily.title="sans")
 
   displayPars(track) <- list("SNP" = "#A6CEE3", "exon" = "#FB9A99",
                              "cis_local_psiQTL" = "#FDBF6F",
@@ -2785,7 +2865,8 @@ geneExpression_GTEx <- function(chr,start, end, gtfFilePath, genexpressionFilePa
                      start=desiredRegionDisplay[,3],
                      end=desiredRegionDisplay[,4],
                      feature=desiredRegionDisplay[,6],
-                     name=title)
+                     name=title,
+                     fontfamily="sans",fontfamily.title="sans")
 
   track
 }
@@ -2879,7 +2960,9 @@ imprintedGenes_GTEx <- function(gen="hg19",chr,start, end, tissues="all",
                                    feature=biomTrackDisplay[,7],group=biomTrackDisplay[,6],
                                    id=biomTrackDisplay[,6], name = title ,stacking="squish",
                                    just.group="above",
-                                   col.line = "black", col = NULL, collapse= FALSE,showId=showId)
+                                   col.line = "black", col = NULL, collapse= FALSE,
+                                   showId=showId,
+                                   fontfamily="sans",fontfamily.title="sans")
 
   displayPars(geneTrackShow) <- list("consistent with biallelic" = "#1b9e77", "NC" = "#7570b3",
                                      "imprinted" =  "#e7298a","consistent with imprinting" = "#66a61e",

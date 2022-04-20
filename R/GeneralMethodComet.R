@@ -126,7 +126,10 @@ draw.plot.grid.setup <- function(config.var, gbl.var) {
   }
 
   itrack <- IdeogramTrack(genome=gbl.var$mydata.gen, chromosome=gbl.var$mydata.chr)
-  plotTracks(itrack,from=gbl.var$min.x,to=gbl.var$max.x,panel.only=TRUE, fontsize=config.var$fontsize.gviz,showBandId = TRUE, cex.bands = 0.5)
+  plotTracks(itrack,from=gbl.var$min.x,to=gbl.var$max.x,
+             panel.only=TRUE, fontsize=config.var$fontsize.gviz,
+             showBandId = TRUE, cex.bands = 0.5,
+             fontfamily="sans",fontfamily.title="sans")
   #-------------------CONNECTOR VIEWPORT---------------------
 
   if(config.var$disp.cormatrixmap) {
@@ -699,7 +702,10 @@ draw.plot.annotation <- function(config.var, gbl.var) {
   if(! (is.null(gbl.var$listtracks_gviz))){
     seekViewport("annotviewport")
     pushViewport(gvizviewport)
-    plotTracks(gbl.var$listtracks_gviz, from=gbl.var$min.x, to=gbl.var$max.x,panel.only=TRUE,add=TRUE, fontsize=config.var$fontsize.gviz)
+    plotTracks(gbl.var$listtracks_gviz, from=gbl.var$min.x, 
+               to=gbl.var$max.x,panel.only=TRUE,add=TRUE, 
+               fontsize=config.var$fontsize.gviz,
+               fontfamily="sans",fontfamily.title="sans")
 
   }
 
@@ -723,7 +729,10 @@ draw.plot.annotation <- function(config.var, gbl.var) {
   if(! (is.null(gbl.var$listtracks_user))){
     seekViewport("annotviewport")
     pushViewport(gvizuserviewport)
-    plotTracks(gbl.var$listtracks_user, from=gbl.var$min.x, to=gbl.var$max.x,panel.only=TRUE,add=TRUE, fontsize=config.var$fontsize.gviz)
+    plotTracks(gbl.var$listtracks_user, from=gbl.var$min.x, 
+               to=gbl.var$max.x,panel.only=TRUE,add=TRUE, 
+               fontsize=config.var$fontsize.gviz,
+               fontfamily="sans",fontfamily.title="sans")
   }
 
   popViewport()
@@ -2092,16 +2101,16 @@ draw.name.tracks.web <- function(config.var,gbl.var) {
 
 
   #--- DNAse
-  if(has.key("DNAse",gbl.var$split.list.tracks)) {
-    label.tracks.text.dnase <- textGrob("DNase Clusters",
-                                        x = -0.25,
-                                        y = y.label.pos[num.tracks],
-                                        just=c("right"),
-                                        gp = gpar(fontsize = (gbl.var$font.size *0.75*config.var$font.factor ),fontface = "bold"))
-
-    legend.tracks.list[[num.tracks]] <- label.tracks.text.dnase
-    num.tracks <- num.tracks + 1
-  }
+  # if(has.key("DNAse",gbl.var$split.list.tracks)) {
+  #   label.tracks.text.dnase <- textGrob("DNase Clusters",
+  #                                       x = -0.25,
+  #                                       y = y.label.pos[num.tracks],
+  #                                       just=c("right"),
+  #                                       gp = gpar(fontsize = (gbl.var$font.size *0.75*config.var$font.factor ),fontface = "bold"))
+  # 
+  #   legend.tracks.list[[num.tracks]] <- label.tracks.text.dnase
+  #   num.tracks <- num.tracks + 1
+  # }
 
   #--- Regulation ENSEMBL
   if(has.key("RegENSEMBL",gbl.var$split.list.tracks)) {
@@ -2464,17 +2473,17 @@ create.tracks.web <- function(config.var,gbl.var) {
   }
 
   #--- DNAse
-  if(has.key("DNAse",gbl.var$split.list.tracks)) {
-    if (config.var$verbose) cat("Draw DNAse\n")
-    dnasetrack<-DNAse_UCSC(config.var$genome,gbl.var$mydata.chr,
-                           gbl.var$min.x,
-                           gbl.var$max.x,gbl.var$mySession)
-    if(length(listtracks_gviz) == 0) {
-      listtracks_gviz <- list(dnasetrack)
-    } else {
-      listtracks_gviz <- c(listtracks_gviz,dnasetrack)
-    }
-  }
+  # if(has.key("DNAse",gbl.var$split.list.tracks)) {
+  #   if (config.var$verbose) cat("Draw DNAse\n")
+  #   dnasetrack<-DNAse_UCSC(config.var$genome,gbl.var$mydata.chr,
+  #                          gbl.var$min.x,
+  #                          gbl.var$max.x,gbl.var$mySession)
+  #   if(length(listtracks_gviz) == 0) {
+  #     listtracks_gviz <- list(dnasetrack)
+  #   } else {
+  #     listtracks_gviz <- c(listtracks_gviz,dnasetrack)
+  #   }
+  # }
 
 
   #---- Regulation (hg19)
