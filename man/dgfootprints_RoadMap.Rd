@@ -82,10 +82,12 @@ bedFilePath <- file.path(extdata, "RoadMap/CD3-DS17198.hg19_subset.bed")
 if(interactive()){
   dgfootprints_RoadMapSingle <- dgfootprints_RoadMap(gen,chr,start, end,
   bedFilePath, tissueGroupDisplay='Blood & T-cell' )
-  plotTracks(dgfootprints_RoadMapSingle, from = start, to = end)
+  plotTracks(dgfootprints_RoadMapSingle, from = start, to = end,
+    fontfamily="sans",fontfamily.title="sans")
 } else {
   data(dgfootprints_RoadMapSingle)
-  plotTracks(dgfootprints_RoadMapSingle, from = start, to = end)
+  plotTracks(dgfootprints_RoadMapSingle, from = start, to = end,
+    fontfamily="sans",fontfamily.title="sans")
 }
 
 }

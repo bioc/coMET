@@ -2,10 +2,10 @@
 \alias{DNAse_UCSC}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Creation of an UCSC's DNase clusters track
+Creation of an UCSC's DNase clusters track - obselete function
 }
 \description{
-Creation of DNase cluster track from a connection to UCSC genome browser in using the GViz bioconductor package
+Creation of DNase cluster track from a connection to UCSC genome browser in using the GViz bioconductor package. Obselete function 
 }
 \usage{
 DNAse_UCSC(gen, chr, start, end, mySession, title="DNA cluster",
@@ -62,26 +62,28 @@ Tiphaine Martin
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 %%}
 \examples{
-library("Gviz")
-library("rtracklayer")
+# library("Gviz")
+# library("rtracklayer")
 
-gen <- "hg19"
-chr <- "chr7"
-start <- 38290160
-end <- 38303219
-if(interactive()){
-  BROWSER.SESSION="UCSC"
-  mySession <- browserSession(BROWSER.SESSION)
-  genome(mySession) <- gen
-  track.name="Broad ChromHMM"
-  tablestrack<-tableNames(ucscTableQuery(mySession, track=track.name))
-  table.name<-tablestrack[1]
-  dnasetrack<-DNAse_UCSC(gen,chr,start,end,mySession)
-  plotTracks(dnasetrack, from = start, to =end)
-}else {
-    data(dnasetrack)
-   plotTracks(dnasetrack, from = start, to =end)
-}
+# gen <- "hg19"
+# chr <- "chr7"
+# start <- 38290160
+# end <- 38303219
+# if(interactive()){
+#   BROWSER.SESSION="UCSC"
+#   mySession <- browserSession(BROWSER.SESSION)
+#   genome(mySession) <- gen
+#   track.name="Broad ChromHMM"
+#   tablestrack<-tableNames(ucscTableQuery(mySession, track=track.name))
+#   table.name<-tablestrack[1]
+#   dnasetrack<-DNAse_UCSC(gen,chr,start,end,mySession)
+#   plotTracks(dnasetrack, from = start, to =end,
+#                                   fontfamily="sans",fontfamily.title="sans")
+# }else {
+#     data(dnasetrack)
+#    plotTracks(dnasetrack, from = start, to =end,
+#                                   fontfamily="sans",fontfamily.title="sans")
+# }
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

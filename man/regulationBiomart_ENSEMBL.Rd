@@ -60,10 +60,12 @@ end <- 38303219
 
 if(interactive()){
   regulationENSEMBLtrack<-regulationBiomart_ENSEMBL(gen,chr,start,end)
-  plotTracks(regulationENSEMBLtrack, from = start, to =end)
+  plotTracks(regulationENSEMBLtrack, from = start, to =end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(regulationENSEMBLtrack)
-  plotTracks(regulationENSEMBLtrack, from = start, to =end)
+  plotTracks(regulationENSEMBLtrack, from = start, to =end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 }

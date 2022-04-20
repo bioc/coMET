@@ -68,10 +68,12 @@ end <- 38303219
 gen <- "hg19"
 if(interactive()){
     cosmicVariant<-COSMIC_UCSC(gen,chrom,start,end)
-    plotTracks(cosmicVariant, from = start, to =end)
+    plotTracks(cosmicVariant, from = start, to =end,
+    fontfamily="sans",fontfamily.title="sans")
 }else {
     data(cosmicVarianttrack)
-    plotTracks(cosmicVariant, from = start, to =end)
+    plotTracks(cosmicVariant, from = start, to =end,
+    fontfamily="sans",fontfamily.title="sans")
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

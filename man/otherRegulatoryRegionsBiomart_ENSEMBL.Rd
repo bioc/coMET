@@ -72,10 +72,12 @@ featureDisplay <- "Enhancer"
 if(interactive()){
  otherRegulatoryRegionsTrackSingle<-otherRegulatoryRegionsBiomart_ENSEMBL(gen,
  chr,start,end,featureDisplay)
-  plotTracks(otherRegulatoryRegionsTrackSingle, from = start, to = end)
+  plotTracks(otherRegulatoryRegionsTrackSingle, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(otherRegulatoryRegionsTrackSingle)
-  plotTracks(otherRegulatoryRegionsTrackSingle, from = start, to = end)
+  plotTracks(otherRegulatoryRegionsTrackSingle, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 ########
@@ -90,10 +92,12 @@ featureDisplay <- "all"
 if(interactive()){
  otherRegulatoryRegionsTrackAll<-otherRegulatoryRegionsBiomart_ENSEMBL(gen,
  chr,start,end,featureDisplay)
-  plotTracks(otherRegulatoryRegionsTrackAll, from = start, to = end)
+  plotTracks(otherRegulatoryRegionsTrackAll, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(otherRegulatoryRegionsTrackAll)
-  plotTracks(otherRegulatoryRegionsTrackAll, from = start, to = end)
+  plotTracks(otherRegulatoryRegionsTrackAll, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 
 }
 }

@@ -80,10 +80,12 @@ bedFilePath <- file.path(extdata, "RoadMap/E063_15_coreMarks_mnemonics.bed")
 if(interactive()){
   chromHMM_RoadMapSingle <- chromHMM_RoadMap(gen="hg19",chr,start, end,
   bedFilePath, featureDisplay = featureDisplay, colorcase='roadmap15' )
-  plotTracks(chromHMM_RoadMapSingle, from = start, to = end)
+  plotTracks(chromHMM_RoadMapSingle, from = start, to = end,
+  fontfamily="sans",fontfamily.title="sans")
 } else {
   data(chromHMM_RoadMapSingle)
-  plotTracks(chromHMM_RoadMapSingle, from = start, to = end)
+  plotTracks(chromHMM_RoadMapSingle, from = start, to = end,
+  fontfamily="sans",fontfamily.title="sans")
 }
 
 ######
@@ -100,10 +102,12 @@ bedFilePath <- file.path(extdata, "RoadMap/E063_15_coreMarks_mnemonics.bed")
 if(interactive()){
   chromHMM_RoadMapMultiple <- chromHMM_RoadMap(gen="hg19",chr,start, end,
   bedFilePath, featureDisplay = featureDisplay, colorcase='roadmap15' )
-  plotTracks(chromHMM_RoadMapMultiple, from = start, to = end)
+  plotTracks(chromHMM_RoadMapMultiple, from = start, to = end,
+  fontfamily="sans",fontfamily.title="sans")
 } else {
   data(chromHMM_RoadMapMultiple)
-  plotTracks(chromHMM_RoadMapMultiple, from = start, to = end)
+  plotTracks(chromHMM_RoadMapMultiple, from = start, to = end,
+  fontfamily="sans",fontfamily.title="sans")
 }
 
 #####
@@ -120,10 +124,12 @@ bedFilePath <- file.path(extdata, "RoadMap/E063_15_coreMarks_mnemonics.bed")
 if(interactive()){
   chromHMM_RoadMapAll <- chromHMM_RoadMap(gen="hg19",chr,start, end,
   bedFilePath, featureDisplay = featureDisplay, colorcase='roadmap15' )
-  plotTracks(chromHMM_RoadMapAll, from = start, to = end)
+  plotTracks(chromHMM_RoadMapAll, from = start, to = end,
+  fontfamily="sans",fontfamily.title="sans")
 } else {
   data(chromHMM_RoadMapAll)
-  plotTracks(chromHMM_RoadMapAll, from = start, to = end)
+  plotTracks(chromHMM_RoadMapAll, from = start, to = end,
+  fontfamily="sans",fontfamily.title="sans")
 }
 }
 

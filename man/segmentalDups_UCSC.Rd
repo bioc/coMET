@@ -63,10 +63,12 @@ end <- 200000
 
 if(interactive()){
   DupTrack <-segmentalDups_UCSC(gen,chr,start,end)
-  plotTracks(DupTrack, from = start, to = end)
+  plotTracks(DupTrack, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(DupTrack)
-  plotTracks(DupTrack, from = start, to = end)
+  plotTracks(DupTrack, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 }

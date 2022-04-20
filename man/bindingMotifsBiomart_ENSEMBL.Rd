@@ -71,10 +71,12 @@ featureDisplay <- "CTCF"
 if(interactive()){
  bindMotifsBiomartTrackSingle<-bindingMotifsBiomart_ENSEMBL(gen,chr,start,
  end,featureDisplay)
-  plotTracks(bindMotifsBiomartTrackSingle, from = start, to = end)
+  plotTracks(bindMotifsBiomartTrackSingle, from = start, to = end,
+  fontfamily="sans",fontfamily.title="sans")
 } else {
   data(bindMotifsBiomartTrackSingle)
-  plotTracks(bindMotifsBiomartTrackSingle, from = start, to = end)
+  plotTracks(bindMotifsBiomartTrackSingle, from = start, to = end,
+  fontfamily="sans",fontfamily.title="sans")
 }
 
 ######
@@ -88,10 +90,12 @@ featureDisplay <- c("CTCF","Egr1")
 
 if(interactive()){
  bindMotifsBiomartTrackMultiple<-bindingMotifsBiomart_ENSEMBL(gen,chr,start,end,featureDisplay)
-  plotTracks(bindMotifsBiomartTrackMultiple, from = start, to = end)
+  plotTracks(bindMotifsBiomartTrackMultiple, from = start, to = end,
+  fontfamily="sans",fontfamily.title="sans")
 } else {
   data(bindMotifsBiomartTrackMultiple)
-  plotTracks(bindMotifsBiomartTrackMultiple, from = start, to = end)
+  plotTracks(bindMotifsBiomartTrackMultiple, from = start, to = end,
+  fontfamily="sans",fontfamily.title="sans")
 }
 
 ######
@@ -105,10 +109,12 @@ featureDisplay <- "all"
 
 if(interactive()){
  bindMotifsBiomartTrackAll<-bindingMotifsBiomart_ENSEMBL(gen,chr,start,end,featureDisplay)
-  plotTracks(bindMotifsBiomartTrackAll, from = start, to = end)
+  plotTracks(bindMotifsBiomartTrackAll, from = start, to = end,
+  fontfamily="sans",fontfamily.title="sans")
 } else {
   data(bindMotifsBiomartTrackAll)
-  plotTracks(bindMotifsBiomartTrackAll, from = start, to = end)
+  plotTracks(bindMotifsBiomartTrackAll, from = start, to = end,
+  fontfamily="sans",fontfamily.title="sans")
 }
 }
 

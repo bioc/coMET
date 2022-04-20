@@ -67,10 +67,12 @@ end <- 38303219
 
 if(interactive()){
   rmtrack <-repeatMasker_UCSC(gen,chr,start,end,showId=TRUE)
-  plotTracks(rmtrack, from = start, to = end)
+  plotTracks(rmtrack, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(repeatMaskerTrack)
-  plotTracks(rmtrack, from = start, to = end)
+  plotTracks(rmtrack, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 }

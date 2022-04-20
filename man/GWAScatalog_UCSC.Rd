@@ -62,10 +62,12 @@ end <- 100000
 
 if(interactive()) {
   gwastrack <-GWAScatalog_UCSC(gen,chrom,start,end)
-  plotTracks(gwastrack, from = start, to =end)
+  plotTracks(gwastrack, from = start, to =end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(GWASTrack)
-  plotTracks(gwastrack, from = start, to =end)
+  plotTracks(gwastrack, from = start, to =end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 }

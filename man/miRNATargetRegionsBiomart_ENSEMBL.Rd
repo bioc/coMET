@@ -72,10 +72,12 @@ end <- 20000000
 if(interactive()){
  miRNATargetRegionsBiomartTrack<-miRNATargetRegionsBiomart_ENSEMBL(gen,chr,start,end,
                                       datasetEnsembl = "hsapiens_mirna_target_feature")
-  plotTracks(miRNATargetRegionsBiomartTrack, from = start, to = end)
+  plotTracks(miRNATargetRegionsBiomartTrack, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(miRNATargetRegionsBiomartTrack)
-  plotTracks(miRNATargetRegionsBiomartTrack, from = start, to = end)
+  plotTracks(miRNATargetRegionsBiomartTrack, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

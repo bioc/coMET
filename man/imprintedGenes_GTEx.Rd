@@ -84,7 +84,8 @@ if(interactive()){
    imprintinglist <- list(allIGtrack,allimprintedIGtrack,
    StomachIGtrack,PancreasIGtrack,PancreasimprintedIGtrack)
 
-  plotTracks(imprintinglist, from = start, to = end)
+  plotTracks(imprintinglist, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 
 } else {
 
@@ -97,7 +98,8 @@ if(interactive()){
    imprintinglist <- list(allIGtrack,allimprintedIGtrack,
    StomachIGtrack,PancreasIGtrack,PancreasimprintedIGtrack)
 
-  plotTracks(imprintinglist, from = start, to = end)
+  plotTracks(imprintinglist, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 }

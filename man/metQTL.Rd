@@ -86,10 +86,12 @@ mqtlbedFilePath <- file.path(extdata, "metQTL.bed")
 if(interactive()){
   metQTLTrackSingle <- metQTL(gen,chr,start, end,mqtlbedFilePath,
   featureDisplay = featureDisplay )
-  plotTracks(metQTLTrackSingle, from = start, to = end)
+  plotTracks(metQTLTrackSingle, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(metQTLTrackSingle)
-  plotTracks(metQTLTrackSingle, from = start, to = end)
+  plotTracks(metQTLTrackSingle, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 ###
@@ -109,10 +111,12 @@ bedFilePath <- file.path(extdata, "metQTL.bed")
 if(interactive()){
   metQTLTrackMultiple <- metQTL(gen,chr,start, end, bedFilePath,
   featureDisplay = featureDisplay )
-  plotTracks(metQTLTrackMultiple, from = start, to = end)
+  plotTracks(metQTLTrackMultiple, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(metQTLTrackMultiple)
-  plotTracks(metQTLTrackMultiple, from = start, to = end)
+  plotTracks(metQTLTrackMultiple, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 #####
@@ -132,10 +136,12 @@ bedFilePath <- file.path(extdata, "metQTL.bed")
 if(interactive()){
   metQTLTrackAll <- metQTL(gen,chr,start, end, bedFilePath,
   featureDisplay = featureDisplay )
-  plotTracks(metQTLTrackAll, from = start, to = end)
+  plotTracks(metQTLTrackAll, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(metQTLTrackAll)
-  plotTracks(metQTLTrackAll, from = start, to = end)
+  plotTracks(metQTLTrackAll, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 }
 

@@ -67,10 +67,12 @@ end <- 38303219
 
 if(interactive()){
     coreilVariant<-CoreillCNV_UCSC(gen,chrom,start,end)
-    plotTracks(coreilVariant, from = start, to =end)
+    plotTracks(coreilVariant, from = start, to =end,
+    fontfamily="sans",fontfamily.title="sans")
 } else {
      data(coreilVarianttrack)
-    plotTracks(coreilVariant, from = start, to =end)
+    plotTracks(coreilVariant, from = start, to =end,
+    fontfamily="sans",fontfamily.title="sans")
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

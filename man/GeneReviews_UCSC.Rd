@@ -64,10 +64,12 @@ start <- 10000000
 end <- 100000000
 if(interactive()){
   geneRtrack <-GeneReviews_UCSC(gen,chrom,start,end,showId=TRUE)
-  plotTracks(geneRtrack, from = start, to = end)
+  plotTracks(geneRtrack, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(GeneReviewTrack)
-  plotTracks(geneRtrack, from = start, to = end)
+  plotTracks(geneRtrack, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 }

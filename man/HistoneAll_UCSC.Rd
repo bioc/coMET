@@ -77,10 +77,12 @@ if(interactive()){
 
   histonalltrack<-HistoneAll_UCSC(gen,chr,start,end,mySession,
   pattern=pattern1,track.name="Broad Histone")
-  plotTracks(histonalltrack, from = start, to =end)
+  plotTracks(histonalltrack, from = start, to =end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(histonalltrack)
-  plotTracks(histonalltrack, from = start, to =end)
+  plotTracks(histonalltrack, from = start, to =end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

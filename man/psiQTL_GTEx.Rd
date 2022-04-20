@@ -82,10 +82,12 @@ if(interactive()){
   psiGTexTrackall<- psiQTL_GTEx(gen,chr,start, end, psiQTLFilePath,
   featureDisplay = 'all', showId=TRUE, type_stacking="squish",
   just_group="above" )
-  plotTracks(psiGTexTrackall, from = start, to = end)
+  plotTracks(psiGTexTrackall, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(psiGTexTrackall)
-  plotTracks(psiGTexTrackall, from = start, to = end)
+  plotTracks(psiGTexTrackall, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 %SNP
@@ -93,10 +95,12 @@ if(interactive()){
  psiGTexTrackSNP<- psiQTL_GTEx(gen,chr,start, end, psiQTLFilePath,
  featureDisplay = 'SNP', showId=TRUE, type_stacking="squish",
  just_group="left")
-  plotTracks(psiGTexTrackSNP, from = start, to = end)
+  plotTracks(psiGTexTrackSNP, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(psiGTexTrackSNP)
-  plotTracks(psiGTexTrackSNP, from = start, to = end)
+  plotTracks(psiGTexTrackSNP, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 }

@@ -76,10 +76,12 @@ enhFantomFile <- file.path(extdata,
 if(interactive()){
  enhFANTOMtrack <- DNaseI_FANTOM(gen,chr,start, end,
  enhFantomFile, featureDisplay='enhancer')
-  plotTracks(enhFANTOMtrack, from = start, to = end)
+  plotTracks(enhFANTOMtrack, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(enhFANTOMtrack)
-  plotTracks(enhFANTOMtrack, from = start, to = end)
+  plotTracks(enhFANTOMtrack, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 }

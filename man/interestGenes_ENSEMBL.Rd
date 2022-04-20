@@ -74,10 +74,12 @@ interestcolor <- list("bad"="red", "good"="green")
 if(interactive()) {
   interestgenesENSMBLtrack<-interestGenes_ENSEMBL(gen,chr,start,end,
   interestfeatures,interestcolor,showId=TRUE)
-  plotTracks(interestgenesENSMBLtrack, from = start, to =end)
+  plotTracks(interestgenesENSMBLtrack, from = start, to =end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(interestgenesENSMBLtrack)
-  plotTracks(interestgenesENSMBLtrack, from = start, to =end)
+  plotTracks(interestgenesENSMBLtrack, from = start, to =end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 

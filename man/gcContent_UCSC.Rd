@@ -60,10 +60,12 @@ end <- 38303219
 
 if(interactive()){
   gctrack<-gcContent_UCSC(gen,chr,start,end)
-  plotTracks(gctrack,from= start, to=end)
+  plotTracks(gctrack,from= start, to=end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(gctrack)
-  plotTracks(gctrack,from= start, to=end)
+  plotTracks(gctrack,from= start, to=end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 

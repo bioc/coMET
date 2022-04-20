@@ -66,10 +66,12 @@ AP1FantomFile <- file.path(extdata, "FANTOM/Fantom_hg19.AP1_MA0099.2.sites_examp
 
 if(interactive()){
   tfbsFANTOMtrack <- TFBS_FANTOM(gen,chr,start, end, AP1FantomFile)
-  plotTracks(tfbsFANTOMtrack, from = start, to = end)
+  plotTracks(tfbsFANTOMtrack, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(tfbsFANTOMtrack)
-  plotTracks(tfbsFANTOMtrack, from = start, to = end)
+  plotTracks(tfbsFANTOMtrack, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 }

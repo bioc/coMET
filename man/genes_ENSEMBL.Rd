@@ -63,10 +63,12 @@ start <- 38290160
 end <- 38303219
 if(interactive()) {
   genetrack <-genes_ENSEMBL(gen,chrom,start,end,showId=TRUE)
-  plotTracks(genetrack, from = start, to =end)
+  plotTracks(genetrack, from = start, to =end,
+  fontfamily="sans",fontfamily.title="sans")
 } else {
   data(geneENSEMBLtrack)
-  plotTracks(genetrack, from = start, to =end)
+  plotTracks(genetrack, from = start, to =end,
+  fontfamily="sans",fontfamily.title="sans")
 }
 
 

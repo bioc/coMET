@@ -75,24 +75,28 @@ Tiphaine Martin
         mySession <- browserSession(BROWSER.SESSION)
         genome(mySession) <- gen
         track.name="Broad ChromHMM"
-        tablestrack<-tableNames(ucscTableQuery(mySession, track=track.name))
+        tablestrack<-ucscTables(gen, track=track.name)
         table.name<-tablestrack[1]
         PATTERN.REGULATION<-"GM12878"
 
         chromhmmPattern<-chromatinHMMAll_UCSC(gen,chr,start,end,mySession,
         color='coMET',PATTERN.REGULATION)
-        plotTracks(chromhmmPattern, from = start, to =end)
+        plotTracks(chromhmmPattern, from = start, to =end,
+  fontfamily="sans",fontfamily.title="sans")
 
         chromhmmNoPattern<-chromatinHMMAll_UCSC(gen,chr,start,end,
         mySession,color='coMET')
-        plotTracks(chromhmmNoPattern, from = start, to =end)
+        plotTracks(chromhmmNoPattern, from = start, to =end,
+  fontfamily="sans",fontfamily.title="sans")
     } else {
 
         data(chromhmmPattern)
-        plotTracks(chromhmmPattern, from = start, to =end)
+        plotTracks(chromhmmPattern, from = start, to =end,
+  fontfamily="sans",fontfamily.title="sans")
 
         data(chromhmmNoPattern)
-        plotTracks(chromhmmNoPattern, from = start, to =end)
+        plotTracks(chromhmmNoPattern, from = start, to =end,
+  fontfamily="sans",fontfamily.title="sans")
     }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

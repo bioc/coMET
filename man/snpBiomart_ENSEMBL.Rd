@@ -69,10 +69,12 @@ end <- 38303219
 if(interactive()){
   snptrack <- snpBiomart_ENSEMBL(gen,chr, start, end,
                        dataset="hsapiens_snp",showId=FALSE)
-  plotTracks(snptrack, from=start, to=end)
+  plotTracks(snptrack, from=start, to=end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(snpBiomarttrack)
-  plotTracks(snptrack, from=start, to=end)
+  plotTracks(snptrack, from=start, to=end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 }

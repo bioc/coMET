@@ -65,10 +65,12 @@ end <- 38303219
 
 if(interactive()) {
   snpUCSCtrack<-snpLocations_UCSC(gen,chr,start,end,"All SNPs(142)")
-  plotTracks(snpUCSCtrack, from = start, to =end)
+  plotTracks(snpUCSCtrack, from = start, to =end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(snpUCSCtrack)
-  plotTracks(snpUCSCtrack, from = start, to =end)
+  plotTracks(snpUCSCtrack, from = start, to =end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 }

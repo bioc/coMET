@@ -64,10 +64,12 @@ end <- 33303219
 
 if(interactive()){
   transENSMBLtrack<-transcript_ENSEMBL(gen,chr,start,end,showId=TRUE)
-  plotTracks(transENSMBLtrack, from=start, to=end)
+  plotTracks(transENSMBLtrack, from=start, to=end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(transENSMBLtrack)
-  plotTracks(transENSMBLtrack, from=start, to=end)
+  plotTracks(transENSMBLtrack, from=start, to=end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 }

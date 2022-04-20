@@ -60,10 +60,12 @@ gen <- "hg38"
 
 if(interactive()) {
     cpgIstrack<-cpgIslands_UCSC(gen, chrom, start, end)
-    plotTracks(cpgIstrack, from = start, to =end)
+    plotTracks(cpgIstrack, from = start, to =end,
+    fontfamily="sans",fontfamily.title="sans")
 }else {
     data(cpgIslandtrack)
-    plotTracks(cpgIstrack, from = start, to =end)
+    plotTracks(cpgIstrack, from = start, to =end,
+    fontfamily="sans",fontfamily.title="sans")
 }
 
 }

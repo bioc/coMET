@@ -82,10 +82,12 @@ bedFilePath <- file.path(extdata, "RoadMap/regions_prom_E063.bed")
 if(interactive()){
   DNaseI_RoadMapSingle <- DNaseI_RoadMap(gen,chr,start, end,
   bedFilePath, featureDisplay='promotor'  )
-  plotTracks(DNaseI_RoadMapSingle, from = start, to = end)
+  plotTracks(DNaseI_RoadMapSingle, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(DNaseI_RoadMapSingle)
-  plotTracks(DNaseI_RoadMapSingle, from = start, to = end)
+  plotTracks(DNaseI_RoadMapSingle, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 }
 

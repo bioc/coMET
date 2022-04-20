@@ -66,10 +66,12 @@ end <- 10000000
 
 if(interactive()) {
     clinVariant<-ClinVarMain_UCSC(gen,chrom,start,end)
-    plotTracks(clinVariant, from = start, to =end)
+    plotTracks(clinVariant, from = start, to =end,
+    fontfamily="sans",fontfamily.title="sans")
 }else{
     data(clinVarMaintrack)
-    plotTracks(clinVariant, from = start, to =end)
+    plotTracks(clinVariant, from = start, to =end,
+    fontfamily="sans",fontfamily.title="sans")
 }
 
 }

@@ -82,11 +82,14 @@ extdata <- system.file("extdata", package="coMET",mustWork=TRUE)
 bedFilePath <- file.path(extdata, "eQTL.bed")
 
 if(interactive()){
-  eQTLTrackSingle <- eQTL(gen,chr,start, end, bedFilePath, featureDisplay = featureDisplay )
-  plotTracks(eQTLTrackSingle, from = start, to = end)
+  eQTLTrackSingle <- eQTL(gen,chr,start, end, bedFilePath, 
+  featureDisplay = featureDisplay )
+  plotTracks(eQTLTrackSingle, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(eQTLTrackSingle)
-  plotTracks(eQTLTrackSingle, from = start, to = end)
+  plotTracks(eQTLTrackSingle, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 ###########
@@ -103,10 +106,12 @@ bedFilePath <- file.path(extdata, "eQTL.bed")
 
 if(interactive()){
   eQTLTrackMultiple <- eQTL(gen,chr,start, end, bedFilePath, featureDisplay = featureDisplay )
-  plotTracks(eQTLTrackMultiple, from = start, to = end)
+  plotTracks(eQTLTrackMultiple, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(eQTLTrackMultiple)
-  plotTracks(eQTLTrackMultiple, from = start, to = end)
+  plotTracks(eQTLTrackMultiple, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 ######
@@ -123,10 +128,12 @@ bedFilePath <- file.path(extdata, "eQTL.bed")
 
 if(interactive()){
   eQTLTrackAll <- eQTL(gen,chr,start, end, bedFilePath, featureDisplay = featureDisplay )
-  plotTracks(eQTLTrackAll, from = start, to = end)
+  plotTracks(eQTLTrackAll, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(eQTLTrackAll)
-  plotTracks(eQTLTrackAll, from = start, to = end)
+  plotTracks(eQTLTrackAll, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 }
 

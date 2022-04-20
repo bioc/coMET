@@ -63,10 +63,12 @@ end <- 38303219
 
 if(interactive()){
   xenogenestrack<-xenorefGenes_UCSC(gen,chr,start,end,showId=TRUE)
-  plotTracks(xenogenestrack, from=start, to=end)
+  plotTracks(xenogenestrack, from=start, to=end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(xenogenestrack)
-  plotTracks(xenogenestrack, from=start, to=end)
+  plotTracks(xenogenestrack, from=start, to=end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 }

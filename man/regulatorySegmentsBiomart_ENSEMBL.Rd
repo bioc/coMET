@@ -73,10 +73,12 @@ featureDisplay <- "CTCF enriched"
 if(interactive()){
  regulatorySegmentsBiomartTrackSingle<-regulatorySegmentsBiomart_ENSEMBL(gen,
  chr,start,end,featureDisplay)
-  plotTracks(regulatorySegmentsBiomartTrackSingle, from = start, to = end)
+  plotTracks(regulatorySegmentsBiomartTrackSingle, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(regulatorySegmentsBiomartTrackSingle)
-  plotTracks(regulatorySegmentsBiomartTrackSingle, from = start, to = end)
+  plotTracks(regulatorySegmentsBiomartTrackSingle, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 ####
@@ -91,10 +93,12 @@ featureDisplay <- c("CTCF enriched","Predicted Promoter Flank")
 if(interactive()){
  regulatorySegmentsBiomartTrackMultiple<-regulatorySegmentsBiomart_ENSEMBL(gen,
  chr,start,end,featureDisplay)
-  plotTracks(regulatorySegmentsBiomartTrackMultiple, from = start, to = end)
+  plotTracks(regulatorySegmentsBiomartTrackMultiple, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(regulatorySegmentsBiomartTrackMultiple)
-  plotTracks(regulatorySegmentsBiomartTrackMultiple, from = start, to = end)
+  plotTracks(regulatorySegmentsBiomartTrackMultiple, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 ####
@@ -108,10 +112,12 @@ featureDisplay <- "all"
 if(interactive()){
  regulatorySegmentsBiomartTrackAll<-regulatorySegmentsBiomart_ENSEMBL(gen,
  chr,start,end,featureDisplay)
-  plotTracks(regulatorySegmentsBiomartTrackAll, from = start, to = end)
+  plotTracks(regulatorySegmentsBiomartTrackAll, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(regulatorySegmentsBiomartTrackAll)
-  plotTracks(regulatorySegmentsBiomartTrackAll, from = start, to = end)
+  plotTracks(regulatorySegmentsBiomartTrackAll, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 
 }
 }

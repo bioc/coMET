@@ -86,10 +86,12 @@ if(interactive()){
     chipTFtrack <- ChIPTF_ENCODE(gen,chr,start, end, bedFilePath,
     featureDisplay=c("AHR::ARNT::HIF1A_1","AIRE_1","AIRE_2","AHR::ARNT_1"),
     motif_color,type_stacking="squish",showId=TRUE)
-    plotTracks(chipTFtrack, from = start, to = end)
+    plotTracks(chipTFtrack, from = start, to = end,
+  fontfamily="sans",fontfamily.title="sans")
 } else {
     data(chipTFtrack)
-    plotTracks(chipTFtrack, from = start, to = end)
+    plotTracks(chipTFtrack, from = start, to = end,
+  fontfamily="sans",fontfamily.title="sans")
 }
 }
 

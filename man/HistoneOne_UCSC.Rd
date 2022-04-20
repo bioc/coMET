@@ -74,10 +74,12 @@ if(interactive()) {
   mySession <- browserSession(BROWSER.SESSION)
   genome(mySession) <- gen
   histoneonetrack<-HistoneOne_UCSC(gen,chr,start,end,mySession)
-  plotTracks(histoneonetrack, from = start, to =end)
+  plotTracks(histoneonetrack, from = start, to =end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(histoneonetrack)
-  plotTracks(histoneonetrack, from = start, to =end)
+  plotTracks(histoneonetrack, from = start, to =end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 }

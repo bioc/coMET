@@ -72,10 +72,12 @@ featureDisplay <- "Enhancer"
 if(interactive()){
  regulatoryFeaturesBiomartTrackSingle<-regulatoryFeaturesBiomart_ENSEMBL(gen,
  chr,start,end,featureDisplay)
-  plotTracks(regulatoryFeaturesBiomartTrackSingle, from = start, to = end)
+  plotTracks(regulatoryFeaturesBiomartTrackSingle, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(regulatoryFeaturesBiomartTrackSingle)
-  plotTracks(regulatoryFeaturesBiomartTrackSingle, from = start, to = end)
+  plotTracks(regulatoryFeaturesBiomartTrackSingle, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 #####
@@ -90,10 +92,12 @@ featureDisplay <- c("CTCF Binding Site","Enhancer")
 if(interactive()){
  regulatoryFeaturesBiomartTrackMultiple<-regulatoryFeaturesBiomart_ENSEMBL(gen,
  chr,start,end,featureDisplay)
-  plotTracks(regulatoryFeaturesBiomartTrackMultiple, from = start, to = end)
+  plotTracks(regulatoryFeaturesBiomartTrackMultiple, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(regulatoryFeaturesBiomartTrackMultiple)
-  plotTracks(regulatoryFeaturesBiomartTrackMultiple, from = start, to = end)
+  plotTracks(regulatoryFeaturesBiomartTrackMultiple, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 #####
@@ -107,10 +111,12 @@ featureDisplay <- "all"
 if(interactive()){
  regulatoryFeaturesBiomartTrackAll<-regulatoryFeaturesBiomart_ENSEMBL(gen,
  chr,start,end,featureDisplay)
-  plotTracks(regulatoryFeaturesBiomartTrackAll, from = start, to = end)
+  plotTracks(regulatoryFeaturesBiomartTrackAll, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(regulatoryFeaturesBiomartTrackAll)
-  plotTracks(regulatoryFeaturesBiomartTrackAll, from = start, to = end)
+  plotTracks(regulatoryFeaturesBiomartTrackAll, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 
 }
 }

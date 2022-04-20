@@ -64,10 +64,12 @@ end <- 38303219
 
 if(interactive()) {
   genesUcsctrack<-knownGenes_UCSC(gen,chr,start,end,showId=TRUE)
-  plotTracks(genesUcsctrack, from = start, to =end)
+  plotTracks(genesUcsctrack, from = start, to =end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }else {
   data(genesUcsctrack)
-  plotTracks(genesUcsctrack, from = start, to =end)
+  plotTracks(genesUcsctrack, from = start, to =end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 }

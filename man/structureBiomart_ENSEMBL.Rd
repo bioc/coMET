@@ -75,10 +75,12 @@ end <- 38303219
 if(interactive()){
   strutrack <- structureBiomart_ENSEMBL(chr, start, end,
                               strand, dataset="hsapiens_structvar_som")
-  plotTracks(strutrack, from=start, to=end)
+  plotTracks(strutrack, from=start, to=end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }else {
   data(strucBiomarttrack)
-  plotTracks(strutrack, from=start, to=end)
+  plotTracks(strutrack, from=start, to=end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 }

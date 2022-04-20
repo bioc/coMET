@@ -65,10 +65,12 @@ end <- 38303219
 gen <- "hg38"
 if(interactive()){
     clinCNV<-ClinVarCnv_UCSC(gen,chrom,start,end)
-    plotTracks(clinCNV, from = start, to =end)
+    plotTracks(clinCNV, from = start, to =end,
+    fontfamily="sans",fontfamily.title="sans")
 }else {
     data(ClinVarCnvTrack)
-    plotTracks(clinCNV, from = start, to =end)
+    plotTracks(clinCNV, from = start, to =end,
+             fontfamily="sans",fontfamily.title="sans")
 }
 
 

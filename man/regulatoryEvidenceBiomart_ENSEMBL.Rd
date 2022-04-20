@@ -72,10 +72,12 @@ featureDisplay <- "H3K27me3"
 if(interactive()){
  regulatoryEvidenceBiomartTrackSingle <- regulatoryEvidenceBiomart_ENSEMBL(gen,
  chr,start,end,featureDisplay)
-  plotTracks(regulatoryEvidenceBiomartTrackSingle, from = start, to = end)
+  plotTracks(regulatoryEvidenceBiomartTrackSingle, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(regulatoryEvidenceBiomartTrackSingle)
-  plotTracks(regulatoryEvidenceBiomartTrackSingle, from = start, to = end)
+  plotTracks(regulatoryEvidenceBiomartTrackSingle, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 #####
@@ -90,10 +92,12 @@ featureDisplay <- c("H3K27me3","H3K36me3")
 if(interactive()){
  regulatoryEvidenceBiomartTrackMultiple<-regulatoryEvidenceBiomart_ENSEMBL (gen,
  chr,start,end,featureDisplay)
-  plotTracks(regulatoryEvidenceBiomartTrackMultiple, from = start, to = end)
+  plotTracks(regulatoryEvidenceBiomartTrackMultiple, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(regulatoryEvidenceBiomartTrackMultiple)
-  plotTracks(regulatoryEvidenceBiomartTrackMultiple, from = start, to = end)
+  plotTracks(regulatoryEvidenceBiomartTrackMultiple, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 #####
@@ -107,10 +111,12 @@ featureDisplay <- "all"
 if(interactive()){
  regulatoryEvidenceBiomartTrackAll<-regulatoryEvidenceBiomart_ENSEMBL (gen,
  chr,start,end,featureDisplay)
-  plotTracks(regulatoryEvidenceBiomartTrackAll, from = start, to = end)
+  plotTracks(regulatoryEvidenceBiomartTrackAll, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(regulatoryEvidenceBiomartTrackAll)
-  plotTracks(regulatoryEvidenceBiomartTrackAll, from = start, to = end)
+  plotTracks(regulatoryEvidenceBiomartTrackAll, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 
 }
 }

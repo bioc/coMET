@@ -64,10 +64,12 @@ end2 <- 38303219
 
 if(interactive()) {
   gadtrack<-GAD_UCSC(gen=gen2 ,chr=chrom2 ,start=start2 ,end=end2)
-  plotTracks(gadtrack, from = start2, to =end2)
+  plotTracks(gadtrack, from = start2, to =end2,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(gadtrack)
-   plotTracks(gadtrack, from = start2, to =end2)
+   plotTracks(gadtrack, from = start2, to =end2,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 }

@@ -80,20 +80,24 @@ bedFilePath <- file.path(extdata, "/GTEX/eQTL_Uterus_Analysis_extract100.snpgene
 if(interactive()){
  eGTexTrackall <- eQTL_GTEx(gen,chr,start, end, bedFilePath,
  featureDisplay="all", showId=TRUE,just_group="left")
-  plotTracks(eGTexTrackall, from = start, to = end)
+  plotTracks(eGTexTrackall, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(eGTexTrackall)
-  plotTracks(eGTexTrackall, from = start, to = end)
+  plotTracks(eGTexTrackall, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 %SNP
 if(interactive()){
  eGTexTrackSNP <- eQTL_GTEx(gen,chr,start, end, bedFilePath,
  featureDisplay="SNP", showId=TRUE,just_group="left")
-  plotTracks(eGTexTrackSNP, from = start, to = end)
+  plotTracks(eGTexTrackSNP, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(eGTexTrackSNP)
-  plotTracks(eGTexTrackSNP, from = start, to = end)
+  plotTracks(eGTexTrackSNP, from = start, to = end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 }

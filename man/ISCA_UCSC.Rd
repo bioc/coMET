@@ -75,10 +75,12 @@ if(interactive()){
   mySession <- browserSession(BROWSER.SESSION)
   genome(mySession) <- gen
   iscatrack <-ISCA_UCSC(gen,chrom,start,end,mySession,title="ISCA", table="iscaPathogenic")
-  plotTracks(iscatrack, from = start, to =end)
+  plotTracks(iscatrack, from = start, to =end,
+                                   fontfamily="sans",fontfamily.title="sans")
 } else {
   data(ISCAtrack_Grch38)
-  plotTracks(iscatrack, from = start, to =end)
+  plotTracks(iscatrack, from = start, to =end,
+                                   fontfamily="sans",fontfamily.title="sans")
 }
 
 }
