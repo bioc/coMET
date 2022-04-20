@@ -15,11 +15,15 @@ BiocStyle::latex()
 
 <<setup, include=FALSE, cache=FALSE, echo=F>>=
 library(knitr)
-opts_chunk$set(fig.path='figure/minimal-', fig.align='center', fig.show='hold')
+library(showtext)
+opts_chunk$set(fig.path='figure/minimal-', fig.align='center', fig.show='hold',
+               fig.showtext=TRUE)
 options(replace.assign=TRUE,width=90)
+options(bitmapType="cairo")
 @
 
 \RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
 \RequirePackage{hyperref}
 \RequirePackage{url}
 \RequirePackage{listings}
@@ -886,7 +890,7 @@ This is the list of \R{} wrapping functions of some tracks found in UCSC genome 
 \item \Rfunction{CoreillCNV\_UCSC} : Visualise CNV found in Coreil tracks of UCSC genome browser in the genomic region of interest.
 \item \Rfunction{COSMIC\_UCSC} : Visualise SNPs found in COSMIC tracks of UCSC genome browser in the genomic region of interest.\warning{We could not more access to COSMIC data from UCSC genome browser, people needs to extract data from COSMIC directly}.
 \item \Rfunction{cpgIslands\_UCSC} : Visualise CpG Island found in CpGIsland tracks of UCSC genome browser in the genomic region of interest.
-\item \Rfunction{DNAse\_UCSC} : Visualise clinical CNV found in ClinVar tracks of UCSC genome browser in the genomic region of interest.
+\item \Rfunction{DNAse\_UCSC} (obselete): Visualise clinical CNV found in ClinVar tracks of UCSC genome browser in the genomic region of interest.
 \item \Rfunction{GAD\_UCSC} : Visualise genes found in GAD tracks of UCSC genome browser in the genomic region of interest.
 \item \Rfunction{gcContent\_UCSC} : Visualise GC content found in  UCSC genome browser in the genomic region of interest.
 \item \Rfunction{GeneReviews\_UCSC} : Visualise clinical genes found in GeneReviews tracks of UCSC genome browser in the genomic region of interest.
@@ -978,7 +982,7 @@ The current data are done on Release 9. The data are mapped on the reference gen
 
 \subsubsection{Chromatin state}
 There are 3 chromatin states defined in NIH Roadmap project (15 states, 18 states and 25 states).
-For 18 and 25 states, there are the choice beteen 2 set of colors. First, the colors defined by NIH Roadmap and second, the colors defined by us for a better differentiation between states.
+For 18 and 25 states, there are the choice between 2 set of colors. First, the colors defined by NIH Roadmap and second, the colors defined by us for a better differentiation between states.
 
 you can use \Rfunction{chromHMM\_RoadMap} to visualise chromatin state in :
 \begin{itemize}
@@ -1041,19 +1045,22 @@ prombedFilePath <- file.path(extdata, "/RoadMap/regions_prom_E001.bed")
 promRMtrack<- DNaseI_RoadMap(gen,chr,start, end, prombedFilePath,
                              featureDisplay='promotor', type_stacking="squish")
 
-enhbedFilePath <- file.path(extdata, "/RoadMap/regions_enh_E001.bed")
+#lost file
+#enhbedFilePath <- file.path(extdata, "/RoadMap/regions_enh_E001.bed")
 
-enhRMtrack<- DNaseI_RoadMap(gen,chr,start, end, enhbedFilePath,
-                            featureDisplay='enhancer', type_stacking="squish")
+#enhRMtrack<- DNaseI_RoadMap(gen,chr,start, end, enhbedFilePath,
+#                            featureDisplay='enhancer', type_stacking="squish")
 
 dyabedFilePath <- file.path(extdata, "/RoadMap/regions_dyadic_E001.bed")
+
 
 dyaRMtrack<- DNaseI_RoadMap(gen,chr,start, end, dyabedFilePath,
                             featureDisplay='dyadic', type_stacking="squish")
 
 genetrack <-genes_ENSEMBL(gen,chr,start,end,showId=TRUE)
 
-listRoadMap <- list(genetrack,promRMtrack,enhRMtrack,dyaRMtrack)
+#listRoadMap <- list(genetrack,promRMtrack,enhRMtrack,dyaRMtrack)
+listRoadMap <- list(genetrack,promRMtrack,dyaRMtrack)
 plotTracks(listRoadMap, chromosome=chr,from=start,to=end)
 @
 
@@ -1065,11 +1072,12 @@ end <- 38303219
 gen<-"hg19"
 
 data(promRMtrack)
-data(enhRMtrack)
+#data(enhRMtrack)
 data(dyaRMtrack)
 data(genetrack4RM)
 
-listRoadMap <- list(genetrack,promRMtrack,enhRMtrack,dyaRMtrack)
+#listRoadMap <- list(genetrack,promRMtrack,enhRMtrack,dyaRMtrack)
+listRoadMap <- list(genetrack,promRMtrack,dyaRMtrack)
 plotTracks(listRoadMap, chromosome=chr,from=start,to=end)
 @
 \caption{Plot of NIH Roadmap data.\label{fig:RoadMaptrack}}
