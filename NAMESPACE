@@ -15,7 +15,6 @@ import(utils)
 ### Non-bioconductor packages
 ###
 importFrom("psych",corr.test)
-importFrom("colortools",complementary, opposite)
 importFrom("gridExtra",arrangeGrob, grid.arrange)
 importClassesFrom("hash",hash)
 #importMethodsFrom("hash",keys)
@@ -95,7 +94,12 @@ export(chrUCSC2ENSEMBL,
     ChIPTF_ENCODE,
     chromatinHMMAll_UCSC, chromatinHMMOne_UCSC,
     HistoneAll_UCSC, HistoneOne_UCSC,
-    HiCdata2matrix)
+    HiCdata2matrix,
+    complementary,
+    opposite,
+    pizza,
+    col2HSV,
+    setColors)
 
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ### obselete tracks
